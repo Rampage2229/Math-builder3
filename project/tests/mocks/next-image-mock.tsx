@@ -1,4 +1,4 @@
-import type { JSX } from "react";
+import { JSX } from "react";
 
 export const Image = ({ src, alt, width, height, priority, className, ...props }: any): JSX.Element => {
   return (
