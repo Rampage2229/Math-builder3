@@ -226,3 +226,30 @@ Let me fix all of these:
 im
 
 ---
+
+### Cycle #7 [2026-10-24 00:51:14]
+**Subtasks Assigned:**
+- **subtask_1**: Fix src/middleware.ts: Remove the deprecated middleware.ts file since proxy.ts already exists as the new convention for Next.js 15+. The middleware.ts file is causing TS7006 error (implicit any type) and conflicts with the new proxy convention.
+- **subtask_2**: Fix tests/mocks/next-image-mock.tsx: Resolve 'Cannot find namespace JSX' error by adding proper React types import or configuring TypeScript to recognize JSX namespace. Target file: project/tests/mocks/next-image-mock.tsx
+- **subtask_3**: Verify next.config.ts is properly configured for Next.js 15+ App Router: Ensure no deprecated i18n configuration, no invalid experimental keys, and proper proxy/middleware configuration. Target file: project/next.config.ts
+- **subtask_4**: Run local build verification: Execute npm run build in project directory to confirm all TypeScript errors are resolved before pushing to Vercel. Target: project/package.json build script
+**Deliverables & Modified Files:**
+- `project/jest.config.ts`
+- `project/src/app/[locale]/page.tsx`
+- `project/src/app/[locale]/scientific/page.tsx`
+- `project/src/app/[locale]/social/page.tsx`
+- `project/src/app/layout.tsx`
+- `project/src/middleware.ts`
+- `project/tests/middleware.test.ts`
+- `project/tests/mocks/next-image-mock.tsx`
+**QA Validation:**
+The failing tests reveal a bug in `proxy.ts`: the locale detection only matches `, ca` (with space) but the Accept-Language headers use `,ca` (no space). I'll fix the parsing to split by comma and check each language tag properly.
+```filepath:project/src/proxy.ts
+<<<<<<< SEARCH
+// Detect locale from Accept-Language header
+const acceptLanguage = request.headers.get('accept-language') || '';
+let detectedLocale: string | null = null;
+// Simple locale detection
+if (acceptLanguage.startsWith('ca') ||
+
+---

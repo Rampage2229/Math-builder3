@@ -18,12 +18,19 @@ export function proxy(request: NextRequest) {
     const acceptLanguage = request.headers.get('accept-language') || '';
     let detectedLocale: string | null = null;
     
-    // Simple locale detection
-    if (acceptLanguage.startsWith('ca') || acceptLanguage.includes(', ca')) {
-      detectedLocale = 'ca';
-    } else if (acceptLanguage.startsWith('es') || acceptLanguage.includes(', es')) {
-      detectedLocale = 'es';
-    } else {
+    // Parse Accept-Language header: split by comma, check each language tag
+    const languageTags = acceptLanguage.split(',').map(tag => tag.trim().split(';')[0].trim().toLowerCase());
+    for (const tag of languageTags) {
+      if (tag.startsWith('ca')) {
+        detectedLocale = 'ca';
+        break;
+      } else if (tag.startsWith('es')) {
+        detectedLocale = 'es';
+        break;
+      }
+    }
+    
+    if (!detectedLocale) {
       detectedLocale = 'en'; // default to English
     }
     
