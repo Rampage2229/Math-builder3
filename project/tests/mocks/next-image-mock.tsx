@@ -1,4 +1,4 @@
-export const Image = ({ src, alt, width, height, priority, className, ...props }: any) => {
+export const Image = ({ src, alt, width, height, priority, className, ...props }: any): JSX.Element => {
   return (
     <img
       src={src}

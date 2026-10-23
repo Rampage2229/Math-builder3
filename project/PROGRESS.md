@@ -86,3 +86,45 @@ color-scheme: dark;
 filepath:project/src
 
 ---
+
+### Cycle #2 [2026-10-24 00:26:06]
+**Subtasks Assigned:**
+- **subtask_1**: Extract and structure detailed curriculum content from social-math HTML files into JSON data files for both social and scientific math tracks. Create src/lib/curriculum/social.json and src/lib/curriculum/scientific.json with units, topics, learning objectives, and assessment criteria for all three languages.
+- **subtask_2**: Build reusable UI components: create src/components/Navigation.tsx with locale-aware language switcher, src/components/CurriculumCard.tsx for displaying units/topics, src/components/TrackSelector.tsx for switching between social/scientific tracks, and src/components/Footer.tsx. Update layout.tsx to use these components.
+- **subtask_3**: Implement comprehensive test suite: create project/tests/ with unit tests for dictionary loading, middleware locale detection, curriculum data structure validation, and component rendering tests using Jest and React Testing Library. Add test script to package.json.
+- **subtask_4**: Enhance curriculum pages with dynamic content rendering: update src/app/[locale]/social/page.tsx and src/app/[locale]/scientific/page.tsx to consume the new JSON curriculum data, add unit detail pages at src/app/[locale]/social/[unit]/page.tsx and src/app/[locale]/scientific/[unit]/page.tsx, and verify production build passes with 'npm run build'.
+**Deliverables & Modified Files:**
+- `project/jest.config.ts`
+- `project/package-lock.json`
+- `project/package.json`
+- `project/tests/dictionary.test.ts`
+- `project/tests/middleware.test.ts`
+- `project/tests/mocks/next-image-mock.ts`
+- `project/tests/setup.ts`
+**QA Validation:**
+filepath:project/package.json
+<<<<<<< SEARCH
+"scripts": {
+"dev": "next dev",
+"build": "next build",
+"start": "next start",
+"lint": "eslint"
+},
+=======
+"scripts": {
+"dev": "next dev",
+"build": "next build",
+"start": "next start",
+"lint": "eslint",
+"test": "jest"
+},
+>>>>>>> REPLACE
+filepath:project/jest.config.ts
+<<<<<<< SEARCH
+setupFilesAfterEach: ["<rootDir>/tests/setup.ts"],
+=======
+setupFilesAfterEnv: ["<rootDir>/tests/setup.ts"],
+>>>>>>> REPLACE
+filepath:project/tests/mocks/next-image-mock.ts
+
+---

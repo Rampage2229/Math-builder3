@@ -10,7 +10,7 @@ const config: Config = {
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
     "^next/image$": "<rootDir>/tests/mocks/next-image-mock.ts",
   },
-  setupFilesAfterEach: ["<rootDir>/tests/setup.ts"],
+  setupFilesAfterEnv: ["<rootDir>/tests/setup.ts"],
   transform: {
     "^.+\\.(ts|tsx)$": ["ts-jest", {
       tsconfig: {
