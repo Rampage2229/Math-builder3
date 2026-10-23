@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { middleware, config } from "../src/middleware";
+import { proxy as middleware, config } from "../src/proxy";
 
 // Mock the next/server module
 jest.mock("next/server", () => ({
