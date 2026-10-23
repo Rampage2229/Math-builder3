@@ -1,7 +1,7 @@
 # Project Execution State & Swarm Instructions
 **Goal:** Develop this website about spanish bacculerate's both social ans scientific math curriculums. Buid it so it can be deployed in Vercel with node.js. Make it in Catalan, Spanish and English. Make sure that on each iteration the webpage is functional with vercel, and it doesn't break between pushes.
 **Active Mode:** 💻 Software Engineering (Code)
-**Last Updated:** 2026-10-24 00:45:09 (Cycle #5)
+**Last Updated:** 2026-10-24 00:48:37 (Cycle #6)
 **Latest Operator Steering:** 00:37:03.234 Running build in Washington, D.C., USA (East) – iad1
 00:37:03.235 Build machine configuration: 2 cores, 8 GB
 00:37:03.387 Cloning github.com/Rampage2229/Math-builder3 (Branch: main, Commit: 3b78db5)
@@ -62,21 +62,15 @@ This error
 - `skills/`: Reusable procedural knowledge manuals.
 
 ## Latest QA Status
-I need to start exploring the project structure. Let me run the initial exploration commands.I'll start by exploring the project structure to understand what we're working with.
-I have a comprehensive picture now. Let me analyze the results:
-**Build**: ✅ `next build` passes, TypeScript compiles
-**Tests**: ❌ 18 failed, 5 passed, 23 total across 2 suites
-**ESLint**: ❌ 12 errors, 10 warnings
-**Prettier**: ❌ 15 files need formatting
-**Dist packages**: No `dist/` or `build/` - `.next/` contains build output
-Key issues:
-1. `middleware.test.ts`: `NextRequest is not a constructor` - all 10 tests fail
-2. `dictionary.test.ts`: File naming mismatch (`en.json` vs `english.json`) - 8 tests fail
-3. ESLint errors: `require()` import, `any` types in test files
-Let me read the test files and fix them.
-I now have a complete picture of all issues. Let me fix them systematically.
+bash
+```
+Now I have a clear picture of all the issues. Let me summarize and fix them:
 **Issues found:**
-1. `middleware.test.ts`: `NextRequest is not a constructor` (10 tests fail), `require()` import forbidden, `any` types
-2. `dictionary.test.ts`: File naming mismatch (`en.json` vs `english.json`) (8 tests fail)
-3. `next-image-mock.tsx`: `any` type error
-4. ESLint: 12 errors, Prettier: 15 files need formatting
+1. `tests/middleware.test.ts` imports from `../src/middleware` but the file is `src/proxy.ts` (middleware was renamed to proxy)
+2. Dictionary tests look for `en.json`, `ca.json`, `es.json` but files are named `english.json`, `catalan.json`, `spanish.json`
+3. `next build` fails type checking due to the missing `src/middleware.ts`
+Let me fix all of these:
+```filepath:project/src/middleware.ts
+import { proxy, config } from "./proxy";
+export { proxy as middleware, config };
+```
