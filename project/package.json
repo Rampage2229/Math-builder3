@@ -10,6 +10,8 @@
     "test": "jest"
   },
   "dependencies": {
+    "@types/katex": "^0.16.8",
+    "katex": "^0.19.1",
     "next": "16.4.3",
     "next-i18next": "^16.4.2",
     "react": "19.3.0",
