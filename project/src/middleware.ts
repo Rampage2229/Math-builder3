@@ -6,7 +6,7 @@ export const config = {
   ],
 };
 
-export function middleware(request) {
+export function proxy(request) {
   const { pathname } = request.nextUrl;
   
   // Skip if already has locale prefix or is a root path
