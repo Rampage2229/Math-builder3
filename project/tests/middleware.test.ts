@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { middleware, config } from "../src/middleware";
 
-// Mock the middleware module
+// Mock the next/server module
 jest.mock("next/server", () => ({
   NextResponse: {
     redirect: jest.fn((url: string | URL) => ({
@@ -11,7 +12,19 @@ jest.mock("next/server", () => ({
   },
 }));
 
-const { middleware, config } = require("../src/middleware");
+// Helper to create a mock request object
+const createMockRequest = (acceptLanguage: string, pathname: string): NextRequest => {
+  return {
+    nextUrl: new URL(`http://localhost:3000${pathname}`),
+    url: `http://localhost:3000${pathname}`,
+    headers: {
+      get: (key: string): string | null => {
+        if (key === "accept-language") return acceptLanguage;
+        return null;
+      },
+    },
+  } as unknown as NextRequest;
+};
 
 describe("Middleware Locale Detection", () => {
   describe("config", () => {
@@ -30,82 +43,65 @@ describe("Middleware Locale Detection", () => {
   });
 
   describe("locale detection from Accept-Language header", () => {
-    const createRequest = (acceptLanguage: string, pathname: string) => {
-      return new NextRequest(`http://localhost:3000${pathname}`, {
-        headers: {
-          "accept-language": acceptLanguage,
-        },
-      });
-    };
-
     it("should detect Catalan locale from Accept-Language header starting with 'ca'", () => {
-      const request = createRequest("ca-ES,ca;q=0.9", "/");
-      const response = middleware(request) as any;
+      const request = createMockRequest("ca-ES,ca;q=0.9", "/");
+      const response = middleware(request) as { url: string };
       expect(response.url).toContain("/ca/");
     });
 
     it("should detect Spanish locale from Accept-Language header starting with 'es'", () => {
-      const request = createRequest("es-ES,es;q=0.9", "/");
-      const response = middleware(request) as any;
+      const request = createMockRequest("es-ES,es;q=0.9", "/");
+      const response = middleware(request) as { url: string };
       expect(response.url).toContain("/es/");
     });
 
     it("should default to English when Accept-Language is not Catalan or Spanish", () => {
-      const request = createRequest("en-US,en;q=0.9", "/");
-      const response = middleware(request) as any;
+      const request = createMockRequest("en-US,en;q=0.9", "/");
+      const response = middleware(request) as { url: string };
       expect(response.url).toContain("/en/");
     });
 
     it("should default to English when Accept-Language header is empty", () => {
-      const request = createRequest("", "/");
-      const response = middleware(request) as any;
+      const request = createMockRequest("", "/");
+      const response = middleware(request) as { url: string };
       expect(response.url).toContain("/en/");
     });
 
     it("should detect Catalan when 'ca' appears after comma in Accept-Language", () => {
-      const request = createRequest("en-US,en;q=0.9,ca;q=0.8", "/");
-      const response = middleware(request) as any;
+      const request = createMockRequest("en-US,en;q=0.9,ca;q=0.8", "/");
+      const response = middleware(request) as { url: string };
       expect(response.url).toContain("/ca/");
     });
 
     it("should detect Spanish when 'es' appears after comma in Accept-Language", () => {
-      const request = createRequest("en-US,en;q=0.9,es;q=0.8", "/");
-      const response = middleware(request) as any;
+      const request = createMockRequest("en-US,en;q=0.9,es;q=0.8", "/");
+      const response = middleware(request) as { url: string };
       expect(response.url).toContain("/es/");
     });
   });
 
   describe("pathname handling", () => {
     it("should redirect root path '/' to default locale", () => {
-      const request = new NextRequest("http://localhost:3000/", {
-        headers: { "accept-language": "en-US,en;q=0.9" },
-      });
-      const response = middleware(request) as any;
+      const request = createMockRequest("en-US,en;q=0.9", "/");
+      const response = middleware(request) as { url: string };
       expect(response.url).toContain("/en/");
     });
 
     it("should pass through requests that already have a locale prefix", () => {
-      const request = new NextRequest("http://localhost:3000/en/social", {
-        headers: { "accept-language": "ca-ES" },
-      });
-      const response = middleware(request) as any;
-      // Should call next() not redirect
+      const request = createMockRequest("ca-ES", "/en/social");
+      const response = middleware(request) as { status: number };
       expect(response.status).toBe(200);
     });
 
     it("should pass through requests with Catalan locale prefix", () => {
-      const request = new NextRequest("http://localhost:3000/ca/social", {
-        headers: { "accept-language": "en-US" },
-      });
-      const response = middleware(request) as any;
+      const request = createMockRequest("en-US", "/ca/social");
+      const response = middleware(request) as { status: number };
       expect(response.status).toBe(200);
     });
 
     it("should pass through requests with Spanish locale prefix", () => {
-      const request = new NextRequest("http://localhost:3000/es/scientific", {
-        headers: { "accept-language": "en-US" },
-      });
-      const response = middleware(request) as any;
+      const request = createMockRequest("en-US", "/es/scientific");
+      const response = middleware(request) as { status: number };
       expect(response.status).toBe(200);
     });
   });
