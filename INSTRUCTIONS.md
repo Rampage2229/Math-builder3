@@ -1,7 +1,7 @@
 # Project Execution State & Swarm Instructions
 **Goal:** Develop this website about spanish bacculerate's both social ans scientific math curriculums. Buid it so it can be deployed in Vercel with node.js. Make it in Catalan, Spanish and English. Make sure that on each iteration the webpage is functional with vercel, and it doesn't break between pushes.
 **Active Mode:** 💻 Software Engineering (Code)
-**Last Updated:** 2026-10-24 00:51:14 (Cycle #7)
+**Last Updated:** 2026-10-24 01:06:31 (Cycle #10)
 **Latest Operator Steering:** None provided
 
 ## Directory Layout
@@ -10,29 +10,36 @@
 - `skills/`: Reusable procedural knowledge manuals.
 
 ## Latest QA Status
-The failing tests reveal a bug in `proxy.ts`: the locale detection only matches `, ca` (with space) but the Accept-Language headers use `,ca` (no space). I'll fix the parsing to split by comma and check each language tag properly.
-```filepath:project/src/proxy.ts
-<<<<<<< SEARCH
-// Detect locale from Accept-Language header
-const acceptLanguage = request.headers.get('accept-language') || '';
-let detectedLocale: string | null = null;
-// Simple locale detection
-if (acceptLanguage.startsWith('ca') || acceptLanguage.includes(', ca')) {
-detectedLocale = 'ca';
-} else if (acceptLanguage.startsWith('es') || acceptLanguage.includes(', es')) {
-detectedLocale = 'es';
-} else {
-detectedLocale = 'en'; // default to English
+bash
+cd project && cat tests/page-rendering.test.tsx
+filepath:project/tests/page-rendering.test.tsx
+import { describe, it, expect } from "jest";
+import * as fs from "fs";
+import * as path from "path";
+const dictionariesDir = path.join(__dirname, "..", "src", "lib", "dictionaries");
+const supportedLocales = ["en", "ca", "es"] as const;
+type Locale = (typeof supportedLocales)[number];
+interface Dictionary {
+[key: string]: string;
 }
-=======
-// Detect locale from Accept-Language header
-const acceptLanguage = request.headers.get('accept-language') || '';
-let detectedLocale: string | null = null;
-// Parse Accept-Language header: split by comma, check each language tag
-const languageTags = acceptLanguage.split(',').map(tag => tag.trim().split(';')[0].trim().toLowerCase());
-for (const tag of languageTags) {
-if (tag.startsWith('ca')) {
-detectedLocale = 'ca';
-break;
-} else if (tag.startsWith('es')) {
-detectedLoc
+function loadDictionary(locale: string): Dictionary {
+const filePath = path.join(dictionariesDir, `${locale}.json`);
+if (!fs.existsSync(filePath)) {
+return {};
+}
+return JSON.parse(fs.readFileSync(filePath, "utf-8"));
+}
+const mockDictionaries: Record<Locale, Dictionary> = {
+en: loadDictionary("en"),
+ca: loadDictionary("ca"),
+es: loadDictionary("es"),
+};
+describe("Page Rendering - All Locales (Dictionary Content)", () => {
+describe("Home Page content", () => {
+it.each(supportedLocales)("has hero title in %s", (locale: Locale) => {
+const dict = mockDictionaries[locale];
+expect(dict.hero_title).toBeDefined();
+expect(typeof dict.hero_title).toBe("string");
+expect(dict.hero_title.length).toBeGreaterThan(0);
+});
+it.each(supportedLocales)("has hero description in 
