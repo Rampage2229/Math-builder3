@@ -1,5 +1,5 @@
 import { Exercise } from '@/lib/exercises/types';
-import ExerciseComponent from './ExerciseComponent';
+import { ExerciseComponent } from './ExerciseComponent';
 
 interface ExerciseListProps {
   exercises: Exercise[];
