@@ -6,9 +6,9 @@ interface Dictionary {
 
 async function loadDictionary(locale: string): Promise<Dictionary> {
   const dictionaries: Record<string, Dictionary> = {
-    en: (await import("@/lib/dictionaries/english.json")).default,
-    ca: (await import("@/lib/dictionaries/catalan.json")).default,
-    es: (await import("@/lib/dictionaries/spanish.json")).default,
+    en: (await import("@/lib/dictionaries/en.json")).default,
+    ca: (await import("@/lib/dictionaries/ca.json")).default,
+    es: (await import("@/lib/dictionaries/es.json")).default,
   };
   return dictionaries[locale] || dictionaries.en;
 }

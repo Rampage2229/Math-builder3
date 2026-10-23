@@ -8,7 +8,7 @@ const config: Config = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
     "\\.(css|less|scss|sass)$": "identity-obj-proxy",
-    "^next/image$": "<rootDir>/tests/mocks/next-image-mock.ts",
+    "^next/image$": "<rootDir>/tests/mocks/next-image-mock.tsx",
   },
   setupFilesAfterEnv: ["<rootDir>/tests/setup.ts"],
   transform: {
