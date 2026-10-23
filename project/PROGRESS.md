@@ -342,3 +342,26 @@ function loadDictionary(locale: string): Dictionary {
 const filePa
 
 ---
+
+### Cycle #11 [2026-10-24 01:09:31]
+**Subtasks Assigned:**
+- **subtask_1**: Fix proxy.ts locale detection bug: Update the Accept-Language header parsing in project/src/proxy.ts to properly split by comma and check each language tag without requiring a space after comma. The current code only matches ', ca' but headers use ',ca'.
+- **subtask_2**: Run test suite and fix any failing tests: Execute npm test in project directory, verify all tests pass (0 failures), and fix any issues in test files or source code. Target: project/package.json test script, project/tests/page-rendering.test.tsx, project/tests/dictionary.test.ts, project/tests/middleware.test.ts.
+- **subtask_3**: Run local build verification: Execute npm run build in project directory to confirm all TypeScript errors are resolved and Next.js compiles successfully for Vercel deployment. Fix any build errors that arise. Target: project/package.json build script, project/next.config.ts, project/tsconfig.json.
+- **subtask_4**: Verify dictionary loading and page rendering for all three locales: Test that content loads correctly for ca, es, en on both social and scientific math pages. Check language switching works. Target files: project/src/app/[locale]/page.tsx, project/src/app/[locale]/scientific/page.tsx, project/src/app/[locale]/social/page.tsx, project/src/lib/dictionaries/english.json, project/src/lib/dictionaries/catalan.json, project/src/lib/dictionaries/spanish.json.
+**Deliverables & Modified Files:**
+- `project/tsconfig.json`
+**QA Validation:**
+The test suite shows 1 failure: `page-rendering.test.tsx` fails to run because `describe` is imported from `"jest"` but isn't available as a named export in this Jest version. The other test files use globals successfully. Let me fix the import.
+```filepath:project/tests/page-rendering.test.tsx
+<<<<<<< SEARCH
+import { describe, it, expect } from "jest";
+import * as fs from "fs";
+import * as path from "path";
+=======
+import * as fs from "fs";
+import * as path from "path";
+>>>>>>> REPLACE
+```
+
+---
