@@ -1,7 +1,7 @@
 # Project Execution State & Swarm Instructions
 **Goal:** Develop this website about spanish bacculerate's both social ans scientific math curriculums. Buid it so it can be deployed in Vercel with node.js. Make it in Catalan, Spanish and English
 **Active Mode:** 💻 Software Engineering (Code)
-**Last Updated:** 2026-10-24 00:04:08 (Cycle #1)
+**Last Updated:** 2026-10-24 00:18:35 (Cycle #1)
 **Latest Operator Steering:** None provided
 
 ## Directory Layout
@@ -10,15 +10,55 @@
 - `skills/`: Reusable procedural knowledge manuals.
 
 ## Latest QA Status
-Dependencies are not installed (all UNMET). No `test` script exists. Let me install dependencies first, then run verification.
-All verification checks are complete. Here is the QA outcome:
-**QA VERIFICATION RESULTS:**
-1. **Test Suites:** No `test` script is defined in `package.json` (Next.js project without dedicated test files). `npm test` returns "Missing script: test" — this is expected, not a failure.
-2. **Compilation / Parse Checks — ALL PASSED:**
-- `npm install`: 379 packages installed, **0 vulnerabilities**
-- `npm ls`: All 14 dependencies resolved (no UNMET dependencies)
-- `npx tsc --noEmit`: **No TypeScript errors** (clean exit)
-- `npx eslint .`: **No lint errors** (clean exit)
-- `npx next build`: **Build succeeded** — compiled in 1853ms, TypeScript checked, 2 static pages prerendered (`/`, `/_not-found`)
-3. **Distribution Packages:** Valid and uncorrupted. `npm install` completed with 0 vulnerabilities; `package-lock.json` is intact; all runtime deliverables present.
-**Objective Outcome Summary:** All QA criteria passed. The Next.js project installs cleanly with zero vulnerabilities, TypeScript and ESLint report no errors, and the production build completes successfully ge
+filepath:project/src/app/globals.css
+/* Global styles for the Mathematics Curriculum project */
+* {
+box-sizing: border-box;
+padding: 0;
+margin: 0;
+}
+html,
+body {
+max-width: 100vw;
+overflow-x: hidden;
+}
+body {
+color: rgb(var(--foreground-rgb));
+background: linear-gradient(
+to bottom,
+transparent,
+rgb(var(--background-end-rgb))
+)
+rgb(var(--background-start-rgb));
+}
+a {
+color: inherit;
+text-decoration: none;
+}
+@media (prefers-color-scheme: dark) {
+html {
+color-scheme: dark;
+}
+}
+filepath:project/src/app/[locale]/layout.tsx
+<<<<<<< SEARCH
+import type { Metadata } from "next";
+import "./globals.css";
+export default function LocaleLayout({ children, params }: { children: React.ReactNode; params: { locale: string } }) {
+const locale = params.locale;
+// Set direction based on locale (RTL languages would go here)
+const dir = locale === 'ar' || locale === 'he' ? 'rtl' : 'ltr';
+return (
+<html
+lang={locale}
+dir={dir}
+className="h-full antialiased"
+>
+<body className="min-h-full flex flex-col">{children}</body>
+</html>
+);
+}
+=======
+import type { Metadata } from "next";
+import "./globals.css";
+export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: Pro

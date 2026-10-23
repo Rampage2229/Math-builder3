@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { useEffect } from "react";
 
 interface Dictionary {
   [key: string]: string;
@@ -16,8 +13,8 @@ async function loadDictionary(locale: string): Promise<Dictionary> {
   return dictionaries[locale] || dictionaries.en;
 }
 
-export default async function LocalizedPage({ params }: { params: { locale: string } }) {
-  const locale = params.locale;
+export default async function LocalizedPage({ params }: { params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale;
   const dictionary = await loadDictionary(locale);
   
   return (

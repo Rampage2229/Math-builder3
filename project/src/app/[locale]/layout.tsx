@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-export default function LocaleLayout({ children, params }: { children: React.ReactNode; params: { locale: string } }) {
-  const locale = params.locale;
+export default async function LocaleLayout({ children, params }: { children: React.ReactNode; params: Promise<{ locale: string }> }) {
+  const locale = (await params).locale;
   
   // Set direction based on locale (RTL languages would go here)
   const dir = locale === 'ar' || locale === 'he' ? 'rtl' : 'ltr';
