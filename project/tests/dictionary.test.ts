@@ -1,7 +1,13 @@
 import * as fs from "fs";
 import * as path from "path";
 
-const dictionariesDir = path.join(__dirname, "..", "src", "lib", "dictionaries");
+const dictionariesDir = path.join(
+  __dirname,
+  "..",
+  "src",
+  "lib",
+  "dictionaries",
+);
 
 const supportedLocales = ["en", "ca", "es"] as const;
 
@@ -128,7 +134,9 @@ describe("Dictionary Loading", () => {
     it("should have valid JSON structure in all dictionary files", () => {
       supportedLocales.forEach((locale) => {
         const filePath = path.join(dictionariesDir, `${locale}.json`);
-        expect(() => JSON.parse(fs.readFileSync(filePath, "utf-8"))).not.toThrow();
+        expect(() =>
+          JSON.parse(fs.readFileSync(filePath, "utf-8")),
+        ).not.toThrow();
       });
     });
   });

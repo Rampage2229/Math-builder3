@@ -13,10 +13,14 @@ async function loadDictionary(locale: string): Promise<Dictionary> {
   return dictionaries[locale] || dictionaries.en;
 }
 
-export default async function LocalizedPage({ params }: { params: Promise<{ locale: string }> }) {
+export default async function LocalizedPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
   const locale = (await params).locale;
   const dictionary = await loadDictionary(locale);
-  
+
   return (
     <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
@@ -40,17 +44,26 @@ export default async function LocalizedPage({ params }: { params: Promise<{ loca
           <nav>
             <ul className="flex gap-4">
               <li>
-                <a href={`/${locale}`} className="font-medium text-zinc-950 dark:text-zinc-50">
+                <a
+                  href={`/${locale}`}
+                  className="font-medium text-zinc-950 dark:text-zinc-50"
+                >
                   {dictionary.nav_home}
                 </a>
               </li>
               <li>
-                <a href={`/${locale}/social`} className="font-medium text-zinc-950 dark:text-zinc-50">
+                <a
+                  href={`/${locale}/social`}
+                  className="font-medium text-zinc-950 dark:text-zinc-50"
+                >
                   {dictionary.nav_social}
                 </a>
               </li>
               <li>
-                <a href={`/${locale}/scientific`} className="font-medium text-zinc-950 dark:text-zinc-50">
+                <a
+                  href={`/${locale}/scientific`}
+                  className="font-medium text-zinc-950 dark:text-zinc-50"
+                >
                   {dictionary.nav_scientific}
                 </a>
               </li>

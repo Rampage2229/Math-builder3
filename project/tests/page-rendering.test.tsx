@@ -1,7 +1,13 @@
 import * as fs from "fs";
 import * as path from "path";
 
-const dictionariesDir = path.join(__dirname, "..", "src", "lib", "dictionaries");
+const dictionariesDir = path.join(
+  __dirname,
+  "..",
+  "src",
+  "lib",
+  "dictionaries",
+);
 
 const supportedLocales = ["en", "ca", "es"] as const;
 
@@ -34,22 +40,28 @@ describe("Page Rendering - All Locales (Dictionary Content)", () => {
       expect(dict.hero_title.length).toBeGreaterThan(0);
     });
 
-    it.each(supportedLocales)("has hero description in %s", (locale: Locale) => {
-      const dict = mockDictionaries[locale];
-      expect(dict.hero_description).toBeDefined();
-      expect(typeof dict.hero_description).toBe("string");
-      expect(dict.hero_description.length).toBeGreaterThan(0);
-    });
+    it.each(supportedLocales)(
+      "has hero description in %s",
+      (locale: Locale) => {
+        const dict = mockDictionaries[locale];
+        expect(dict.hero_description).toBeDefined();
+        expect(typeof dict.hero_description).toBe("string");
+        expect(dict.hero_description.length).toBeGreaterThan(0);
+      },
+    );
 
-    it.each(supportedLocales)("has navigation links in %s", (locale: Locale) => {
-      const dict = mockDictionaries[locale];
-      expect(dict.nav_home).toBeDefined();
-      expect(dict.nav_social).toBeDefined();
-      expect(dict.nav_scientific).toBeDefined();
-      expect(typeof dict.nav_home).toBe("string");
-      expect(typeof dict.nav_social).toBe("string");
-      expect(typeof dict.nav_scientific).toBe("string");
-    });
+    it.each(supportedLocales)(
+      "has navigation links in %s",
+      (locale: Locale) => {
+        const dict = mockDictionaries[locale];
+        expect(dict.nav_home).toBeDefined();
+        expect(dict.nav_social).toBeDefined();
+        expect(dict.nav_scientific).toBeDefined();
+        expect(typeof dict.nav_home).toBe("string");
+        expect(typeof dict.nav_social).toBe("string");
+        expect(typeof dict.nav_scientific).toBe("string");
+      },
+    );
   });
 
   describe("Social Track Page content", () => {
@@ -59,12 +71,15 @@ describe("Page Rendering - All Locales (Dictionary Content)", () => {
       expect(dict.hero_title.length).toBeGreaterThan(0);
     });
 
-    it.each(supportedLocales)("has navigation links in %s", (locale: Locale) => {
-      const dict = mockDictionaries[locale];
-      expect(dict.nav_home).toBeDefined();
-      expect(dict.nav_social).toBeDefined();
-      expect(dict.nav_scientific).toBeDefined();
-    });
+    it.each(supportedLocales)(
+      "has navigation links in %s",
+      (locale: Locale) => {
+        const dict = mockDictionaries[locale];
+        expect(dict.nav_home).toBeDefined();
+        expect(dict.nav_social).toBeDefined();
+        expect(dict.nav_scientific).toBeDefined();
+      },
+    );
   });
 
   describe("Scientific Track Page content", () => {
@@ -74,12 +89,15 @@ describe("Page Rendering - All Locales (Dictionary Content)", () => {
       expect(dict.hero_title.length).toBeGreaterThan(0);
     });
 
-    it.each(supportedLocales)("has navigation links in %s", (locale: Locale) => {
-      const dict = mockDictionaries[locale];
-      expect(dict.nav_home).toBeDefined();
-      expect(dict.nav_social).toBeDefined();
-      expect(dict.nav_scientific).toBeDefined();
-    });
+    it.each(supportedLocales)(
+      "has navigation links in %s",
+      (locale: Locale) => {
+        const dict = mockDictionaries[locale];
+        expect(dict.nav_home).toBeDefined();
+        expect(dict.nav_social).toBeDefined();
+        expect(dict.nav_scientific).toBeDefined();
+      },
+    );
   });
 
   describe("Language Switching", () => {

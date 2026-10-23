@@ -13,7 +13,10 @@ jest.mock("next/server", () => ({
 }));
 
 // Helper to create a mock request object
-const createMockRequest = (acceptLanguage: string, pathname: string): NextRequest => {
+const createMockRequest = (
+  acceptLanguage: string,
+  pathname: string,
+): NextRequest => {
   return {
     nextUrl: new URL(`http://localhost:3000${pathname}`),
     url: `http://localhost:3000${pathname}`,

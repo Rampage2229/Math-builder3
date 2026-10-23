@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import katex from 'katex';
-import 'katex/dist/katex.min.css';
+import { useEffect, useRef } from "react";
+import katex from "katex";
+import "katex/dist/katex.min.css";
 
 interface FormulaDisplayProps {
   latex: string;
@@ -14,7 +14,7 @@ interface FormulaDisplayProps {
 export function FormulaDisplay({
   latex,
   displayMode = true,
-  className = '',
+  className = "",
   onError,
 }: FormulaDisplayProps) {
   const containerRef = useRef<HTMLSpanElement>(null);
@@ -29,7 +29,8 @@ export function FormulaDisplay({
         strict: false,
       });
     } catch (error) {
-      const err = error instanceof Error ? error : new Error('KaTeX rendering failed');
+      const err =
+        error instanceof Error ? error : new Error("KaTeX rendering failed");
       onError?.(err);
       containerRef.current.textContent = latex;
     }
@@ -38,10 +39,32 @@ export function FormulaDisplay({
   return <span ref={containerRef} className={className} />;
 }
 
-export function InlineFormula({ latex, className = '', onError }: Omit<FormulaDisplayProps, 'displayMode'>) {
-  return <FormulaDisplay latex={latex} displayMode={false} className={className} onError={onError} />;
+export function InlineFormula({
+  latex,
+  className = "",
+  onError,
+}: Omit<FormulaDisplayProps, "displayMode">) {
+  return (
+    <FormulaDisplay
+      latex={latex}
+      displayMode={false}
+      className={className}
+      onError={onError}
+    />
+  );
 }
 
-export function BlockFormula({ latex, className = '', onError }: Omit<FormulaDisplayProps, 'displayMode'>) {
-  return <FormulaDisplay latex={latex} displayMode={true} className={className} onError={onError} />;
+export function BlockFormula({
+  latex,
+  className = "",
+  onError,
+}: Omit<FormulaDisplayProps, "displayMode">) {
+  return (
+    <FormulaDisplay
+      latex={latex}
+      displayMode={true}
+      className={className}
+      onError={onError}
+    />
+  );
 }

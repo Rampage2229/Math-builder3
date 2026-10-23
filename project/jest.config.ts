@@ -12,22 +12,25 @@ const config: Config = {
   },
   setupFilesAfterEnv: ["<rootDir>/tests/setup.ts"],
   transform: {
-    "^.+\\.(ts|tsx)$": ["ts-jest", {
-      tsconfig: {
-        jsx: "react-jsx",
-        module: "esnext",
-        moduleResolution: "bundler",
-        isolatedModules: true,
-        strict: true,
-        esModuleInterop: true,
-        skipLibCheck: true,
-        resolveJsonModule: true,
-        target: "ES2017",
-        lib: ["dom", "dom.iterable", "esnext"],
-        allowJs: true,
-        noEmit: true,
+    "^.+\\.(ts|tsx)$": [
+      "ts-jest",
+      {
+        tsconfig: {
+          jsx: "react-jsx",
+          module: "esnext",
+          moduleResolution: "bundler",
+          isolatedModules: true,
+          strict: true,
+          esModuleInterop: true,
+          skipLibCheck: true,
+          resolveJsonModule: true,
+          target: "ES2017",
+          lib: ["dom", "dom.iterable", "esnext"],
+          allowJs: true,
+          noEmit: true,
+        },
       },
-    }],
+    ],
   },
   collectCoverageFrom: [
     "src/lib/dictionaries/*.json",
