@@ -12,7 +12,6 @@ import {
   Title,
   Tooltip,
   Legend,
-  ChartOptions,
 } from "chart.js";
 import { Bar, Line } from "react-chartjs-2";
 
@@ -30,78 +29,39 @@ ChartJS.register(
   Legend,
 );
 
+type ChartType = "descriptive" | "distribution" | "inference" | "regression" | "optimization";
+type Locale = "en" | "ca" | "es";
+
 interface StatisticsChartProps {
-  chartType:
-    | "descriptive"
-    | "distribution"
-    | "inference"
-    | "regression"
-    | "optimization";
-  locale: "en" | "ca" | "es";
+  chartType: ChartType;
+  locale: Locale;
 }
 
-const chartLabels: Record<string, string[]> = {
+const chartLabels: Record<Locale, Record<ChartType, string[]>> = {
   en: {
     descriptive: ["Mean", "Median", "Mode", "Range", "Variance", "Std Dev"],
     distribution: ["Normal", "Binomial", "Poisson", "Exponential", "Uniform"],
-    inference: [
-      "t-Test",
-      "Z-Test",
-      "Chi-Square",
-      "ANOVA",
-      "Confidence Interval",
-    ],
+    inference: ["t-Test", "Z-Test", "Chi-Square", "ANOVA", "Confidence Interval"],
     regression: ["Linear", "Multiple", "Polynomial", "Logistic"],
     optimization: ["Gradient Descent", "Newton", "Simplex", "Interior Point"],
   },
   ca: {
-    descriptive: [
-      "Mitjana",
-      "Mediana",
-      "Moda",
-      "Rang",
-      "Variància",
-      "Desv. Típica",
-    ],
+    descriptive: ["Mitjana", "Mediana", "Moda", "Rang", "Variància", "Desv. Típica"],
     distribution: ["Normal", "Binomial", "Poisson", "Exponencial", "Uniforme"],
-    inference: [
-      "t-Test",
-      "Z-Test",
-      "Chi-Quadrat",
-      "ANOVA",
-      "Interval de Confiança",
-    ],
+    inference: ["t-Test", "Z-Test", "Chi-Quadrat", "ANOVA", "Interval de Confiança"],
     regression: ["Lineal", "Múltiple", "Polinòmica", "Logístic"],
     optimization: ["Descens de Gradiant", "Newton", "Simplex", "Punt Interior"],
   },
   es: {
-    descriptive: [
-      "Media",
-      "Mediana",
-      "Moda",
-      "Rango",
-      "Varianza",
-      "Desv. Típica",
-    ],
+    descriptive: ["Media", "Mediana", "Moda", "Rango", "Varianza", "Desv. Típica"],
     distribution: ["Normal", "Binomial", "Poisson", "Exponencial", "Uniforme"],
-    inference: [
-      "t-Test",
-      "Z-Test",
-      "Chi-Cuadrado",
-      "ANOVA",
-      "Intervalo de Confianza",
-    ],
+    inference: ["t-Test", "Z-Test", "Chi-Cuadrado", "ANOVA", "Intervalo de Confianza"],
     regression: ["Lineal", "Múltiple", "Polinómica", "Logística"],
-    optimization: [
-      "Descenso de Gradiente",
-      "Newton",
-      "Simplex",
-      "Punto Interior",
-    ],
+    optimization: ["Descenso de Gradiente", "Newton", "Simplex", "Punto Interior"],
   },
 };
 
-const chartData: Record<string, number[]> = {
+const chartData: Record<ChartType, number[]> = {
   descriptive: [85, 78, 92, 65, 70, 88],
   distribution: [90, 75, 60, 55, 50],
   inference: [80, 72, 68, 75, 85],
@@ -109,7 +69,7 @@ const chartData: Record<string, number[]> = {
   optimization: [75, 85, 70, 80],
 };
 
-const chartTitles: Record<string, Record<string, string>> = {
+const chartTitles: Record<Locale, Record<ChartType, string>> = {
   en: {
     descriptive: "Descriptive Statistics Measures",
     distribution: "Probability Distributions",
@@ -133,7 +93,7 @@ const chartTitles: Record<string, Record<string, string>> = {
   },
 };
 
-const getChartOptions = (title: string, yMax: number = 100): ChartOptions => ({
+const getChartOptions = (title: string, yMax: number = 100) => ({
   responsive: true,
   maintainAspectRatio: false,
   plugins: {
@@ -177,7 +137,7 @@ export default function StatisticsChart({
     <div className="w-full max-w-2xl mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8">
       {isBar ? (
         <Bar
-          options={options}
+          options={options as unknown as Parameters<typeof Bar>[0]["options"]}
           data={{
             labels,
             datasets: [
@@ -194,7 +154,7 @@ export default function StatisticsChart({
         />
       ) : (
         <Line
-          options={options}
+          options={options as unknown as Parameters<typeof Line>[0]["options"]}
           data={{
             labels,
             datasets: [
