@@ -23,9 +23,9 @@ export async function generateMetadata({
 type Dictionary = Record<string, string>;
 
 const dictionaries: Record<string, Dictionary> = {
-  en: enDict as Dictionary,
-  es: esDict as Dictionary,
-  ca: caDict as Dictionary,
+  en: enDict as unknown as Dictionary,
+  es: esDict as unknown as Dictionary,
+  ca: caDict as unknown as Dictionary,
 };
 
 async function loadDictionary(locale: string): Promise<Dictionary> {

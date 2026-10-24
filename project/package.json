@@ -47,6 +47,7 @@
     "start": "next start",
     "lint": "eslint",
     "test": "jest",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "type-check": "tsc --noEmit"
   }
 }
