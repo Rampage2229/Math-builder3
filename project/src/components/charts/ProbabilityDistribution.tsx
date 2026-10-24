@@ -110,43 +110,48 @@ export function ProbabilityDistribution({
     };
   }, [type, params, title]);
 
-  const options = useMemo(() => ({
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      title: {
-        display: true,
-        text: title,
-        font: { size: 16, weight: "bold" },
-      },
-      legend: { display: false },
-      tooltip: {
-        enabled: true,
-        callbacks: {
-          label: (ctx: any) => {
-            const x = ctx.parsed.x;
-            const y = ctx.parsed.y;
-            return `${xLabel} = ${x}, P = ${y?.toFixed(4)}`;
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: title,
+          font: { size: 16, weight: "bold" },
+        },
+        legend: { display: false },
+        tooltip: {
+          enabled: true,
+          callbacks: {
+            label: (ctx: any) => {
+              const x = ctx.parsed.x;
+              const y = ctx.parsed.y;
+              return `${xLabel} = ${x}, P = ${y?.toFixed(4)}`;
+            },
           },
         },
       },
-    },
-    scales: {
-      x: {
-        title: { display: true, text: xLabel },
-        grid: { color: "rgba(0,0,0,0.05)" },
+      scales: {
+        x: {
+          title: { display: true, text: xLabel },
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
+        y: {
+          title: { display: true, text: "Probability Density" },
+          grid: { color: "rgba(0,0,0,0.05)" },
+          beginAtZero: true,
+        },
       },
-      y: {
-        title: { display: true, text: "Probability Density" },
-        grid: { color: "rgba(0,0,0,0.05)" },
-        beginAtZero: true,
-      },
-    },
-    animation: { duration: 0 },
-  }), [type, title, xLabel]);
+      animation: { duration: 0 },
+    }),
+    [type, title, xLabel],
+  );
 
   return (
-    <div className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}>
+    <div
+      className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}
+    >
       <Line
         options={options as unknown as Parameters<typeof Line>[0]["options"]}
         data={chartData as unknown as Parameters<typeof Line>[0]["data"]}

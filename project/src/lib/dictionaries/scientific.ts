@@ -50,18 +50,18 @@ export interface FormulaDict {
 }
 
 export interface VisualizationConfigDict {
-  type: 'function-graph' | 'vector' | 'matrix' | 'probability';
+  type: "function-graph" | "vector" | "matrix" | "probability";
   config: Record<string, unknown>;
 }
 
-export const scientificTopicsOrder: (keyof ScientificDictionary['topics'])[] = [
-  'limits',
-  'continuity',
-  'derivatives',
-  'integrals',
-  'vectors',
-  'matrices',
-  'probability',
+export const scientificTopicsOrder: (keyof ScientificDictionary["topics"])[] = [
+  "limits",
+  "continuity",
+  "derivatives",
+  "integrals",
+  "vectors",
+  "matrices",
+  "probability",
 ];
 
 export interface ScientificPageDictionary {
@@ -95,20 +95,26 @@ export interface ScientificPageDictionary {
 export const scientificDictionary: Record<string, ScientificPageDictionary> = {
   en: {
     page_title: "Scientific Mathematics Theory",
-    page_subtitle: "Comprehensive coverage of limits, derivatives, integrals, vectors, matrices, and probability for the Spanish Baccalaureate Scientific track.",
+    page_subtitle:
+      "Comprehensive coverage of limits, derivatives, integrals, vectors, matrices, and probability for the Spanish Baccalaureate Scientific track.",
     track_badge: "Scientific Sciences Track",
     limits_title: "Limits and Continuity",
-    limits_desc: "Study of limits, continuity, and asymptotic behavior of functions.",
+    limits_desc:
+      "Study of limits, continuity, and asymptotic behavior of functions.",
     derivatives_title: "Derivatives",
-    derivatives_desc: "Differentiation rules and applications including rates of change and optimization.",
+    derivatives_desc:
+      "Differentiation rules and applications including rates of change and optimization.",
     integrals_title: "Integrals",
-    integrals_desc: "Integration techniques including definite and indefinite integrals.",
+    integrals_desc:
+      "Integration techniques including definite and indefinite integrals.",
     vectors_title: "Vectors",
     vectors_desc: "Vector operations in 2D and 3D space.",
     matrices_title: "Matrices",
-    matrices_desc: "Matrix operations, determinants, and systems of linear equations.",
+    matrices_desc:
+      "Matrix operations, determinants, and systems of linear equations.",
     probability_title: "Probability",
-    probability_desc: "Probability theory including conditional probability and distributions.",
+    probability_desc:
+      "Probability theory including conditional probability and distributions.",
     nav_home: "Home",
     nav_social: "Social Mathematics",
     nav_scientific: "Scientific Mathematics",
@@ -122,20 +128,26 @@ export const scientificDictionary: Record<string, ScientificPageDictionary> = {
   },
   ca: {
     page_title: "Teoria de Matemàtiques Científiques",
-    page_subtitle: "Cobertura completa de límits, derivades, integrals, vectors, matrius i probabilitat per a la pista de Ciències del Batxillerat espanyol.",
+    page_subtitle:
+      "Cobertura completa de límits, derivades, integrals, vectors, matrius i probabilitat per a la pista de Ciències del Batxillerat espanyol.",
     track_badge: "Pista de Ciències Científiques",
     limits_title: "Límits i Continuitat",
-    limits_desc: "Estudi de límits, continuïtat i comportament assimptòtic de funcions.",
+    limits_desc:
+      "Estudi de límits, continuïtat i comportament assimptòtic de funcions.",
     derivatives_title: "Derivades",
-    derivatives_desc: "Regles de derivació i aplicacions inclòs ritmes de canvi i optimització.",
+    derivatives_desc:
+      "Regles de derivació i aplicacions inclòs ritmes de canvi i optimització.",
     integrals_title: "Integrals",
-    integrals_desc: "Tècniques d'integració inclòs integrals definides i indefinides.",
+    integrals_desc:
+      "Tècniques d'integració inclòs integrals definides i indefinides.",
     vectors_title: "Vectors",
     vectors_desc: "Operacions vectors en espai 2D i 3D.",
     matrices_title: "Matrius",
-    matrices_desc: "Operacions de matrius, determinants i sistemes d'equacions lineals.",
+    matrices_desc:
+      "Operacions de matrius, determinants i sistemes d'equacions lineals.",
     probability_title: "Probabilitat",
-    probability_desc: "Teoria de la probabilitat inclòs probabilitat condicionada i distribucions.",
+    probability_desc:
+      "Teoria de la probabilitat inclòs probabilitat condicionada i distribucions.",
     nav_home: "Inici",
     nav_social: "Matemàtiques Socials",
     nav_scientific: "Matemàtiques Científiques",
@@ -149,20 +161,26 @@ export const scientificDictionary: Record<string, ScientificPageDictionary> = {
   },
   es: {
     page_title: "Teoría de Matemáticas Científicas",
-    page_subtitle: "Cobertura completa de límites, derivadas, integrales, vectores, matrices y probabilidad para la pista de Ciencias del Bachillerato español.",
+    page_subtitle:
+      "Cobertura completa de límites, derivadas, integrales, vectores, matrices y probabilidad para la pista de Ciencias del Bachillerato español.",
     track_badge: "Pista de Ciencias Científicas",
     limits_title: "Límites y Continuidad",
-    limits_desc: "Estudio de límites, continuidad y comportamiento asintótico de funciones.",
+    limits_desc:
+      "Estudio de límites, continuidad y comportamiento asintótico de funciones.",
     derivatives_title: "Derivadas",
-    derivatives_desc: "Reglas de derivación y aplicaciones inclòs tasas de cambio y optimización.",
+    derivatives_desc:
+      "Reglas de derivación y aplicaciones inclòs tasas de cambio y optimización.",
     integrals_title: "Integrales",
-    integrals_desc: "Técnicas de integración inclòs integrales definidas e indefinidas.",
+    integrals_desc:
+      "Técnicas de integración inclòs integrales definidas e indefinidas.",
     vectors_title: "Vectores",
     vectors_desc: "Operaciones vectoriales en espacio 2D y 3D.",
     matrices_title: "Matrices",
-    matrices_desc: "Operaciones de matrices, determinantes y sistemas de ecuaciones lineales.",
+    matrices_desc:
+      "Operaciones de matrices, determinantes y sistemas de ecuaciones lineales.",
     probability_title: "Probabilidad",
-    probability_desc: "Teoría de probabilidad inclòs probabilidad condicionada y distribuciones.",
+    probability_desc:
+      "Teoría de probabilidad inclòs probabilidad condicionada y distribuciones.",
     nav_home: "Inicio",
     nav_social: "Matemáticas Sociales",
     nav_scientific: "Matemáticas Científicas",

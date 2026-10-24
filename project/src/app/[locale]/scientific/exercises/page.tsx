@@ -20,7 +20,8 @@ export default async function ScientificExercisesPage({
             Scientific Mathematics Exercises
           </h1>
           <p className="text-zinc-600 dark:text-zinc-400 max-w-lg mx-auto">
-            Practice limits, derivatives, integrals, vectors, matrices, and probability.
+            Practice limits, derivatives, integrals, vectors, matrices, and
+            probability.
           </p>
         </div>
         <ExerciseList

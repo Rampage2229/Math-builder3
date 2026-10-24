@@ -20,7 +20,8 @@ export default async function SocialExercisesPage({
             Social Mathematics Exercises
           </h1>
           <p className="text-zinc-600 dark:text-zinc-400 max-w-lg mx-auto">
-            Practice descriptive statistics, probability distributions, inference, and regression.
+            Practice descriptive statistics, probability distributions,
+            inference, and regression.
           </p>
         </div>
         <ExerciseList

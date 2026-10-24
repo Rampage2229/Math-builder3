@@ -60,7 +60,7 @@ export function loadProgress(): UserProgress {
           (a: ExerciseAttempt) => ({
             ...a,
             completedAt: new Date(a.completedAt),
-          })
+          }),
         ),
       },
       topicProgress: parsed.topicProgress || {},
@@ -87,7 +87,7 @@ export function updateExerciseProgress(
   isCorrect: boolean,
   points: number,
   topic: string,
-  timeSpent: number
+  timeSpent: number,
 ): UserProgress {
   const now = new Date();
   const attempt: ExerciseAttempt = {
@@ -97,13 +97,16 @@ export function updateExerciseProgress(
     completedAt: now,
   };
 
-  const completedExercises = { ...progress.exerciseProgress.completedExercises };
+  const completedExercises = {
+    ...progress.exerciseProgress.completedExercises,
+  };
   if (isCorrect) {
     completedExercises[exerciseId] = true;
   }
 
   const attempts = [...progress.exerciseProgress.attempts, attempt];
-  const totalPoints = progress.exerciseProgress.totalPoints + (isCorrect ? points : 0);
+  const totalPoints =
+    progress.exerciseProgress.totalPoints + (isCorrect ? points : 0);
 
   // Update topic progress
   const topicProgress = { ...progress.topicProgress };
@@ -119,7 +122,8 @@ export function updateExerciseProgress(
     currentTopic.completed += 1;
   }
   currentTopic.averageScore =
-    (currentTopic.averageScore * (currentTopic.total - 1) + (isCorrect ? 100 : 0)) /
+    (currentTopic.averageScore * (currentTopic.total - 1) +
+      (isCorrect ? 100 : 0)) /
     currentTopic.total;
   currentTopic.timeSpent += timeSpent;
   topicProgress[topic] = currentTopic;
@@ -140,7 +144,7 @@ export function updateExerciseProgress(
 export function getTopicStats(
   progress: UserProgress,
   topic: string,
-  totalExercises: number
+  totalExercises: number,
 ): TopicProgress {
   const topicProgress = progress.topicProgress[topic];
   if (!topicProgress) {
@@ -165,13 +169,17 @@ export function getOverallStats(progress: UserProgress): {
   totalPoints: number;
   totalTimeSpent: number;
 } {
-  const completed = Object.values(progress.exerciseProgress.completedExercises).filter(
-    Boolean
+  const completed = Object.values(
+    progress.exerciseProgress.completedExercises,
+  ).filter(Boolean).length;
+  const total = Object.keys(
+    progress.exerciseProgress.completedExercises,
   ).length;
-  const total = Object.keys(progress.exerciseProgress.completedExercises).length;
   const averageScore =
     total > 0
-      ? (progress.exerciseProgress.attempts.filter((a) => a.isCorrect).length / total) * 100
+      ? (progress.exerciseProgress.attempts.filter((a) => a.isCorrect).length /
+          total) *
+        100
       : 0;
 
   return {

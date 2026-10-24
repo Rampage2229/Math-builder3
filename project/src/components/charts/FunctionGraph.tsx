@@ -92,48 +92,53 @@ export function FunctionGraph({
     };
   }, [func, xMin, xMax, title, color]);
 
-  const options = useMemo(() => ({
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      title: {
-        display: true,
-        text: title,
-        font: { size: 16, weight: "bold" },
-      },
-      legend: { display: false },
-      tooltip: {
-        enabled: true,
-        mode: "nearest",
-        intersect: false,
-        callbacks: {
-          label: (ctx: any) => {
-            const x = ctx.parsed.x;
-            const y = ctx.parsed.y;
-            return `f(${x}) = ${y?.toFixed(4)}`;
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: title,
+          font: { size: 16, weight: "bold" },
+        },
+        legend: { display: false },
+        tooltip: {
+          enabled: true,
+          mode: "nearest",
+          intersect: false,
+          callbacks: {
+            label: (ctx: any) => {
+              const x = ctx.parsed.x;
+              const y = ctx.parsed.y;
+              return `f(${x}) = ${y?.toFixed(4)}`;
+            },
           },
         },
       },
-    },
-    scales: {
-      x: {
-        type: "linear",
-        position: "bottom",
-        title: { display: true, text: xLabel },
-        min: xMin,
-        max: xMax,
-        grid: { color: "rgba(0,0,0,0.05)" },
+      scales: {
+        x: {
+          type: "linear",
+          position: "bottom",
+          title: { display: true, text: xLabel },
+          min: xMin,
+          max: xMax,
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
+        y: {
+          title: { display: true, text: yLabel },
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
       },
-      y: {
-        title: { display: true, text: yLabel },
-        grid: { color: "rgba(0,0,0,0.05)" },
-      },
-    },
-    animation: { duration: 0 },
-  }), [xMin, xMax, xLabel, yLabel, title]);
+      animation: { duration: 0 },
+    }),
+    [xMin, xMax, xLabel, yLabel, title],
+  );
 
   return (
-    <div className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}>
+    <div
+      className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}
+    >
       <Line
         options={options as unknown as Parameters<typeof Line>[0]["options"]}
         data={chartData as unknown as Parameters<typeof Line>[0]["data"]}
@@ -143,7 +148,8 @@ export function FunctionGraph({
       {highlightPoint && (
         <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-100 dark:border-blue-800 text-sm">
           <p className="text-blue-900 dark:text-blue-300 font-medium">
-            {highlightPoint.label}: f({highlightPoint.x}) = {highlightPoint.y.toFixed(4)}
+            {highlightPoint.label}: f({highlightPoint.x}) ={" "}
+            {highlightPoint.y.toFixed(4)}
           </p>
         </div>
       )}

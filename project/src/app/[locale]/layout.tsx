@@ -59,10 +59,29 @@ export default async function LocaleLayout({
   const metadata: Metadata = localeMetadata[locale] || localeMetadata.en;
 
   const navLinks = [
-    { href: `/${locale}`, label: locale === "ca" ? "Inici" : locale === "es" ? "Inicio" : "Home" },
-    { href: `/${locale}/social`, label: locale === "ca" ? "Socials" : locale === "es" ? "Sociales" : "Social" },
-    { href: `/${locale}/scientific`, label: locale === "ca" ? "Científiques" : locale === "es" ? "Científicas" : "Scientific" },
-    { href: `/${locale}/progress`, label: locale === "ca" ? "Progrés" : locale === "es" ? "Progreso" : "Progress" },
+    {
+      href: `/${locale}`,
+      label: locale === "ca" ? "Inici" : locale === "es" ? "Inicio" : "Home",
+    },
+    {
+      href: `/${locale}/social`,
+      label:
+        locale === "ca" ? "Socials" : locale === "es" ? "Sociales" : "Social",
+    },
+    {
+      href: `/${locale}/scientific`,
+      label:
+        locale === "ca"
+          ? "Científiques"
+          : locale === "es"
+            ? "Científicas"
+            : "Scientific",
+    },
+    {
+      href: `/${locale}/progress`,
+      label:
+        locale === "ca" ? "Progrés" : locale === "es" ? "Progreso" : "Progress",
+    },
   ];
 
   return (
@@ -73,7 +92,11 @@ export default async function LocaleLayout({
             <div className="flex items-center justify-between h-16">
               <div className="flex items-center gap-2">
                 <span className="text-xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">
-                  {locale === "ca" ? "Matemàtiques Batxillerat" : locale === "es" ? "Matemáticas Bachillerato" : "Spanish Baccalaureate Math"}
+                  {locale === "ca"
+                    ? "Matemàtiques Batxillerat"
+                    : locale === "es"
+                      ? "Matemáticas Bachillerato"
+                      : "Spanish Baccalaureate Math"}
                 </span>
               </div>
               <div className="hidden md:flex items-center gap-6">
