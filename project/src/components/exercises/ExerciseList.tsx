@@ -1,3 +1,5 @@
+"use client";
+
 import { Exercise } from '@/lib/exercises/types';
 import { ExerciseComponent } from './ExerciseComponent';
 
@@ -5,9 +7,10 @@ interface ExerciseListProps {
   exercises: Exercise[];
   title: string;
   description?: string;
+  onComplete?: (exerciseId: string, isCorrect: boolean) => void;
 }
 
-export function ExerciseList({ exercises, title, description }: ExerciseListProps) {
+export function ExerciseList({ exercises, title, description, onComplete }: ExerciseListProps) {
   return (
     <section className="exercise-list" aria-labelledby="exercise-list-title">
       <header className="exercise-list-header">
@@ -17,7 +20,7 @@ export function ExerciseList({ exercises, title, description }: ExerciseListProp
       <div className="exercises-grid">
         {exercises.map((exercise) => (
           <article key={exercise.id} className="exercise-card">
-            <ExerciseComponent exercise={exercise} />
+            <ExerciseComponent exercise={exercise} onComplete={onComplete} />
           </article>
         ))}
       </div>
