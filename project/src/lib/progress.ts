@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 export interface ExerciseAttempt {
   exerciseId: string;
   userAnswer: string | number;
@@ -205,12 +207,7 @@ export function formatTime(seconds: number): string {
 }
 
 export function useProgress() {
-  const [progress, setProgress] = useState<UserProgress>(defaultProgress);
-
-  useEffect(() => {
-    const loaded = loadProgress();
-    setProgress(loaded);
-  }, [loadProgress]);
+  const [progress, setProgress] = useState<UserProgress>(() => loadProgress());
 
   return { progress, loadProgress };
 }

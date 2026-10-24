@@ -1,6 +1,6 @@
 "use client";
 
-import { Exercise } from "@/lib/exercises/types";
+import type { Exercise } from "@/lib/exercises/types";
 import { ExerciseComponent } from "./ExerciseComponent";
 
 interface ExerciseListProps {

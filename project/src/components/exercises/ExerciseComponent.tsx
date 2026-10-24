@@ -6,7 +6,8 @@ import {
   InlineFormula,
   BlockFormula,
 } from "@/components/theory/FormulaDisplay";
-import { Exercise, ExerciseType } from "@/lib/exercises/types";
+import { ExerciseType } from "@/lib/exercises/types";
+import type { Exercise } from "@/lib/exercises/types";
 
 interface ExerciseComponentProps {
   exercise: Exercise;

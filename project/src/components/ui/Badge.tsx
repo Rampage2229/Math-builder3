@@ -5,6 +5,26 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+declare module "class-variance-authority" {
+  export function cva(
+    className: string,
+    config?: {
+      variants?: Record<string, Record<string, string>>;
+      defaultVariants?: Record<string, string>;
+    }
+  ): (props?: { variant?: string; className?: string }) => string;
+}
+
+declare module "class-variance-authority" {
+  export function cva(
+    className: string,
+    config?: {
+      variants?: Record<string, Record<string, string>>;
+      defaultVariants?: Record<string, string>;
+    }
+  ): (props?: { variant?: string; className?: string }) => string;
+}
+
 const badgeVariants = cva(
   "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {

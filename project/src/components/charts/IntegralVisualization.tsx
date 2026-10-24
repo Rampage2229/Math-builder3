@@ -19,10 +19,10 @@ export function IntegralVisualization({ data }: IntegralVisualizationProps) {
     if (!data) return null;
     
     const { function: fn, a, b, partitions = 10 } = data;
-    const xValues = [];
-    const yValues = [];
-    const rectX = [];
-    const rectY = [];
+    const xValues: number[] = [];
+    const yValues: number[] = [];
+    const rectX: number[] = [];
+    const rectY: number[] = [];
     
     // Generate function points
     for (let i = 0; i <= 100; i++) {
@@ -30,7 +30,7 @@ export function IntegralVisualization({ data }: IntegralVisualizationProps) {
       xValues.push(x);
       // Simple eval for demo - in production use a proper math parser
       try {
-        yValues.push(Function('x', `return ${fn}`)(x));
+        yValues.push(Number(Function('x', `return ${fn}`)(x)) || 0);
       } catch {
         yValues.push(0);
       }
@@ -42,7 +42,7 @@ export function IntegralVisualization({ data }: IntegralVisualizationProps) {
       const x = a + i * width;
       rectX.push(x, x + width, x + width, x, x);
       try {
-        const y = Function('x', `return ${fn}`)(x);
+        const y = Number(Function('x', `return ${fn}`)(x)) || 0;
         rectY.push(0, 0, y, y, 0);
       } catch {
         rectY.push(0, 0, 0, 0, 0);

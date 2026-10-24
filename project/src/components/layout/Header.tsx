@@ -84,7 +84,7 @@ export function Header({ hasSidebar, onToggleSidebar }: HeaderProps) {
             {/* Language switcher */}
             <LanguageSwitcher
               locale={currentLocale}
-              onChange={({ locale }) => handleLanguageChange(locale)}
+              onChange={(newLocale: string) => handleLanguageChange(newLocale)}
             />
           </div>
         </div>
