@@ -1539,3 +1539,27 @@ filepath:project/src/app/[locale]/scientific/page.tsx
 <<<<<<< SEARCHPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLAC
 
 ---
+
+### Cycle #98 [2026-10-24 11:22:42]
+**Subtasks Assigned:**
+- **subtask_1**: Read and fix the syntax error in project/src/app/[locale]/scientific/page.tsx - the build fails with 'Expected a semicolon' at line 14 column 24 near dict.limits_title
+- **subtask_2**: Verify the scientific dictionary in project/src/lib/dictionaries/scientific.ts has all required properties (limits_title, limits_desc, etc.) for ca, es, en locales
+- **subtask_3**: Run npm run build in project directory to verify the fix works and the build passes
+- **subtask_4**: Run npm test and tsc --noEmit to ensure all tests pass and TypeScript compilation succeeds
+**Deliverables & Modified Files:**
+- `project/src/app/[locale]/scientific/page.tsx`
+**QA Validation:**
+```filepath:project/src/app/[locale]/scientific/page.tsx
+"use client";
+import { useEffect, useState } from "react";
+import { useTranslation } from "next-i18next";
+import Link from "next/link";
+import { scientificTopicsOrder } from "@/lib/dictionaries/scientific";
+export default function ScientificPage() {
+const { t } = useTranslation("scientific");
+const [activeTopic, setActiveTopic] = useState<string | null>(null);
+return (
+<div className="min-h-screen bg-slate-50 text-slate-900">
+<nav classNam
+
+---
