@@ -3,10 +3,20 @@
 import { useMemo } from "react";
 
 export interface ProbabilityDistributionProps {
-  data?: { value: number; probability: number }[];
+  data: { value: number; probability: number }[];
+  title?: string;
+  xLabel?: string;
+  yLabel?: string;
+  className?: string;
 }
 
-export function ProbabilityDistribution({ data }: ProbabilityDistributionProps) {
+export function ProbabilityDistribution({
+  data,
+  title,
+  xLabel = "Value",
+  yLabel = "Probability",
+  className = "",
+}: ProbabilityDistributionProps) {
   const config = useMemo(() => {
     const colors = ['#4F46E5', '#EF4444', '#10B981', '#F59E0B', '#8B5CF6'];
     const color = colors[0];
@@ -15,11 +25,11 @@ export function ProbabilityDistribution({ data }: ProbabilityDistributionProps) 
       type: 'bar' as const,
       data: {
         datasets: [{
-          label: 'Probability',
-          data: data?.map((item: { value: number; probability: number }) => ({
+          label: title || 'Probability',
+          data: data.map((item: { value: number; probability: number }) => ({
             x: item.value,
             y: item.probability
-          })) || [],
+          })),
           backgroundColor: color,
         }],
       },
@@ -30,11 +40,11 @@ export function ProbabilityDistribution({ data }: ProbabilityDistributionProps) 
           x: {
             type: 'linear',
             position: 'bottom',
-            title: { display: true, text: 'Value' },
+            title: { display: true, text: xLabel },
           },
           y: {
             beginAtZero: true,
-            title: { display: true, text: 'Probability' },
+            title: { display: true, text: yLabel },
             max: 1,
           },
         },
@@ -42,7 +52,11 @@ export function ProbabilityDistribution({ data }: ProbabilityDistributionProps) 
     };
     
     return config;
-  }, [data]);
+  }, [data, title, xLabel, yLabel]);
   
-  return <canvas id="probability-chart" width={800} height={400} />;
+  return (
+    <div className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}>
+      <canvas id="probability-chart" width={800} height={400} />
+    </div>
+  );
 }

@@ -6,19 +6,28 @@ import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 
 export interface IntegralVisualizationProps {
-  data?: {
-    function: string;
-    a: number;
-    b: number;
-    partitions?: number;
-  };
+  func: (x: number) => number;
+  a: number;
+  b: number;
+  partitions?: number;
+  title?: string;
+  xLabel?: string;
+  yLabel?: string;
+  className?: string;
 }
 
-export function IntegralVisualization({ data }: IntegralVisualizationProps) {
+export function IntegralVisualization({
+  func,
+  a,
+  b,
+  partitions = 10,
+  title,
+  xLabel = "x",
+  yLabel = "y",
+  className = "",
+}: IntegralVisualizationProps) {
   const config = useMemo(() => {
-    if (!data) return null;
-    
-    const { function: fn, a, b, partitions = 10 } = data;
+    const fn = func.toString();
     const xValues: number[] = [];
     const yValues: number[] = [];
     const rectX: number[] = [];
@@ -28,9 +37,8 @@ export function IntegralVisualization({ data }: IntegralVisualizationProps) {
     for (let i = 0; i <= 100; i++) {
       const x = a + (b - a) * (i / 100);
       xValues.push(x);
-      // Simple eval for demo - in production use a proper math parser
       try {
-        yValues.push(Number(Function('x', `return ${fn}`)(x)) || 0);
+        yValues.push(func(x));
       } catch {
         yValues.push(0);
       }
@@ -42,7 +50,7 @@ export function IntegralVisualization({ data }: IntegralVisualizationProps) {
       const x = a + i * width;
       rectX.push(x, x + width, x + width, x, x);
       try {
-        const y = Number(Function('x', `return ${fn}`)(x)) || 0;
+        const y = func(x);
         rectY.push(0, 0, y, y, 0);
       } catch {
         rectY.push(0, 0, 0, 0, 0);
@@ -80,21 +88,25 @@ export function IntegralVisualization({ data }: IntegralVisualizationProps) {
           x: {
             type: 'linear',
             position: 'bottom',
-            title: { display: true, text: 'x' },
+            title: { display: true, text: xLabel },
           },
           y: {
-            title: { display: true, text: 'y' },
+            title: { display: true, text: yLabel },
           },
         },
         plugins: {
           title: {
             display: true,
-            text: `∫[${a},${b}] ${fn} dx`,
+            text: title || `∫[${a},${b}] f(x) dx`,
           },
         },
       },
     };
-  }, [data]);
+  }, [func, a, b, partitions, title, xLabel, yLabel]);
   
-  return <canvas id="integral-chart" width={800} height={400} />;
+  return (
+    <div className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}>
+      <canvas id="integral-chart" width={800} height={400} />
+    </div>
+  );
 }
