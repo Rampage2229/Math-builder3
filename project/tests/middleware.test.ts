@@ -1,5 +1,3 @@
-import { describe, it, expect } from "jest";
-import { describe, it, expect } from "jest";
 import { NextRequest, NextResponse } from "next/server";
 import { proxy as middleware, config } from "../src/proxy";
 
