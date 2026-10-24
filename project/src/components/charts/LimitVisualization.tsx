@@ -61,31 +61,25 @@ export function LimitVisualization({
 }: LimitVisualizationProps) {
   const chartData = useMemo(() => {
     const step = (xMax - xMin) / DEFAULT_POINTS;
-    const labels: string[] = [];
-    const data: number[] = [];
+    const dataPoints: { x: number; y: number | null }[] = [];
 
     for (let i = 0; i <= DEFAULT_POINTS; i++) {
       const x = xMin + i * step;
       try {
         const y = func(x);
         if (isFinite(y) && Math.abs(y) < 1e6) {
-          labels.push(x.toFixed(2));
-          data.push(y);
+          dataPoints.push({ x, y });
         } else {
-          labels.push(x.toFixed(2));
-          data.push(NaN as unknown as number);
+          dataPoints.push({ x, y: null });
         }
       } catch {
-        labels.push(x.toFixed(2));
-        data.push(NaN as unknown as number);
+        dataPoints.push({ x, y: null });
       }
     }
 
-    type ChartDataPoint = number | { x: number; y: number };
-
     const datasets: Array<{
       label: string;
-      data: ChartDataPoint[];
+      data: { x: number; y: number | null }[];
       borderColor: string;
       backgroundColor: string;
       borderWidth?: number;
@@ -98,7 +92,7 @@ export function LimitVisualization({
     }> = [
       {
         label: title,
-        data: data as ChartDataPoint[],
+        data: dataPoints,
         borderColor: color,
         backgroundColor: color.replace("1)", "0.1)"),
         borderWidth: 2,
@@ -181,7 +175,7 @@ export function LimitVisualization({
       });
     }
 
-    return { labels, datasets };
+    return { datasets };
   }, [func, xMin, xMax, limitPoint, limitValue, title, color, showEpsilonDelta, epsilon, delta]);
 
   const options = useMemo(() => ({
