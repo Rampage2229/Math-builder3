@@ -2,6 +2,7 @@
 
 import { TheorySection, TheoryTopic } from "@/components/theory/TheorySection";
 import { socialDictionary } from "@/lib/dictionaries/social";
+import { LinearProgrammingVisualization } from "@/components/charts/LinearProgrammingVisualization";
 
 interface SocialDictionary {
   page_title: string;
@@ -327,6 +328,68 @@ export default async function SocialTrackPage({
             description={dict.linear_programming_desc}
             topics={pageTopics.filter((t) => t.id === "linear-programming")}
           />
+          
+          {/* Linear Programming Visualization */}
+          <section className="mt-16">
+            <h2 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100 mb-6 text-center">
+              {dict.linear_programming_title} - Interactive Visualization
+            </h2>
+            <LinearProgrammingVisualization
+              constraints={[
+                { id: "c1", label: "2x + y ≤ 20", a: 2, b: 1, c: 20, type: "<=" },
+                { id: "c2", label: "x + 2y ≤ 20", a: 1, b: 2, c: 20, type: "<=" },
+                { id: "c3", label: "x ≥ 0", a: 1, b: 0, c: 0, type: ">=" },
+                { id: "c4", label: "y ≥ 0", a: 0, b: 1, c: 0, type: ">=" },
+              ]}
+              objective={{ label: "Maximize z = 3x + 4y", a: 3, b: 4, maximize: true }}
+              title="Linear Programming: Feasible Region & Optimal Solution"
+              xLabel="x"
+              yLabel="y"
+              xMax={15}
+              yMax={15}
+              simplexSteps={[
+                {
+                  step: 1,
+                  description: "Convert inequalities to equations by adding slack variables s1, s2",
+                  tableau: [
+                    [2, 1, 1, 0, 20],
+                    [1, 2, 0, 1, 20],
+                    [-3, -4, 0, 0, 0],
+                  ],
+                  basicVariables: ["s1", "s2"],
+                  enteringVariable: "y",
+                  leavingVariable: "s2",
+                  pivotElement: 2,
+                },
+                {
+                  step: 2,
+                  description: "Pivot on y in row 2, normalize and eliminate",
+                  tableau: [
+                    [1.5, 0, 1, -0.5, 10],
+                    [0.5, 1, 0, 0.5, 10],
+                    [-1, 0, 0, 2, 40],
+                  ],
+                  basicVariables: ["s1", "y"],
+                  enteringVariable: "x",
+                  leavingVariable: "s1",
+                  pivotElement: 1.5,
+                },
+                {
+                  step: 3,
+                  description: "Pivot on x in row 1, optimal solution reached",
+                  tableau: [
+                    [1, 0, 2/3, -1/3, 20/3],
+                    [0, 1, -1/3, 2/3, 20/3],
+                    [0, 0, 2/3, 5/3, 160/3],
+                  ],
+                  basicVariables: ["x", "y"],
+                  enteringVariable: "none",
+                  leavingVariable: "none",
+                  pivotElement: 0,
+                },
+              ]}
+            />
+          </section>
         </section>
       </main>
     </div>
