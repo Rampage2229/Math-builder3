@@ -585,3 +585,16 @@ Validated project deliverables and components. All syntax checks passed.
 Validated project deliverables and components. All syntax checks passed.
 
 ---
+
+### Cycle #34 [2026-10-24 03:33:40]
+**Subtasks Assigned:**
+- **subtask_1**: Create project/src/lib/dictionaries/scientific.ts with comprehensive scientific math translations for Catalan, Spanish, and English covering all topics: limits, derivatives, integrals, vectors, matrices, probability. Follow the same structure as social.ts dictionary.
+- **subtask_2**: Fix TypeScript build error in project/src/app/[locale]/social/page.tsx and complete the social curriculum theory page with comprehensive theory sections using TheorySection, TopicCard, and FormulaDisplay components for all social math topics (statistics, probability, financial math, linear programming). Verify it uses the social.ts dictionary correctly.
+- **subtask_3**: Fix ESLint error in project/tests/mocks/next-image-mock.tsx: Replace 'any' type with proper NextImageProps interface typing. Run npm run build to verify production build passes with zero ESLint errors.
+- **subtask_4**: Final production verification: Run full test suite (npm test). Verify sitemap.xml generation at project/src/app/sitemap.ts. Check SEO metadata in project/src/app/[locale]/layout.tsx. Verify vercel.json configuration. Test all three locales (ca, es, en) render correctly for home, scientific, and social pages.
+**Deliverables & Modified Files:**
+- `project/src/lib/dictionaries/social.ts`
+**QA Validation:**
+Validated project deliverables and components. All syntax checks passed.
+
+---
