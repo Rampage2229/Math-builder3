@@ -163,6 +163,21 @@ export function DerivativeVisualization({
           showLine: false,
         });
       }
+    } else if (pointOfInterest !== undefined && !derivative) {
+      // Show point of interest without tangent
+      const x0 = pointOfInterest;
+      const y0 = func(x0);
+      if (isFinite(y0)) {
+        datasets.push({
+          label: `Point of interest (${x0}, ${y0.toFixed(4)})`,
+          data: [{ x: x0, y: y0 }],
+          borderColor: tangentColor,
+          backgroundColor: tangentColor,
+          pointRadius: 8,
+          pointStyle: "circle",
+          showLine: false,
+        });
+      }
     }
 
     return { datasets };
@@ -274,19 +289,32 @@ export function DerivativeVisualization({
               </span>{" "}
               - Derivative (rate of change)
             </li>
-            {pointOfInterest !== undefined && derivative && (
-              <li>
-                <span className="font-mono text-green-600 dark:text-green-400">
-                  Tangent line
-                </span>{" "}
-                at x = {pointOfInterest}
-                <br />
-                <span className="ml-4">
-                  Slope f&#39;({pointOfInterest}) ={" "}
-                  {derivative(pointOfInterest).toFixed(4)}
-                </span>
-              </li>
-            )}
+      {pointOfInterest !== undefined && derivative && (
+        <li>
+          <span className="font-mono text-green-600 dark:text-green-400">
+            Tangent line
+          </span>{" "}
+          at x = {pointOfInterest}
+          <br />
+          <span className="ml-4">
+            Slope f&#39;({pointOfInterest}) ={" "}
+            {derivative(pointOfInterest).toFixed(4)}
+          </span>
+        </li>
+      )}
+      {pointOfInterest !== undefined && !derivative && (
+        <li>
+          <span className="font-mono text-amber-600 dark:text-amber-400">
+            Tangent line
+          </span>{" "}
+          at x = {pointOfInterest}
+          <br />
+          <span className="ml-4 text-zinc-500 dark:text-zinc-400">
+            Derivative function not provided - tangent cannot be calculated
+          </span>
+        </li>
+      )}
+
           </ul>
         </div>
       </div>
