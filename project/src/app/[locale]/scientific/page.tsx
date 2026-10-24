@@ -1,20 +1,152 @@
 "use client";
 
-import Image from "next/image";
-import { useEffect } from "react";
+import { TheorySection, TheoryTopic } from "@/components/theory/TheorySection";
+import { scientificDictionary } from "@/lib/dictionaries/scientific";
 
-interface Dictionary {
-  [key: string]: string;
+interface ScientificDictionary {
+  page_title: string;
+  page_subtitle: string;
+  track_badge: string;
+  limits_title: string;
+  limits_desc: string;
+  derivatives_title: string;
+  derivatives_desc: string;
+  integrals_title: string;
+  integrals_desc: string;
+  vectors_title: string;
+  vectors_desc: string;
+  matrices_title: string;
+  matrices_desc: string;
+  probability_title: string;
+  probability_desc: string;
+  nav_home: string;
+  nav_social: string;
+  nav_scientific: string;
+  key_formulas: string;
+  examples: string;
+  key_points: string;
+  problem: string;
+  solution: string;
+  theory_link: string;
+  exercises_link: string;
 }
 
-async function loadDictionary(locale: string): Promise<Dictionary> {
-  const dictionaries: Record<string, Dictionary> = {
-    en: (await import("@/lib/dictionaries/en.json")).default,
-    ca: (await import("@/lib/dictionaries/ca.json")).default,
-    es: (await import("@/lib/dictionaries/es.json")).default,
-  };
-  return dictionaries[locale] || dictionaries.en;
-}
+const topics: Record<string, TheoryTopic[]> = {
+  en: [
+    {
+      id: "limits",
+      title: "Limits and Continuity",
+      content: "Study of limits, continuity, and asymptotic behavior of functions, including one-sided limits and infinite limits.",
+      keyPoints: ["Limit definition", "One-sided limits", "Continuity", "Asymptotic behavior"],
+    },
+    {
+      id: "derivatives",
+      title: "Derivatives",
+      content: "Differentiation rules, applications of derivatives including rates of change, optimization, and curve sketching.",
+      keyPoints: ["Power rule", "Product rule", "Chain rule", "Applications"],
+    },
+    {
+      id: "integrals",
+      title: "Integrals",
+      content: "Integration techniques including definite and indefinite integrals, the Fundamental Theorem of Calculus, and applications.",
+      keyPoints: ["Indefinite integrals", "Definite integrals", "Fundamental Theorem", "Applications"],
+    },
+    {
+      id: "vectors",
+      title: "Vectors",
+      content: "Vector operations in 2D and 3D space, including dot product, cross product, and vector geometry.",
+      keyPoints: ["Vector operations", "Dot product", "Cross product", "Vector geometry"],
+    },
+    {
+      id: "matrices",
+      title: "Matrices",
+      content: "Matrix operations, determinants, inverse matrices, and systems of linear equations.",
+      keyPoints: ["Matrix operations", "Determinants", "Inverse matrices", "Linear systems"],
+    },
+    {
+      id: "probability",
+      title: "Probability",
+      content: "Probability theory including conditional probability, independence, random variables, and probability distributions.",
+      keyPoints: ["Conditional probability", "Independence", "Random variables", "Probability distributions"],
+    },
+  ],
+  ca: [
+    {
+      id: "limits",
+      title: "Límits i Continuitat",
+      content: "Estudi de límits, continuïtat i comportament assimptòtic de funcions, inclòs límits unilaterals i límits infinits.",
+      keyPoints: ["Definició de límit", "Límits unilaterals", "Continuitat", "Comportament assimptòtic"],
+    },
+    {
+      id: "derivatives",
+      title: "Derivades",
+      content: "Regles de derivació i aplicacions de les derivades inclòs ritmes de canvi, optimització i esbossat de courbes.",
+      keyPoints: ["Regla de potència", "Regla del producte", "Regla de la cadena", "Aplicacions"],
+    },
+    {
+      id: "integrals",
+      title: "Integrals",
+      content: "Tècniques d'integració inclòs integrals definides i indefinides, el Teorema Fondamental del Càlcul i aplicacions.",
+      keyPoints: ["Integrals indefinides", "Integrals definides", "Teorema Fonamental", "Aplicacions"],
+    },
+    {
+      id: "vectors",
+      title: "Vectors",
+      content: "Operacions vectors en espai 2D i 3D, inclòs producte escalar, producte vectorial i geometria vectorial.",
+      keyPoints: ["Operacions vectors", "Producte escalar", "Producte vectorial", "Geometria vectorial"],
+    },
+    {
+      id: "matrices",
+      title: "Matrius",
+      content: "Operacions de matrius, determinants, matrius inverses i sistemes d'equacions lineals.",
+      keyPoints: ["Operacions de matrius", "Determinants", "Matrius inverses", "Sistemes lineals"],
+    },
+    {
+      id: "probability",
+      title: "Probabilitat",
+      content: "Teoria de la probabilitat inclòs probabilitat condicionada, independència, variables aleatòries i distribucions de probabilitat.",
+      keyPoints: ["Probabilitat condicionada", "Independència", "Variables aleatòries", "Distribucions de probabilitat"],
+    },
+  ],
+  es: [
+    {
+      id: "limits",
+      title: "Límites y Continuidad",
+      content: "Estudio de límites, continuidad y comportamiento asintótico de funciones, incluyendo límites laterales e infinitos.",
+      keyPoints: ["Definición de límite", "Límites laterales", "Continuidad", "Comportamiento asintótico"],
+    },
+    {
+      id: "derivatives",
+      title: "Derivadas",
+      content: "Reglas de derivación y aplicaciones de las derivadas incluyendo tasas de cambio, optimización y esbozo de curvas.",
+      keyPoints: ["Regla de potencia", "Regla del producto", "Regla de la cadena", "Aplicaciones"],
+    },
+    {
+      id: "integrals",
+      title: "Integrales",
+      content: "Técnicas de integración incluyendo integrales definidas e indefinidas, el Teorema Fundamental del Cálculo y aplicaciones.",
+      keyPoints: ["Integrales indefinidas", "Integrales definidas", "Teorema Fundamental", "Aplicaciones"],
+    },
+    {
+      id: "vectors",
+      title: "Vectores",
+      content: "Operaciones vectoriales en espacio 2D y 3D, incluyendo producto punto, producto cruz y geometría vectorial.",
+      keyPoints: ["Operaciones vectoriales", "Producto punto", "Producto cruz", "Geometría vectorial"],
+    },
+    {
+      id: "matrices",
+      title: "Matrices",
+      content: "Operaciones de matrices, determinantes, matrices inversas y sistemas de ecuaciones lineales.",
+      keyPoints: ["Operaciones de matrices", "Determinantes", "Matrices inversas", "Sistemas lineales"],
+    },
+    {
+      id: "probability",
+      title: "Probabilidad",
+      content: "Teoría de probabilidad incluyendo probabilidad condicionada, independencia, variables aleatorias y distribuciones de probabilidad.",
+      keyPoints: ["Probabilidad condicionada", "Independencia", "Variables aleatorias", "Distribuciones de probabilidad"],
+    },
+  ],
+};
 
 export default async function ScientificTrackPage({
   params,
@@ -22,211 +154,65 @@ export default async function ScientificTrackPage({
   params: Promise<{ locale: string }>;
 }) {
   const locale = (await params).locale;
-  const dictionary = await loadDictionary(locale);
-
-  // Unit data translated per locale
-  const units = {
-    en: [
-      {
-        id: 1,
-        title: "Calculus Fundamentals",
-        duration: "4 weeks",
-        level: "Introductory",
-        description:
-          "Limits, continuity, and differentiation for scientific applications.",
-      },
-      {
-        id: 2,
-        title: "Linear Algebra",
-        duration: "4 weeks",
-        level: "Introductory",
-        description:
-          "Matrices, vectors, and linear transformations for physics and engineering.",
-      },
-      {
-        id: 3,
-        title: "Differential Equations",
-        duration: "5 weeks",
-        level: "Intermediate",
-        description:
-          "First-order and second-order ODEs with scientific applications.",
-      },
-      {
-        id: 4,
-        title: "Multivariable Calculus",
-        duration: "5 weeks",
-        level: "Intermediate",
-        description:
-          "Partial derivatives, multiple integrals, and vector calculus.",
-      },
-      {
-        id: 5,
-        title: "Complex Analysis",
-        duration: "3 weeks",
-        level: "Advanced",
-        description:
-          "Complex numbers, contour integration, and residue theory.",
-      },
-      {
-        id: 6,
-        title: "Numerical Methods",
-        duration: "3 weeks",
-        level: "Advanced",
-        description:
-          "Computational techniques for solving mathematical problems.",
-      },
-    ],
-    ca: [
-      {
-        id: 1,
-        title: "Fundamentals de Càlcul",
-        duration: "4 setmanes",
-        level: "Introductori",
-        description:
-          "Limits, continuity, and differentiation for scientific applications.",
-      },
-      {
-        id: 2,
-        title: "Àlgebra Lineal",
-        duration: "4 setmanes",
-        level: "Introductori",
-        description:
-          "Matrices, vectors, and linear transformations for physics and engineering.",
-      },
-      {
-        id: 3,
-        title: "Equacions Diferencials",
-        duration: "5 setmanes",
-        level: "Intermig",
-        description:
-          "First-order and second-order ODEs with scientific applications.",
-      },
-      {
-        id: 4,
-        title: "Càlcul Multivariant",
-        duration: "5 setmanes",
-        level: "Intermig",
-        description:
-          "Partial derivatives, multiple integrals, and vector calculus.",
-      },
-      {
-        id: 5,
-        title: "Anàlisi Complexa",
-        duration: "3 setmanes",
-        level: "Avançat",
-        description:
-          "Complex numbers, contour integration, and residue theory.",
-      },
-      {
-        id: 6,
-        title: "Mètodes Numèrics",
-        duration: "3 setmanes",
-        level: "Avançat",
-        description:
-          "Computational techniques for solving mathematical problems.",
-      },
-    ],
-    es: [
-      {
-        id: 1,
-        title: "Fundamentos de Cálculo",
-        duration: "4 semanas",
-        level: "Introductoria",
-        description:
-          "Limits, continuity, and differentiation for scientific applications.",
-      },
-      {
-        id: 2,
-        title: "Álgebra Lineal",
-        duration: "4 semanas",
-        level: "Introductoria",
-        description:
-          "Matrices, vectors, and linear transformations for physics and engineering.",
-      },
-      {
-        id: 3,
-        title: "Ecuaciones Diferenciales",
-        duration: "5 semanas",
-        level: "Intermedia",
-        description:
-          "First-order and second-order ODEs with scientific applications.",
-      },
-      {
-        id: 4,
-        title: "Cálculo Multivariable",
-        duration: "5 semanas",
-        level: "Intermedia",
-        description:
-          "Partial derivatives, multiple integrals, and vector calculus.",
-      },
-      {
-        id: 5,
-        title: "Análisis Complejo",
-        duration: "3 semanas",
-        level: "Avanzado",
-        description:
-          "Complex numbers, contour integration, and residue theory.",
-      },
-      {
-        id: 6,
-        title: "Métodos Numéricos",
-        duration: "3 semanas",
-        level: "Avanzado",
-        description:
-          "Computational techniques for solving mathematical problems.",
-      },
-    ],
-  };
+  const dict = scientificDictionary[locale as keyof typeof scientificDictionary] || scientificDictionary.en;
+  const pageTopics = topics[locale as keyof typeof topics] || topics.en;
 
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            {dictionary.hero_title}
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            {dictionary.hero_description}
-          </p>
+    <div className="flex flex-col flex-1 min-h-screen bg-zinc-50 font-sans dark:bg-black">
+      <header className="sticky top-0 z-40 bg-white/80 dark:bg-black/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-2">
+              <span className="text-xl font-bold text-zinc-900 dark:text-zinc-50 tracking-tight">{dict.page_title}</span>
+            </div>
+            <nav className="hidden md:flex items-center gap-6">
+              <a href={`/${locale}`} className="text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{dict.nav_home}</a>
+              <a href={`/${locale}/social`} className="text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{dict.nav_social}</a>
+              <a href={`/${locale}/scientific`} className="text-sm font-medium text-zinc-900 dark:text-zinc-100 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">{dict.nav_scientific}</a>
+            </nav>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <nav>
-            <ul className="flex gap-4">
-              <li>
-                <a
-                  href={`/${locale}`}
-                  className="font-medium text-zinc-950 dark:text-zinc-50"
-                >
-                  {dictionary.nav_home}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/${locale}/social`}
-                  className="font-medium text-zinc-950 dark:text-zinc-50"
-                >
-                  {dictionary.nav_social}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={`/${locale}/scientific`}
-                  className="font-medium text-zinc-950 dark:text-zinc-50"
-                >
-                  {dictionary.nav_scientific}
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
+      </header>
+
+      <main className="flex-1">
+        <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+          <div className="text-center mb-16">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 dark:bg-blue-900/20 border border-blue-500/20 dark:border-blue-900/30 text-blue-400 dark:text-blue-300 text-sm font-medium mb-6">{dict.track_badge}</span>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-zinc-900 dark:text-zinc-100 mb-6 leading-tight">{dict.page_title}</h1>
+            <p className="text-lg sm:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed">{dict.page_subtitle}</p>
+          </div>
+
+          <TheorySection
+            title={dict.limits_title}
+            description={dict.limits_desc}
+            topics={pageTopics.filter((t) => t.id === "limits")}
+          />
+          <TheorySection
+            title={dict.derivatives_title}
+            description={dict.derivatives_desc}
+            topics={pageTopics.filter((t) => t.id === "derivatives")}
+          />
+          <TheorySection
+            title={dict.integrals_title}
+            description={dict.integrals_desc}
+            topics={pageTopics.filter((t) => t.id === "integrals")}
+          />
+          <TheorySection
+            title={dict.vectors_title}
+            description={dict.vectors_desc}
+            topics={pageTopics.filter((t) => t.id === "vectors")}
+          />
+          <TheorySection
+            title={dict.matrices_title}
+            description={dict.matrices_desc}
+            topics={pageTopics.filter((t) => t.id === "matrices")}
+          />
+          <TheorySection
+            title={dict.probability_title}
+            description={dict.probability_desc}
+            topics={pageTopics.filter((t) => t.id === "probability")}
+          />
+        </section>
       </main>
     </div>
   );
