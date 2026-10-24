@@ -2126,3 +2126,25 @@ Let me fix `DerivativeVisualization.tsx` first:
 Validated project deliverables and components. All syntax checks passed.
 
 ---
+
+### Cycle #1 [2026-10-24 20:20:37]
+**Subtasks Assigned:**
+- **subtask_1**: Consolidate and fix the i18n infrastructure. Create a robust locale loader (src/lib/i18n.ts) that reads the appropriate dictionary (src/lib/dictionaries/*.ts) based on the dynamic [locale] segment. Add any missing dictionary keys (e.g., examples_link, formulas) for Catalan (ca), Spanish (es) and English (en). Update src/components/ui/LanguageSwitcher.tsx to change locale via Next.js navigation (router.push) and ensure the component is wired into src/app/[locale]/layout.tsx. Adjust routing so that the default locale redirects to /en and all pages correctly receive the locale param. Update or add tests for dictionary loading and language switching.
+- **subtask_2**: Implement light/dark mode support using next-themes. Add a ThemeProvider component (src/components/ui/ThemeProvider.tsx) that wraps the app in src/app/layout.tsx. Create a ThemeToggle button (src/components/ui/ThemeToggle.tsx) and embed it in src/components/layout/Header.tsx. Configure Tailwind (project/tailwind.config.ts) for "class" based dark mode, add necessary CSS variables, and ensure all UI components (Badge, Button, Card, etc.) respect the current theme. Verify the UI adapts on desktop and mobile.
+- **subtask_3**: Build the interactive exercise system. Define the Exercise type and related interfaces in src/lib/exercises/types.ts. Populate sample exercises for both the social and scientific curricula in src/lib/exercises/social-exercises.ts and src/lib/exercises/scientific-exercises.ts. Implement ExerciseComponent.tsx and ExerciseList.tsx under src/components/exercises/ to render exercises, capture user answers, provide instant feedback, and update progress via the existing progress hook (src/lib/progress.ts). Ensure the components are responsive and accessible.
+- **subtask_4**: Finalize Vercel deployment configuration. Review and correct project/vercel.json to include proper rewrites for the [locale] catch‑all, a fallback 404 page, and static asset handling. Verify next.config.ts has the correct basePath, i18n settings (if any), and output directory. Ensure package.json scripts include "build", "start", and "dev" and that npm run build completes without errors. Add a simple pages/404.tsx if missing. Run a local production build to confirm the site serves correctly.
+- **subtask_5**: Expand and stabilize the test suite. Add Jest tests for the new i18n loader (tests/i18n.test.ts), the ThemeToggle component (tests/theme.test.ts), and the exercise workflow (tests/exercise.test.ts). Update existing tests that were failing due to async server component rendering. Ensure jest.config.ts is configured for Next.js 16 with Turbopack. Run the full test suite and achieve 100% pass, providing a test report in project/test-results.
+**Deliverables & Modified Files:**
+- `project/next.config.ts`
+- `project/pages/404.tsx`
+- `project/src/app/layout.tsx`
+- `project/src/components/layout/Header.tsx`
+- `project/src/components/ui/ThemeProvider.tsx`
+- `project/src/components/ui/ThemeToggle.tsx`
+- `project/src/lib/dictionaries/en.json`
+- `project/src/lib/i18n.ts`
+- `project/vercel.json`
+**QA Validation:**
+Error in [QA & Test Automation Lead] turn 0: Error code: 404 - {'error': {'message': 'The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.', 'type': 'invalid_request_error', 'code': 'model_not_found'}}
+
+---
