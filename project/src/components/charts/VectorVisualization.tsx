@@ -67,6 +67,7 @@ export function VectorVisualization({
         borderColor: "rgba(16, 185, 129, 1)",
         backgroundColor: "rgba(16, 185, 129, 1)",
         borderWidth: 3,
+        // @ts-ignore - borderDash is supported by Chart.js but not in the type definition
         borderDash: [6, 4],
         pointRadius: [6, 6],
         pointBackgroundColor: ["rgba(16, 185, 129, 1)", "rgba(16, 185, 129, 1)"],

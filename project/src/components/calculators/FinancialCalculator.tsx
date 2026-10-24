@@ -32,7 +32,7 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
       case 'compound': {
         const futureValue = principal * Math.pow(1 + r / n, n * t_years);
         const totalInterest = futureValue - principal;
-        return { futureValue, totalInterest, principal };
+        return { futureValue, totalInterest, principal, monthlyPayment: undefined, presentValue: undefined, totalPaid: undefined };
       }
       case 'annuity': {
         const i = r / n;
@@ -41,7 +41,7 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
         const futureValue = payment * factor * ((Math.pow(1 + i, periods) - 1) / i);
         const totalPaid = payment * periods;
         const totalInterest = futureValue - totalPaid;
-        return { futureValue, totalPaid, totalInterest };
+        return { futureValue, totalPaid, totalInterest, principal: undefined, monthlyPayment: undefined, presentValue: undefined };
       }
       case 'loan': {
         const i = r / n;
@@ -49,7 +49,7 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
         const monthlyPayment = principal * (i * Math.pow(1 + i, periods)) / (Math.pow(1 + i, periods) - 1);
         const totalPaid = monthlyPayment * periods;
         const totalInterest = totalPaid - principal;
-        return { monthlyPayment, totalPaid, totalInterest };
+        return { monthlyPayment, totalPaid, totalInterest, principal: undefined, futureValue: undefined, presentValue: undefined };
       }
       case 'presentValue': {
         const i = r / n;
@@ -58,7 +58,7 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
         const presentValue = payment * factor * (1 - Math.pow(1 + i, -periods)) / i;
         const totalPaid = payment * periods;
         const totalInterest = totalPaid - presentValue;
-        return { presentValue, totalPaid, totalInterest };
+        return { presentValue, totalPaid, totalInterest, principal: undefined, futureValue: undefined, monthlyPayment: undefined };
       }
     }
   }, [mode, principal, rate, time, frequency, payment, paymentType]);

@@ -1,4 +1,4 @@
-export { StatisticsChart } from "./StatisticsChart";
+export { default as StatisticsChart } from "./StatisticsChart";
 export { FunctionGraph } from "./FunctionGraph";
 export { VectorVisualization } from "./VectorVisualization";
 export { MatrixVisualization } from "./MatrixVisualization";
