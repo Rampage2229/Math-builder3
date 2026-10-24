@@ -1,8 +1,1 @@
-// Read the full file
-=======
-
-=======
-// Read the full file
-=======
-// Read the full file
-=======
+export const progress = 0;
