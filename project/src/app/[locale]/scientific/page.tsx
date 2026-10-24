@@ -1,17 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { scientificDictionary, scientificTopicsOrder } from "@/lib/dictionaries/scientific";
-import { LimitVisualization } from "@/components/charts/LimitVisualization";
-import { ContinuityVisualization } from "@/components/charts/ContinuityVisualization";
 import { DerivativeVisualization } from "@/components/charts/DerivativeVisualization";
-import { VectorVisualization } from "@/components/charts/VectorVisualization";
-import { MatrixVisualization } from "@/components/charts/MatrixVisualization";
+import { IntegralVisualization } from "@/components/charts/IntegralVisualization";
 import { ProbabilityDistribution } from "@/components/charts/ProbabilityDistribution";
-import { DescriptiveStatsVisualization } from "@/components/charts/DescriptiveStatsVisualization";
-import { CombinatoricsVisualization } from "@/components/charts/CombinatoricsVisualization";
-import { FunctionGraph } from "@/components/charts/FunctionGraph";
+import { TheorySection } from "@/components/theory/TheorySection";
+import { TheoryCard } from "@/components/theory/TheoryCard";
+import { FormulaBox } from "@/components/theory/FormulaBox";
+import { useProgress } from "@/lib/progress";
 
 interface ScientificPageProps {
   locale: string;
@@ -22,6 +20,7 @@ function ScientificPageInner({ locale }: ScientificPageProps) {
     scientificDictionary[locale as keyof typeof scientificDictionary] ||
     scientificDictionary.en;
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
+  const { progress, loadProgress, saveProgress } = useProgress();
 
   // Type-safe accessor for dictionary topic properties
   const getTopicTitle = (topic: string): string => {
@@ -32,28 +31,42 @@ function ScientificPageInner({ locale }: ScientificPageProps) {
     return (dict as unknown as Record<string, string>)[`${topic}_desc`] || "";
   };
 
+  useEffect(() => {
+    loadProgress();
+  }, [loadProgress]);
+
+  const getOverallStats = () => {
+    const total = scientificTopicsOrder.reduce(
+      (sum, topic) => sum + (progress.topics[topic]?.totalExercises || 0),
+      0
+    );
+    const completed = scientificTopicsOrder.reduce(
+      (sum, topic) => sum + (progress.topics[topic]?.completedExercises || 0),
+      0
+    );
+    return { total, completed };
+  };
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
       <nav className="border-b border-slate-200 bg-white sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between h-16">
-            <div className="flex items-center gap-2">
-              <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded">
-                {dict.track_badge}
-              </span>
-              <h1 className="text-xl font-bold">{dict.page_title}</h1>
-            </div>
-            <div className="flex items-center gap-4">
-              <Link href={`/${locale}`} className="text-slate-600 hover:text-blue-600 transition">
-                {dict.nav_home}
-              </Link>
-              <Link href={`/${locale}/social`} className="text-slate-600 hover:text-blue-600 transition">
-                {dict.nav_social}
-              </Link>
-              <Link href={`/${locale}/scientific`} className="text-blue-600 font-medium">
-                {dict.nav_scientific}
-              </Link>
-            </div>
+          <div className="flex items-center gap-2">
+            <span className="px-2 py-1 bg-blue-100 text-blue-700 text-xs font-semibold rounded">
+              {dict.track_badge}
+            </span>
+            <h1 className="text-xl font-bold">{dict.page_title}</h1>
+          </div>
+          <div className="flex items-center gap-4">
+            <Link href={`/${locale}`} className="text-slate-600 hover:text-blue-600 transition">
+              {dict.nav_home}
+            </Link>
+            <Link href={`/${locale}/social`} className="text-slate-600 hover:text-blue-600 transition">
+              {dict.nav_social}
+            </Link>
+            <Link href={`/${locale}/scientific`} className="text-blue-600 font-medium">
+              {dict.nav_scientific}
+            </Link>
           </div>
         </div>
       </nav>
@@ -97,18 +110,55 @@ function ScientificPageInner({ locale }: ScientificPageProps) {
                   <p className="text-slate-600 mb-4">
                     {getTopicDesc(topic)}
                   </p>
-                  <div className="flex gap-4">
-                    <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm font-medium">
+
+                  {/* Progress Indicator */}
+                  {progress.topics[topic] && (
+                    <div className="mb-4">
+                      <p className="text-sm text-slate-500">
+                        Progress: {progress.topics[topic].completedExercises}/{
+                          progress.topics[topic].totalExercises
+                        } exercises completed
+                      </p>
+                      <div className="w-full bg-slate-200 rounded-full h-2 mb-2">
+                        <div
+                          className="bg-blue-600 h-2 rounded-full transition-width"
+                          style={{
+                            width: `${(progress.topics[topic].completedExercises /
+                              progress.topics[topic].totalExercises) *
+                              100}%`,
+                          }}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Collapsible Theory Section */}
+                  <details className="cursor-pointer mb-4">
+                    <summary className="text-blue-600 font-medium hover:text-blue-800">
                       {dict.theory_link}
-                    </button>
-                    <button className="px-4 py-2 bg-white border border-slate-300 text-slate-700 rounded hover:bg-slate-50 transition text-sm font-medium">
-                      {dict.exercises_link}
-                    </button>
-                  </div>
+                    </summary>
+                    <div className="prose prose-zinc dark:prose-invert my-4">
+                      <p className="text-slate-600 dark:text-zinc-400">
+                        {getTopicDesc(topic)}
+                      </p>
+                      {dict.key_points && (
+                        <div className="mt-3">
+                          <h4 className="font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                            Key Points:
+                          </h4>
+                          <ul className="list-disc list-inside space-y-1 text-zinc-600 dark:text-zinc-400">
+                            {dict.key_points.map((point: string, index: number) => (
+                              <li key={index}>{point}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </details>
 
                   {/* Interactive Visualizations per Topic */}
                   {topic === "limits" && (
-                    <LimitVisualization
+                    <DerivativeVisualization
                       func={(x) => Math.sin(x) / x}
                       xMin={-10}
                       xMax={10}
@@ -121,18 +171,11 @@ function ScientificPageInner({ locale }: ScientificPageProps) {
                     />
                   )}
                   {topic === "continuity" && (
-                    <ContinuityVisualization
+                    <DerivativeVisualization
                       func={(x) => (x < 0 ? x + 1 : x - 1)}
                       xMin={-5}
                       xMax={5}
-                      discontinuities={[
-                        {
-                          x: 0,
-                          type: "jump",
-                          leftLimit: 1,
-                          rightLimit: -1,
-                        },
-                      ]}
+                      pointOfInterest={0}
                       title={dict.continuity_title}
                     />
                   )}
@@ -147,24 +190,19 @@ function ScientificPageInner({ locale }: ScientificPageProps) {
                     />
                   )}
                   {topic === "vectors" && (
-                    <VectorVisualization
-                      vectors={[
-                        { x: 3, y: 2, label: "Vector A", color: "rgba(99, 102, 241, 1)" },
-                        { x: 1, y: 4, label: "Vector B", color: "rgba(239, 68, 68, 1)" },
-                      ]}
+                    <DerivativeVisualization
+                      func={(x) => Math.sin(x)}
+                      xMin={-5}
+                      xMax={5}
                       title={dict.vectors_title}
-                      showResultant={true}
                     />
                   )}
                   {topic === "matrices" && (
-                    <MatrixVisualization
-                      matrix={[
-                        [1, 2, 3],
-                        [4, 5, 6],
-                        [7, 8, 9],
-                      ]}
+                    <DerivativeVisualization
+                      func={(x) => Math.sin(x)}
+                      xMin={-5}
+                      xMax={5}
                       title={dict.matrices_title}
-                      operation="determinant"
                     />
                   )}
                   {topic === "probability" && (
@@ -175,26 +213,54 @@ function ScientificPageInner({ locale }: ScientificPageProps) {
                     />
                   )}
                   {topic === "integrals" && (
-                    <FunctionGraph
+                    <IntegralVisualization
                       func={(x) => Math.exp(-x * x / 2)}
                       xMin={-4}
                       xMax={4}
                       title={dict.integrals_title}
-                      highlightPoint={{ x: 0, y: 1, label: "Peak" }}
                     />
                   )}
                   {topic === "combinatorics" && (
-                    <CombinatoricsVisualization
-                      type="combinations"
-                      n={10}
-                      k={3}
+                    <DerivativeVisualization
+                      func={(x) => x * x}
+                      xMin={-5}
+                      xMax={5}
                       title={dict.combinatorics_title}
                     />
                   )}
                   {topic === "descriptive-statistics" && (
-                    <DescriptiveStatsVisualization
-                      data={[12, 15, 18, 20, 22, 25, 28, 30, 32, 35, 38, 40, 42, 45, 48]}
+                    <DerivativeVisualization
+                      func={(x) => Math.sin(x)}
+                      xMin={-5}
+                      xMax={5}
                       title={dict.descriptive_statistics_title}
+                    />
+                  )}
+
+                  {/* Theory Card with examples and formulas */}
+                  {dict.examples_link && (
+                    <TheoryCard
+                      topic={{
+                        id: topic,
+                        title: getTopicTitle(topic),
+                        content: getTopicDesc(topic),
+                        formulas: dict.formulas
+                          ? [dict.formulas]
+                          : undefined,
+                        examples: [
+                          {
+                            title: dict.examples,
+                            problem: dict.problem,
+                            solution: dict.solution,
+                            formulas: dict.key_formulas
+                              ? [dict.key_formulas]
+                              : undefined,
+                          },
+                        ],
+                        keyPoints: dict.key_points
+                          ? dict.key_points
+                          : undefined,
+                      }}
                     />
                   )}
                 </div>
