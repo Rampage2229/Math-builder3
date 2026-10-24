@@ -188,7 +188,10 @@ export function DerivativeVisualization({
           mode: "nearest",
           intersect: false,
           callbacks: {
-            label: (ctx: { dataset: { label: string }; parsed: { x: number; y: number | null } }) => {
+            label: (ctx: {
+              dataset: { label: string };
+              parsed: { x: number; y: number | null };
+            }) => {
               const x = ctx.parsed.x;
               const y = ctx.parsed.y;
               return `${ctx.dataset.label}: ${y?.toFixed(4)}`;
