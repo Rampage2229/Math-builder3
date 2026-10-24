@@ -9,7 +9,7 @@ interface TheorySectionProps {
   className?: string;
 }
 
-interface TheoryTopic {
+export interface TheoryTopic {
   id: string;
   title: string;
   content: string;
@@ -18,7 +18,7 @@ interface TheoryTopic {
   keyPoints?: string[];
 }
 
-interface TheoryExample {
+export interface TheoryExample {
   title: string;
   problem: string;
   solution: string;
