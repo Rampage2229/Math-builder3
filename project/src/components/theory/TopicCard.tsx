@@ -20,9 +20,7 @@ export function TopicCard({
   const content = (
     <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-700 p-6 hover:border-blue-300 dark:hover:border-blue-700 transition-colors duration-200 h-full flex flex-col">
       {icon && (
-        <div className="text-blue-600 dark:text-blue-400 mb-4">
-          {icon}
-        </div>
+        <div className="text-blue-600 dark:text-blue-400 mb-4">{icon}</div>
       )}
       <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
         {title}

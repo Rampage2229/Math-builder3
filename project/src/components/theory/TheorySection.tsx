@@ -56,14 +56,17 @@ function TopicCard({ topic }: { topic: TheoryTopic }) {
       </h3>
       <div className="prose prose-zinc dark:prose-invert max-w-none">
         <p className="text-zinc-600 dark:text-zinc-400 mb-4">{topic.content}</p>
-        
+
         {topic.formulas && topic.formulas.length > 0 && (
           <div className="space-y-3 my-4">
             <h4 className="font-medium text-zinc-700 dark:text-zinc-300">
               Key Formulas:
             </h4>
             {topic.formulas.map((formula, index) => (
-              <div key={index} className="bg-zinc-50 dark:bg-zinc-800 rounded p-4">
+              <div
+                key={index}
+                className="bg-zinc-50 dark:bg-zinc-800 rounded p-4"
+              >
                 <BlockFormula latex={formula} />
               </div>
             ))}
@@ -92,7 +95,10 @@ function TopicCard({ topic }: { topic: TheoryTopic }) {
                 {example.formulas && example.formulas.length > 0 && (
                   <div className="space-y-2 mt-2">
                     {example.formulas.map((formula, i) => (
-                      <div key={i} className="bg-white dark:bg-zinc-800 rounded p-3">
+                      <div
+                        key={i}
+                        className="bg-white dark:bg-zinc-800 rounded p-3"
+                      >
                         <BlockFormula latex={formula} />
                       </div>
                     ))}

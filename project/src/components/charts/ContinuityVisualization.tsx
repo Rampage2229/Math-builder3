@@ -108,15 +108,19 @@ export function ContinuityVisualization({
 
     // Add discontinuity markers
     discontinuities.forEach((disc, index) => {
-      const discColor = 
-        disc.type === "removable" ? "rgba(239, 68, 68, 1)" :
-        disc.type === "jump" ? "rgba(249, 115, 22, 1)" :
-        "rgba(168, 85, 247, 1)";
+      const discColor =
+        disc.type === "removable"
+          ? "rgba(239, 68, 68, 1)"
+          : disc.type === "jump"
+            ? "rgba(249, 115, 22, 1)"
+            : "rgba(168, 85, 247, 1)";
 
-      const discLabel = 
-        disc.type === "removable" ? "Removable discontinuity" :
-        disc.type === "jump" ? "Jump discontinuity" :
-        "Infinite discontinuity";
+      const discLabel =
+        disc.type === "removable"
+          ? "Removable discontinuity"
+          : disc.type === "jump"
+            ? "Jump discontinuity"
+            : "Infinite discontinuity";
 
       // Add the discontinuity point
       if (disc.value !== undefined && isFinite(disc.value)) {
@@ -179,48 +183,53 @@ export function ContinuityVisualization({
     return { labels, datasets };
   }, [func, xMin, xMax, discontinuities, title, color]);
 
-  const options = useMemo(() => ({
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      title: {
-        display: true,
-        text: title,
-        font: { size: 16, weight: "bold" },
-      },
-      legend: { display: true, position: "top" },
-      tooltip: {
-        enabled: true,
-        mode: "nearest",
-        intersect: false,
-        callbacks: {
-          label: (ctx: any) => {
-            const x = ctx.parsed.x;
-            const y = ctx.parsed.y;
-            return `f(${x}) = ${y?.toFixed(4)}`;
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: title,
+          font: { size: 16, weight: "bold" },
+        },
+        legend: { display: true, position: "top" },
+        tooltip: {
+          enabled: true,
+          mode: "nearest",
+          intersect: false,
+          callbacks: {
+            label: (ctx: any) => {
+              const x = ctx.parsed.x;
+              const y = ctx.parsed.y;
+              return `f(${x}) = ${y?.toFixed(4)}`;
+            },
           },
         },
       },
-    },
-    scales: {
-      x: {
-        type: "linear",
-        position: "bottom",
-        title: { display: true, text: xLabel },
-        min: xMin,
-        max: xMax,
-        grid: { color: "rgba(0,0,0,0.05)" },
+      scales: {
+        x: {
+          type: "linear",
+          position: "bottom",
+          title: { display: true, text: xLabel },
+          min: xMin,
+          max: xMax,
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
+        y: {
+          title: { display: true, text: yLabel },
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
       },
-      y: {
-        title: { display: true, text: yLabel },
-        grid: { color: "rgba(0,0,0,0.05)" },
-      },
-    },
-    animation: { duration: 0 },
-  }), [xMin, xMax, xLabel, yLabel, title]);
+      animation: { duration: 0 },
+    }),
+    [xMin, xMax, xLabel, yLabel, title],
+  );
 
   return (
-    <div className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}>
+    <div
+      className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}
+    >
       <Line
         options={options as unknown as Parameters<typeof Line>[0]["options"]}
         data={chartData as unknown as Parameters<typeof Line>[0]["data"]}
@@ -230,13 +239,16 @@ export function ContinuityVisualization({
       <div className="mt-4 space-y-2 text-sm">
         {discontinuities.length > 0 && (
           <div className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-700">
-            <p className="font-medium text-zinc-900 dark:text-zinc-100 mb-2">Discontinuities:</p>
+            <p className="font-medium text-zinc-900 dark:text-zinc-100 mb-2">
+              Discontinuities:
+            </p>
             <ul className="list-disc list-inside space-y-1 text-zinc-700 dark:text-zinc-300">
               {discontinuities.map((disc, index) => (
                 <li key={index}>
                   <span className="font-mono">x = {disc.x}</span> -{" "}
                   {disc.type === "removable" && "Removable (hole)"}
-                  {disc.type === "jump" && `Jump (left: ${disc.leftLimit?.toFixed(4)}, right: ${disc.rightLimit?.toFixed(4)})`}
+                  {disc.type === "jump" &&
+                    `Jump (left: ${disc.leftLimit?.toFixed(4)}, right: ${disc.rightLimit?.toFixed(4)})`}
                   {disc.type === "infinite" && "Infinite (vertical asymptote)"}
                 </li>
               ))}

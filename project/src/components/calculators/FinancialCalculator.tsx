@@ -1,43 +1,68 @@
-'use client';
+"use client";
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo } from "react";
 
 interface FinancialCalculatorProps {
   dictionary: Record<string, string>;
-  locale: 'ca' | 'es' | 'en';
+  locale: "ca" | "es" | "en";
 }
 
-export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorProps) {
-  const [mode, setMode] = useState<'compound' | 'annuity' | 'loan' | 'presentValue'>('compound');
+export function FinancialCalculator({
+  dictionary,
+  locale,
+}: FinancialCalculatorProps) {
+  const [mode, setMode] = useState<
+    "compound" | "annuity" | "loan" | "presentValue"
+  >("compound");
   const [principal, setPrincipal] = useState(1000);
   const [rate, setRate] = useState(5);
   const [time, setTime] = useState(10);
   const [frequency, setFrequency] = useState(12);
   const [payment, setPayment] = useState(100);
-  const [paymentType, setPaymentType] = useState<'ordinary' | 'due'>('ordinary');
+  const [paymentType, setPaymentType] = useState<"ordinary" | "due">(
+    "ordinary",
+  );
 
   const t = {
-    title: dictionary['calculators.financial.title'] || 'Financial Calculator',
+    title: dictionary["calculators.financial.title"] || "Financial Calculator",
     modes: {
-      compound: dictionary['calculators.financial.modes.compound'] || 'Compound Interest',
-      annuity: dictionary['calculators.financial.modes.annuity'] || 'Annuity',
-      loan: dictionary['calculators.financial.modes.loan'] || 'Loan',
-      presentValue: dictionary['calculators.financial.modes.presentValue'] || 'Present Value',
+      compound:
+        dictionary["calculators.financial.modes.compound"] ||
+        "Compound Interest",
+      annuity: dictionary["calculators.financial.modes.annuity"] || "Annuity",
+      loan: dictionary["calculators.financial.modes.loan"] || "Loan",
+      presentValue:
+        dictionary["calculators.financial.modes.presentValue"] ||
+        "Present Value",
     },
     labels: {
-      principal: dictionary['calculators.financial.labels.principal'] || 'Principal',
-      rate: dictionary['calculators.financial.labels.rate'] || 'Annual Rate (%)',
-      time: dictionary['calculators.financial.labels.time'] || 'Time (years)',
-      frequency: dictionary['calculators.financial.labels.frequency'] || 'Compounding Frequency',
-      payment: dictionary['calculators.financial.labels.payment'] || 'Payment',
-      paymentType: dictionary['calculators.financial.labels.paymentType'] || 'Payment Type',
-      ordinary: dictionary['calculators.financial.labels.ordinary'] || 'Ordinary',
-      due: dictionary['calculators.financial.labels.due'] || 'Due',
-      result: dictionary['calculators.financial.labels.result'] || 'Result',
-      futureValue: dictionary['calculators.financial.labels.futureValue'] || 'Future Value',
-      presentValue: dictionary['calculators.financial.labels.presentValue'] || 'Present Value',
-      totalPaid: dictionary['calculators.financial.labels.totalPaid'] || 'Total Paid',
-      totalInterest: dictionary['calculators.financial.labels.totalInterest'] || 'Total Interest',
+      principal:
+        dictionary["calculators.financial.labels.principal"] || "Principal",
+      rate:
+        dictionary["calculators.financial.labels.rate"] || "Annual Rate (%)",
+      time: dictionary["calculators.financial.labels.time"] || "Time (years)",
+      frequency:
+        dictionary["calculators.financial.labels.frequency"] ||
+        "Compounding Frequency",
+      payment: dictionary["calculators.financial.labels.payment"] || "Payment",
+      paymentType:
+        dictionary["calculators.financial.labels.paymentType"] ||
+        "Payment Type",
+      ordinary:
+        dictionary["calculators.financial.labels.ordinary"] || "Ordinary",
+      due: dictionary["calculators.financial.labels.due"] || "Due",
+      result: dictionary["calculators.financial.labels.result"] || "Result",
+      futureValue:
+        dictionary["calculators.financial.labels.futureValue"] ||
+        "Future Value",
+      presentValue:
+        dictionary["calculators.financial.labels.presentValue"] ||
+        "Present Value",
+      totalPaid:
+        dictionary["calculators.financial.labels.totalPaid"] || "Total Paid",
+      totalInterest:
+        dictionary["calculators.financial.labels.totalInterest"] ||
+        "Total Interest",
     },
   };
 
@@ -54,33 +79,37 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
     const t_years = time;
 
     switch (mode) {
-      case 'compound': {
+      case "compound": {
         const futureValue = principal * Math.pow(1 + r / n, n * t_years);
         const totalInterest = futureValue - principal;
         return { futureValue, totalInterest, principal };
       }
-      case 'annuity': {
+      case "annuity": {
         const i = r / n;
         const periods = n * t_years;
-        const factor = paymentType === 'due' ? (1 + i) : 1;
-        const futureValue = payment * factor * ((Math.pow(1 + i, periods) - 1) / i);
+        const factor = paymentType === "due" ? 1 + i : 1;
+        const futureValue =
+          payment * factor * ((Math.pow(1 + i, periods) - 1) / i);
         const totalPaid = payment * periods;
         const totalInterest = futureValue - totalPaid;
         return { futureValue, totalPaid, totalInterest };
       }
-      case 'loan': {
+      case "loan": {
         const i = r / n;
         const periods = n * t_years;
-        const monthlyPayment = principal * (i * Math.pow(1 + i, periods)) / (Math.pow(1 + i, periods) - 1);
+        const monthlyPayment =
+          (principal * (i * Math.pow(1 + i, periods))) /
+          (Math.pow(1 + i, periods) - 1);
         const totalPaid = monthlyPayment * periods;
         const totalInterest = totalPaid - principal;
         return { monthlyPayment, totalPaid, totalInterest };
       }
-      case 'presentValue': {
+      case "presentValue": {
         const i = r / n;
         const periods = n * t_years;
-        const factor = paymentType === 'due' ? (1 + i) : 1;
-        const presentValue = payment * factor * (1 - Math.pow(1 + i, -periods)) / i;
+        const factor = paymentType === "due" ? 1 + i : 1;
+        const presentValue =
+          (payment * factor * (1 - Math.pow(1 + i, -periods))) / i;
         const totalPaid = payment * periods;
         const totalInterest = totalPaid - presentValue;
         return { presentValue, totalPaid, totalInterest };
@@ -89,13 +118,16 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
   }, [mode, principal, rate, time, frequency, payment, paymentType]);
 
   const formatCurrency = (value: number | undefined) => {
-    if (value === undefined) return '-';
-    return new Intl.NumberFormat(locale === 'ca' ? 'ca-ES' : locale === 'es' ? 'es-ES' : 'en-US', {
-      style: 'currency',
-      currency: 'EUR',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(value);
+    if (value === undefined) return "-";
+    return new Intl.NumberFormat(
+      locale === "ca" ? "ca-ES" : locale === "es" ? "es-ES" : "en-US",
+      {
+        style: "currency",
+        currency: "EUR",
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      },
+    ).format(value);
   };
 
   return (
@@ -104,14 +136,14 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
 
       <div className="calculator-tabs">
         {[
-          { id: 'compound', label: t.modes.compound },
-          { id: 'annuity', label: t.modes.annuity },
-          { id: 'loan', label: t.modes.loan },
-          { id: 'presentValue', label: t.modes.presentValue }
-        ].map(tab => (
+          { id: "compound", label: t.modes.compound },
+          { id: "annuity", label: t.modes.annuity },
+          { id: "loan", label: t.modes.loan },
+          { id: "presentValue", label: t.modes.presentValue },
+        ].map((tab) => (
           <button
             key={tab.id}
-            className={`tab ${mode === tab.id ? 'active' : ''}`}
+            className={`tab ${mode === tab.id ? "active" : ""}`}
             onClick={() => setMode(tab.id as typeof mode)}
           >
             {tab.label}
@@ -155,10 +187,13 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
           />
         </div>
 
-        {['compound', 'annuity', 'loan', 'presentValue'].includes(mode) && (
+        {["compound", "annuity", "loan", "presentValue"].includes(mode) && (
           <div className="input-group">
             <label>{t.labels.frequency}</label>
-            <select value={frequency} onChange={(e) => setFrequency(Number(e.target.value))}>
+            <select
+              value={frequency}
+              onChange={(e) => setFrequency(Number(e.target.value))}
+            >
               <option value={1}>Annual</option>
               <option value={2}>Semi-annual</option>
               <option value={4}>Quarterly</option>
@@ -169,7 +204,7 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
           </div>
         )}
 
-        {['annuity', 'presentValue'].includes(mode) && (
+        {["annuity", "presentValue"].includes(mode) && (
           <>
             <div className="input-group">
               <label>{t.labels.payment}</label>
@@ -183,7 +218,12 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
             </div>
             <div className="input-group">
               <label>{t.labels.paymentType}</label>
-              <select value={paymentType} onChange={(e) => setPaymentType(e.target.value as typeof paymentType)}>
+              <select
+                value={paymentType}
+                onChange={(e) =>
+                  setPaymentType(e.target.value as typeof paymentType)
+                }
+              >
                 <option value="ordinary">{t.labels.ordinary}</option>
                 <option value="due">{t.labels.due}</option>
               </select>
@@ -195,63 +235,85 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
       <div className="calculator-results">
         <h3>{t.labels.result}</h3>
         <div className="results-grid">
-          {mode === 'compound' && (
+          {mode === "compound" && (
             <>
               <div className="result-item">
                 <span className="result-label">{t.labels.futureValue}</span>
-                <span className="result-value">{formatCurrency(results.futureValue)}</span>
+                <span className="result-value">
+                  {formatCurrency(results.futureValue)}
+                </span>
               </div>
               <div className="result-item">
                 <span className="result-label">{t.labels.totalInterest}</span>
-                <span className="result-value">{formatCurrency(results.totalInterest)}</span>
+                <span className="result-value">
+                  {formatCurrency(results.totalInterest)}
+                </span>
               </div>
             </>
           )}
-          {mode === 'annuity' && (
+          {mode === "annuity" && (
             <>
               <div className="result-item">
                 <span className="result-label">{t.labels.futureValue}</span>
-                <span className="result-value">{formatCurrency(results.futureValue)}</span>
+                <span className="result-value">
+                  {formatCurrency(results.futureValue)}
+                </span>
               </div>
               <div className="result-item">
                 <span className="result-label">{t.labels.totalPaid}</span>
-                <span className="result-value">{formatCurrency(results.totalPaid)}</span>
+                <span className="result-value">
+                  {formatCurrency(results.totalPaid)}
+                </span>
               </div>
               <div className="result-item">
                 <span className="result-label">{t.labels.totalInterest}</span>
-                <span className="result-value">{formatCurrency(results.totalInterest)}</span>
+                <span className="result-value">
+                  {formatCurrency(results.totalInterest)}
+                </span>
               </div>
             </>
           )}
-          {mode === 'loan' && (
+          {mode === "loan" && (
             <>
               <div className="result-item">
                 <span className="result-label">Monthly Payment</span>
-                <span className="result-value">{formatCurrency(results.monthlyPayment)}</span>
+                <span className="result-value">
+                  {formatCurrency(results.monthlyPayment)}
+                </span>
               </div>
               <div className="result-item">
                 <span className="result-label">{t.labels.totalPaid}</span>
-                <span className="result-value">{formatCurrency(results.totalPaid)}</span>
+                <span className="result-value">
+                  {formatCurrency(results.totalPaid)}
+                </span>
               </div>
               <div className="result-item">
                 <span className="result-label">{t.labels.totalInterest}</span>
-                <span className="result-value">{formatCurrency(results.totalInterest)}</span>
+                <span className="result-value">
+                  {formatCurrency(results.totalInterest)}
+                </span>
               </div>
             </>
           )}
-          {mode === 'presentValue' && (
+          {mode === "presentValue" && (
             <>
               <div className="result-item">
                 <span className="result-label">{t.labels.presentValue}</span>
-                <span className="result-value">{formatCurrency(results.presentValue)}</span>
+                <span className="result-value">
+                  {formatCurrency(results.presentValue)}
+                </span>
               </div>
               <div className="result-item">
                 <span className="result-label">{t.labels.totalPaid}</span>
-                <span className="result-value">{formatCurrency(results.totalPaid)}</span>
+                <span className="result-value">
+                  {formatCurrency(results.totalPaid)}
+                </span>
               </div>
               <div className="result-item">
                 <span className="result-label">{t.labels.totalInterest}</span>
-                <span className="result-value">{formatCurrency(results.totalInterest)}</span>
+                <span className="result-value">
+                  {formatCurrency(results.totalInterest)}
+                </span>
               </div>
             </>
           )}

@@ -53,7 +53,7 @@ function permutations(n: number, k: number): number {
   if (k < 0 || k > n) return 0;
   let result = 1;
   for (let i = 0; i < k; i++) {
-    result *= (n - i);
+    result *= n - i;
   }
   return result;
 }
@@ -124,48 +124,60 @@ export function CombinatoricsVisualization({
     };
   }, [type, n, k, title]);
 
-  const options = useMemo(() => ({
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      title: {
-        display: true,
-        text: title,
-        font: { size: 16, weight: "bold" },
-      },
-      legend: { display: false },
-      tooltip: {
-        enabled: true,
-        callbacks: {
-          label: (ctx: { parsed: { y: number } }) => {
-            return `Value: ${ctx.parsed.y.toLocaleString()}`;
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: title,
+          font: { size: 16, weight: "bold" },
+        },
+        legend: { display: false },
+        tooltip: {
+          enabled: true,
+          callbacks: {
+            label: (ctx: { parsed: { y: number } }) => {
+              return `Value: ${ctx.parsed.y.toLocaleString()}`;
+            },
           },
         },
       },
-    },
-    scales: {
-      x: {
-        title: { display: true, text: type === "binomial" ? "k" : "k (selection size)" },
-        grid: { color: "rgba(0,0,0,0.05)" },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: type === "binomial" ? "k" : "k (selection size)",
+          },
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
+        y: {
+          title: { display: true, text: "Count" },
+          grid: { color: "rgba(0,0,0,0.05)" },
+          beginAtZero: true,
+        },
       },
-      y: {
-        title: { display: true, text: "Count" },
-        grid: { color: "rgba(0,0,0,0.05)" },
-        beginAtZero: true,
-      },
-    },
-    animation: { duration: 0 },
-  }), [type, title]);
+      animation: { duration: 0 },
+    }),
+    [type, title],
+  );
 
   const stats = chartData;
 
   return (
-    <div className={`w-full max-w-2xl mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}>
+    <div
+      className={`w-full max-w-2xl mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}
+    >
       <div className="mb-4">
-        <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2">{title}</h3>
+        <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+          {title}
+        </h3>
         <div className="flex flex-wrap gap-4 text-sm text-zinc-600 dark:text-zinc-400">
           <span>n = {n}</span>
-          {(type === "permutations" || type === "combinations") && <span>k = {k}</span>}
+          {(type === "permutations" || type === "combinations") && (
+            <span>k = {k}</span>
+          )}
         </div>
       </div>
 
@@ -195,8 +207,8 @@ export function CombinatoricsVisualization({
           {showFormula ? "Hide Formula" : "Show Formula"}
         </button>
         <div className="text-xs text-zinc-500 dark:text-zinc-400">
-          {type === "binomial" 
-            ? `Binomial coefficients for (a+b)^${n}` 
+          {type === "binomial"
+            ? `Binomial coefficients for (a+b)^${n}`
             : `${type === "permutations" ? "Permutations" : "Combinations"} P(${n}, k) / C(${n}, k)`}
         </div>
       </div>

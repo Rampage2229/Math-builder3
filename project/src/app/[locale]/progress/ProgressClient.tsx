@@ -9,8 +9,11 @@ interface ProgressClientProps {
 }
 
 export default function ProgressClient({ locale, dict }: ProgressClientProps) {
-  const { progress, getOverallStats, getTopicStats, formatTime } = useProgress();
-  const [activeTab, setActiveTab] = useState<"overview" | "topics" | "history">("overview");
+  const { progress, getOverallStats, getTopicStats, formatTime } =
+    useProgress();
+  const [activeTab, setActiveTab] = useState<"overview" | "topics" | "history">(
+    "overview",
+  );
 
   const overallStats = getOverallStats();
 
@@ -25,11 +28,31 @@ export default function ProgressClient({ locale, dict }: ProgressClientProps) {
   ];
 
   const socialTopics = [
-    { key: "descriptive_statistics", label: dict.descriptive_statistics, totalExercises: 10 },
-    { key: "inferential_statistics", label: dict.inferential_statistics, totalExercises: 8 },
-    { key: "correlation_regression", label: dict.correlation_regression, totalExercises: 8 },
-    { key: "financial_mathematics", label: dict.financial_mathematics, totalExercises: 8 },
-    { key: "linear_programming", label: dict.linear_programming, totalExercises: 6 },
+    {
+      key: "descriptive_statistics",
+      label: dict.descriptive_statistics,
+      totalExercises: 10,
+    },
+    {
+      key: "inferential_statistics",
+      label: dict.inferential_statistics,
+      totalExercises: 8,
+    },
+    {
+      key: "correlation_regression",
+      label: dict.correlation_regression,
+      totalExercises: 8,
+    },
+    {
+      key: "financial_mathematics",
+      label: dict.financial_mathematics,
+      totalExercises: 8,
+    },
+    {
+      key: "linear_programming",
+      label: dict.linear_programming,
+      totalExercises: 6,
+    },
   ];
 
   const renderOverview = () => (
@@ -87,7 +110,8 @@ export default function ProgressClient({ locale, dict }: ProgressClientProps) {
         <div className="space-y-3">
           {scientificTopics.map((topic) => {
             const stats = getTopicStats(topic.key, topic.totalExercises);
-            const percentage = stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
+            const percentage =
+              stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
             return (
               <TopicProgressBar
                 key={topic.key}
@@ -110,7 +134,8 @@ export default function ProgressClient({ locale, dict }: ProgressClientProps) {
         <div className="space-y-3">
           {socialTopics.map((topic) => {
             const stats = getTopicStats(topic.key, topic.totalExercises);
-            const percentage = stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
+            const percentage =
+              stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
             return (
               <TopicProgressBar
                 key={topic.key}
@@ -137,16 +162,27 @@ export default function ProgressClient({ locale, dict }: ProgressClientProps) {
         <table className="w-full text-left">
           <thead>
             <tr className="border-b border-gray-200 dark:border-gray-700">
-              <th className="pb-2 font-medium text-gray-500 dark:text-gray-400">{dict.exercise}</th>
-              <th className="pb-2 font-medium text-gray-500 dark:text-gray-400">{dict.result}</th>
-              <th className="pb-2 font-medium text-gray-500 dark:text-gray-400">{dict.points_earned}</th>
-              <th className="pb-2 font-medium text-gray-500 dark:text-gray-400">{dict.date}</th>
+              <th className="pb-2 font-medium text-gray-500 dark:text-gray-400">
+                {dict.exercise}
+              </th>
+              <th className="pb-2 font-medium text-gray-500 dark:text-gray-400">
+                {dict.result}
+              </th>
+              <th className="pb-2 font-medium text-gray-500 dark:text-gray-400">
+                {dict.points_earned}
+              </th>
+              <th className="pb-2 font-medium text-gray-500 dark:text-gray-400">
+                {dict.date}
+              </th>
             </tr>
           </thead>
           <tbody>
             {progress.exerciseProgress.attempts.length === 0 ? (
               <tr>
-                <td colSpan={4} className="py-8 text-center text-gray-500 dark:text-gray-400">
+                <td
+                  colSpan={4}
+                  className="py-8 text-center text-gray-500 dark:text-gray-400"
+                >
                   {dict.no_progress_yet}
                 </td>
               </tr>
@@ -155,7 +191,10 @@ export default function ProgressClient({ locale, dict }: ProgressClientProps) {
                 .reverse()
                 .slice(0, 20)
                 .map((attempt, index) => (
-                  <tr key={index} className="border-b border-gray-100 dark:border-gray-800">
+                  <tr
+                    key={index}
+                    className="border-b border-gray-100 dark:border-gray-800"
+                  >
                     <td className="py-2">{attempt.exerciseId}</td>
                     <td className="py-2">
                       <span
@@ -170,13 +209,16 @@ export default function ProgressClient({ locale, dict }: ProgressClientProps) {
                     </td>
                     <td className="py-2">{attempt.isCorrect ? "+10" : "0"}</td>
                     <td className="py-2 text-gray-500 dark:text-gray-400 text-sm">
-                      {new Date(attempt.completedAt).toLocaleDateString(locale, {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
+                      {new Date(attempt.completedAt).toLocaleDateString(
+                        locale,
+                        {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                          hour: "2-digit",
+                          minute: "2-digit",
+                        },
+                      )}
                     </td>
                   </tr>
                 ))
@@ -228,12 +270,24 @@ export default function ProgressClient({ locale, dict }: ProgressClientProps) {
   );
 }
 
-function StatCard({ label, value, icon }: { label: string; value: string | number; icon: string }) {
+function StatCard({
+  label,
+  value,
+  icon,
+}: {
+  label: string;
+  value: string | number;
+  icon: string;
+}) {
   return (
     <div className="bg-gray-50 dark:bg-gray-900 rounded-lg p-4 text-center">
       <div className="text-3xl mb-2">{icon}</div>
-      <div className="text-2xl font-bold text-gray-900 dark:text-white">{value}</div>
-      <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">{label}</div>
+      <div className="text-2xl font-bold text-gray-900 dark:text-white">
+        {value}
+      </div>
+      <div className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+        {label}
+      </div>
     </div>
   );
 }
@@ -258,7 +312,9 @@ function TopicProgressBar({
   return (
     <div className="space-y-2">
       <div className="flex justify-between text-sm">
-        <span className="font-medium text-gray-900 dark:text-white">{label}</span>
+        <span className="font-medium text-gray-900 dark:text-white">
+          {label}
+        </span>
         <span className="text-gray-500 dark:text-gray-400">
           {completed}/{total} ({percentage.toFixed(0)}%)
         </span>
@@ -270,8 +326,12 @@ function TopicProgressBar({
         />
       </div>
       <div className="flex justify-between text-xs text-gray-500 dark:text-gray-400">
-        <span>{dict.average_score}: {averageScore.toFixed(1)}%</span>
-        <span>{dict.time_spent}: {timeSpent}</span>
+        <span>
+          {dict.average_score}: {averageScore.toFixed(1)}%
+        </span>
+        <span>
+          {dict.time_spent}: {timeSpent}
+        </span>
       </div>
     </div>
   );

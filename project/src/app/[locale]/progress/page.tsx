@@ -15,8 +15,8 @@ export async function generateMetadata({ params }: ProgressPageProps): Promise<M
   };
 }
 
-async function loadDictionary(locale: string) {
-  const dictionaries: Record<string, () => Promise<any>> = {
+async function loadDictionary(locale: string): Promise<Record<string, string>> {
+  const dictionaries: Record<string, () => Promise<{ default: Record<string, string> }>> = {
     en: () => import("@/lib/dictionaries/en.json"),
     es: () => import("@/lib/dictionaries/es.json"),
     ca: () => import("@/lib/dictionaries/ca.json"),

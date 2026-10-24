@@ -161,70 +161,87 @@ export function DerivativeVisualization({
     }
 
     return { datasets };
-  }, [func, derivative, xMin, xMax, pointOfInterest, funcColor, derivColor, tangentColor]);
+  }, [
+    func,
+    derivative,
+    xMin,
+    xMax,
+    pointOfInterest,
+    funcColor,
+    derivColor,
+    tangentColor,
+  ]);
 
-  const options = useMemo(() => ({
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      title: {
-        display: true,
-        text: title,
-        font: { size: 16, weight: "bold" },
-      },
-      legend: { display: true, position: "top" },
-      tooltip: {
-        enabled: true,
-        mode: "nearest",
-        intersect: false,
-        callbacks: {
-          label: (ctx: any) => {
-            const x = ctx.parsed.x;
-            const y = ctx.parsed.y;
-            return `${ctx.dataset.label}: ${y?.toFixed(4)}`;
-          },
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: title,
+          font: { size: 16, weight: "bold" },
         },
-      },
-      annotation: pointOfInterest !== undefined ? {
-        annotations: {
-          pointLine: {
-            type: "line",
-            mode: "vertical",
-            scaleID: "x",
-            value: pointOfInterest,
-            borderColor: tangentColor,
-            borderWidth: 1,
-            borderDash: [3, 3],
-            label: {
-              enabled: true,
-              content: `x = ${pointOfInterest}`,
-              position: "start",
-              backgroundColor: tangentColor,
-              color: "white",
+        legend: { display: true, position: "top" },
+        tooltip: {
+          enabled: true,
+          mode: "nearest",
+          intersect: false,
+          callbacks: {
+            label: (ctx: any) => {
+              const x = ctx.parsed.x;
+              const y = ctx.parsed.y;
+              return `${ctx.dataset.label}: ${y?.toFixed(4)}`;
             },
           },
         },
-      } : {},
-    },
-    scales: {
-      x: {
-        type: "linear",
-        position: "bottom",
-        title: { display: true, text: xLabel },
-        min: xMin,
-        max: xMax,
-        grid: { color: "rgba(0,0,0,0.05)" },
+        annotation:
+          pointOfInterest !== undefined
+            ? {
+                annotations: {
+                  pointLine: {
+                    type: "line",
+                    mode: "vertical",
+                    scaleID: "x",
+                    value: pointOfInterest,
+                    borderColor: tangentColor,
+                    borderWidth: 1,
+                    borderDash: [3, 3],
+                    label: {
+                      enabled: true,
+                      content: `x = ${pointOfInterest}`,
+                      position: "start",
+                      backgroundColor: tangentColor,
+                      color: "white",
+                    },
+                  },
+                },
+              }
+            : {},
       },
-      y: {
-        title: { display: true, text: yLabel },
-        grid: { color: "rgba(0,0,0,0.05)" },
+      scales: {
+        x: {
+          type: "linear",
+          position: "bottom",
+          title: { display: true, text: xLabel },
+          min: xMin,
+          max: xMax,
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
+        y: {
+          title: { display: true, text: yLabel },
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
       },
-    },
-    animation: { duration: 0 },
-  }), [xMin, xMax, xLabel, yLabel, title, pointOfInterest, tangentColor]);
+      animation: { duration: 0 },
+    }),
+    [xMin, xMax, xLabel, yLabel, title, pointOfInterest, tangentColor],
+  );
 
   return (
-    <div className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}>
+    <div
+      className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}
+    >
       <Line
         options={options as unknown as Parameters<typeof Line>[0]["options"]}
         data={chartData as unknown as Parameters<typeof Line>[0]["data"]}
@@ -233,19 +250,33 @@ export function DerivativeVisualization({
       />
       <div className="mt-4 space-y-2 text-sm">
         <div className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-700">
-          <p className="font-medium text-zinc-900 dark:text-zinc-100 mb-2">Derivative Analysis:</p>
+          <p className="font-medium text-zinc-900 dark:text-zinc-100 mb-2">
+            Derivative Analysis:
+          </p>
           <ul className="list-disc list-inside space-y-1 text-zinc-700 dark:text-zinc-300">
             <li>
-              <span className="font-mono text-indigo-600 dark:text-indigo-400">f(x)</span> - Original function
+              <span className="font-mono text-indigo-600 dark:text-indigo-400">
+                f(x)
+              </span>{" "}
+              - Original function
             </li>
             <li>
-              <span className="font-mono text-red-600 dark:text-red-400">f'(x)</span> - Derivative (rate of change)
+              <span className="font-mono text-red-600 dark:text-red-400">
+                f'(x)
+              </span>{" "}
+              - Derivative (rate of change)
             </li>
             {pointOfInterest !== undefined && (
               <li>
-                <span className="font-mono text-green-600 dark:text-green-400">Tangent line</span> at x = {pointOfInterest}
+                <span className="font-mono text-green-600 dark:text-green-400">
+                  Tangent line
+                </span>{" "}
+                at x = {pointOfInterest}
                 <br />
-                <span className="ml-4">Slope f'({pointOfInterest}) = {derivative(pointOfInterest).toFixed(4)}</span>
+                <span className="ml-4">
+                  Slope f'({pointOfInterest}) ={" "}
+                  {derivative(pointOfInterest).toFixed(4)}
+                </span>
               </li>
             )}
           </ul>

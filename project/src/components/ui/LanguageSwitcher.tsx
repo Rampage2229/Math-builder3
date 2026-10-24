@@ -20,12 +20,16 @@ const languages = [
   { code: "en", name: "english", nativeName: "English" },
 ] as const;
 
-export function LanguageSwitcher({ locale, dictionary }: LanguageSwitcherProps) {
+export function LanguageSwitcher({
+  locale,
+  dictionary,
+}: LanguageSwitcherProps) {
   const router = useRouter();
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
 
-  const currentLanguage = languages.find((lang) => lang.code === locale) || languages[2];
+  const currentLanguage =
+    languages.find((lang) => lang.code === locale) || languages[2];
 
   const handleLanguageChange = (newLocale: string) => {
     // Replace the locale in the pathname
@@ -53,7 +57,12 @@ export function LanguageSwitcher({ locale, dictionary }: LanguageSwitcherProps) 
           viewBox="0 0 24 24"
           aria-hidden="true"
         >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M19 9l-7 7-7-7"
+          />
         </svg>
       </button>
 

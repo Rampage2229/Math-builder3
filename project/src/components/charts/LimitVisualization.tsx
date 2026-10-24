@@ -176,70 +176,86 @@ export function LimitVisualization({
     }
 
     return { datasets };
-  }, [func, xMin, xMax, limitPoint, limitValue, title, color, showEpsilonDelta, epsilon, delta]);
+  }, [
+    func,
+    xMin,
+    xMax,
+    limitPoint,
+    limitValue,
+    title,
+    color,
+    showEpsilonDelta,
+    epsilon,
+    delta,
+  ]);
 
-  const options = useMemo(() => ({
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      title: {
-        display: true,
-        text: title,
-        font: { size: 16, weight: "bold" },
-      },
-      legend: { display: true, position: "top" },
-      tooltip: {
-        enabled: true,
-        mode: "nearest",
-        intersect: false,
-        callbacks: {
-          label: (ctx: any) => {
-            const x = ctx.parsed.x;
-            const y = ctx.parsed.y;
-            return `f(${x}) = ${y?.toFixed(4)}`;
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: title,
+          font: { size: 16, weight: "bold" },
+        },
+        legend: { display: true, position: "top" },
+        tooltip: {
+          enabled: true,
+          mode: "nearest",
+          intersect: false,
+          callbacks: {
+            label: (ctx: any) => {
+              const x = ctx.parsed.x;
+              const y = ctx.parsed.y;
+              return `f(${x}) = ${y?.toFixed(4)}`;
+            },
           },
         },
-      },
-      annotation: {
-        annotations: {
-          limitLine: {
-            type: "line",
-            mode: "vertical",
-            scaleID: "x",
-            value: limitPoint,
-            borderColor: "rgba(239, 68, 68, 0.5)",
-            borderWidth: 2,
-            borderDash: [5, 5],
-            label: {
-              enabled: true,
-              content: `x → ${limitPoint}`,
-              position: "start",
-              backgroundColor: "rgba(239, 68, 68, 0.8)",
-              color: "white",
+        annotation: {
+          annotations: {
+            limitLine: {
+              type: "line",
+              mode: "vertical",
+              scaleID: "x",
+              value: limitPoint,
+              borderColor: "rgba(239, 68, 68, 0.5)",
+              borderWidth: 2,
+              borderDash: [5, 5],
+              label: {
+                enabled: true,
+                content: `x → ${limitPoint}`,
+                position: "start",
+                backgroundColor: "rgba(239, 68, 68, 0.8)",
+                color: "white",
+              },
             },
           },
         },
       },
-    },
-    scales: {
-      x: {
-        type: "linear",
-        position: "bottom",
-        title: { display: true, text: xLabel },
-        min: xMin,
-        max: xMax,
-        grid: { color: "rgba(0,0,0,0.05)" },
+      scales: {
+        x: {
+          type: "linear",
+          position: "bottom",
+          title: { display: true, text: xLabel },
+          min: xMin,
+          max: xMax,
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
+        y: {
+          title: { display: true, text: yLabel },
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
       },
-      y: {
-        title: { display: true, text: yLabel },
-        grid: { color: "rgba(0,0,0,0.05)" },
-      },
-    },
-    animation: { duration: 0 },
-  }), [xMin, xMax, xLabel, yLabel, title, limitPoint]);
+      animation: { duration: 0 },
+    }),
+    [xMin, xMax, xLabel, yLabel, title, limitPoint],
+  );
 
   return (
-    <div className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}>
+    <div
+      className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}
+    >
       <Line
         options={options as unknown as Parameters<typeof Line>[0]["options"]}
         data={chartData as unknown as Parameters<typeof Line>[0]["data"]}

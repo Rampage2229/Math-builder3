@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { FormulaDisplay, InlineFormula, BlockFormula } from "@/components/theory/FormulaDisplay";
+import {
+  FormulaDisplay,
+  InlineFormula,
+  BlockFormula,
+} from "@/components/theory/FormulaDisplay";
 import { Exercise, ExerciseType } from "@/lib/exercises/types";
 
 interface ExerciseComponentProps {
@@ -9,7 +13,10 @@ interface ExerciseComponentProps {
   onComplete?: (exerciseId: string, isCorrect: boolean) => void;
 }
 
-export function ExerciseComponent({ exercise, onComplete }: ExerciseComponentProps) {
+export function ExerciseComponent({
+  exercise,
+  onComplete,
+}: ExerciseComponentProps) {
   const [userAnswer, setUserAnswer] = useState<string>("");
   const [submitted, setSubmitted] = useState(false);
   const [showHint, setShowHint] = useState(false);
@@ -22,10 +29,16 @@ export function ExerciseComponent({ exercise, onComplete }: ExerciseComponentPro
     }
     if (exercise.type === "numeric_input") {
       const tolerance = exercise.tolerance || 0.01;
-      return Math.abs(Number(userAnswer) - Number(exercise.correctAnswer)) <= tolerance;
+      return (
+        Math.abs(Number(userAnswer) - Number(exercise.correctAnswer)) <=
+        tolerance
+      );
     }
     if (exercise.type === "step_by_step") {
-      return exercise.steps?.[currentStep]?.explanation?.includes(userAnswer) || false;
+      return (
+        exercise.steps?.[currentStep]?.explanation?.includes(userAnswer) ||
+        false
+      );
     }
     return false;
   };
@@ -34,7 +47,10 @@ export function ExerciseComponent({ exercise, onComplete }: ExerciseComponentPro
     setSubmitted(true);
     const correct = isCorrect();
     onComplete?.(exercise.id, correct);
-    if (exercise.type === "step_by_step" && currentStep < (exercise.steps?.length || 0) - 1) {
+    if (
+      exercise.type === "step_by_step" &&
+      currentStep < (exercise.steps?.length || 0) - 1
+    ) {
       setCurrentStep(currentStep + 1);
       setSubmitted(false);
       setUserAnswer("");
@@ -54,7 +70,9 @@ export function ExerciseComponent({ exercise, onComplete }: ExerciseComponentPro
       <h3 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
         {exercise.title}
       </h3>
-      <p className="text-zinc-700 dark:text-zinc-300 mb-4">{exercise.question}</p>
+      <p className="text-zinc-700 dark:text-zinc-300 mb-4">
+        {exercise.question}
+      </p>
       {exercise.latex && (
         <div className="bg-zinc-50 dark:bg-zinc-800 rounded-lg p-4 my-4">
           <BlockFormula latex={exercise.latex} />
@@ -73,8 +91,8 @@ export function ExerciseComponent({ exercise, onComplete }: ExerciseComponentPro
               ? option.isCorrect
                 ? "border-green-500 bg-green-50 dark:bg-green-900/20"
                 : option.id === userAnswer
-                ? "border-red-500 bg-red-50 dark:bg-red-900/20"
-                : "border-zinc-200 dark:border-zinc-700"
+                  ? "border-red-500 bg-red-50 dark:bg-red-900/20"
+                  : "border-zinc-200 dark:border-zinc-700"
               : "border-zinc-200 dark:border-zinc-700 hover:border-blue-300 dark:hover:border-blue-700"
           }`}
         >
@@ -87,7 +105,9 @@ export function ExerciseComponent({ exercise, onComplete }: ExerciseComponentPro
             disabled={submitted}
             className="mr-3 h-4 w-4 text-blue-600 focus:ring-blue-500"
           />
-          <span className="text-zinc-700 dark:text-zinc-300">{option.text}</span>
+          <span className="text-zinc-700 dark:text-zinc-300">
+            {option.text}
+          </span>
         </label>
       ))}
     </div>
@@ -173,7 +193,9 @@ export function ExerciseComponent({ exercise, onComplete }: ExerciseComponentPro
             : "bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800"
         }`}
       >
-        <p className={`font-medium ${correct ? "text-green-800 dark:text-green-200" : "text-red-800 dark:text-red-200"}`}>
+        <p
+          className={`font-medium ${correct ? "text-green-800 dark:text-green-200" : "text-red-800 dark:text-red-200"}`}
+        >
           {correct ? "✓ Correct!" : "✗ Incorrect"}
         </p>
         {exercise.explanation && (
@@ -181,14 +203,15 @@ export function ExerciseComponent({ exercise, onComplete }: ExerciseComponentPro
             <strong>Explanation:</strong> {exercise.explanation}
           </p>
         )}
-        {exercise.type === "step_by_step" && currentStep < (exercise.steps?.length || 0) - 1 && (
-          <button
-            onClick={handleNextStep}
-            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Next Step
-          </button>
-        )}
+        {exercise.type === "step_by_step" &&
+          currentStep < (exercise.steps?.length || 0) - 1 && (
+            <button
+              onClick={handleNextStep}
+              className="mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Next Step
+            </button>
+          )}
       </div>
     );
   };
@@ -201,8 +224,8 @@ export function ExerciseComponent({ exercise, onComplete }: ExerciseComponentPro
             exercise.difficulty === "beginner"
               ? "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
               : exercise.difficulty === "intermediate"
-              ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
-              : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
+                ? "bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300"
+                : "bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300"
           }`}
         >
           {exercise.difficulty}

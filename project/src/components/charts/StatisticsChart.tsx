@@ -29,7 +29,8 @@ ChartJS.register(
   Legend,
 );
 
-type ChartType = "descriptive" | "distribution" | "inference" | "regression" | "optimization";
+type ChartType =
+  "descriptive" | "distribution" | "inference" | "regression" | "optimization";
 type Locale = "en" | "ca" | "es";
 
 interface StatisticsChartProps {
@@ -41,23 +42,60 @@ const chartLabels: Record<Locale, Record<ChartType, string[]>> = {
   en: {
     descriptive: ["Mean", "Median", "Mode", "Range", "Variance", "Std Dev"],
     distribution: ["Normal", "Binomial", "Poisson", "Exponential", "Uniform"],
-    inference: ["t-Test", "Z-Test", "Chi-Square", "ANOVA", "Confidence Interval"],
+    inference: [
+      "t-Test",
+      "Z-Test",
+      "Chi-Square",
+      "ANOVA",
+      "Confidence Interval",
+    ],
     regression: ["Linear", "Multiple", "Polynomial", "Logistic"],
     optimization: ["Gradient Descent", "Newton", "Simplex", "Interior Point"],
   },
   ca: {
-    descriptive: ["Mitjana", "Mediana", "Moda", "Rang", "Variància", "Desv. Típica"],
+    descriptive: [
+      "Mitjana",
+      "Mediana",
+      "Moda",
+      "Rang",
+      "Variància",
+      "Desv. Típica",
+    ],
     distribution: ["Normal", "Binomial", "Poisson", "Exponencial", "Uniforme"],
-    inference: ["t-Test", "Z-Test", "Chi-Quadrat", "ANOVA", "Interval de Confiança"],
+    inference: [
+      "t-Test",
+      "Z-Test",
+      "Chi-Quadrat",
+      "ANOVA",
+      "Interval de Confiança",
+    ],
     regression: ["Lineal", "Múltiple", "Polinòmica", "Logístic"],
     optimization: ["Descens de Gradiant", "Newton", "Simplex", "Punt Interior"],
   },
   es: {
-    descriptive: ["Media", "Mediana", "Moda", "Rango", "Varianza", "Desv. Típica"],
+    descriptive: [
+      "Media",
+      "Mediana",
+      "Moda",
+      "Rango",
+      "Varianza",
+      "Desv. Típica",
+    ],
     distribution: ["Normal", "Binomial", "Poisson", "Exponencial", "Uniforme"],
-    inference: ["t-Test", "Z-Test", "Chi-Cuadrado", "ANOVA", "Intervalo de Confianza"],
+    inference: [
+      "t-Test",
+      "Z-Test",
+      "Chi-Cuadrado",
+      "ANOVA",
+      "Intervalo de Confianza",
+    ],
     regression: ["Lineal", "Múltiple", "Polinómica", "Logística"],
-    optimization: ["Descenso de Gradiente", "Newton", "Simplex", "Punto Interior"],
+    optimization: [
+      "Descenso de Gradiente",
+      "Newton",
+      "Simplex",
+      "Punto Interior",
+    ],
   },
 };
 

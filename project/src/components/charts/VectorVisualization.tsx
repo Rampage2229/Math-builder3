@@ -70,7 +70,10 @@ export function VectorVisualization({
         // @ts-ignore - borderDash is supported by Chart.js but not in the type definition
         borderDash: [6, 4],
         pointRadius: [6, 6],
-        pointBackgroundColor: ["rgba(16, 185, 129, 1)", "rgba(16, 185, 129, 1)"],
+        pointBackgroundColor: [
+          "rgba(16, 185, 129, 1)",
+          "rgba(16, 185, 129, 1)",
+        ],
         showLine: true,
         fill: false,
         tension: 0,
@@ -87,47 +90,52 @@ export function VectorVisualization({
   const yMin = Math.min(0, ...allY) - 2;
   const yMax = Math.max(0, ...allY) + 2;
 
-  const options = useMemo(() => ({
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      title: {
-        display: true,
-        text: title,
-        font: { size: 16, weight: "bold" },
-      },
-      legend: { display: true, position: "top" },
-      tooltip: {
-        enabled: true,
-        callbacks: {
-          label: (ctx: any) => {
-            const p = ctx.parsed;
-            return `(${p.x}, ${p.y})`;
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: title,
+          font: { size: 16, weight: "bold" },
+        },
+        legend: { display: true, position: "top" },
+        tooltip: {
+          enabled: true,
+          callbacks: {
+            label: (ctx: any) => {
+              const p = ctx.parsed;
+              return `(${p.x}, ${p.y})`;
+            },
           },
         },
       },
-    },
-    scales: {
-      x: {
-        type: "linear",
-        position: "bottom",
-        title: { display: true, text: "x" },
-        min: xMin,
-        max: xMax,
-        grid: { color: "rgba(0,0,0,0.05)" },
+      scales: {
+        x: {
+          type: "linear",
+          position: "bottom",
+          title: { display: true, text: "x" },
+          min: xMin,
+          max: xMax,
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
+        y: {
+          title: { display: true, text: "y" },
+          min: yMin,
+          max: yMax,
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
       },
-      y: {
-        title: { display: true, text: "y" },
-        min: yMin,
-        max: yMax,
-        grid: { color: "rgba(0,0,0,0.05)" },
-      },
-    },
-    animation: { duration: 0 },
-  }), [xMin, xMax, yMin, yMax, title]);
+      animation: { duration: 0 },
+    }),
+    [xMin, xMax, yMin, yMax, title],
+  );
 
   return (
-    <div className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}>
+    <div
+      className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}
+    >
       <Line
         options={options as unknown as Parameters<typeof Line>[0]["options"]}
         data={chartData as unknown as Parameters<typeof Line>[0]["data"]}

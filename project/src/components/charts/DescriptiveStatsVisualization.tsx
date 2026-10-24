@@ -77,8 +77,7 @@ export function DescriptiveStatsVisualization({
         ? (sorted[sorted.length / 2 - 1] + sorted[sorted.length / 2]) / 2
         : sorted[Math.floor(sorted.length / 2)];
     const variance =
-      data.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) /
-      data.length;
+      data.reduce((sum, val) => sum + Math.pow(val - mean, 2), 0) / data.length;
     const stdDev = Math.sqrt(variance);
 
     return {
@@ -97,43 +96,48 @@ export function DescriptiveStatsVisualization({
     };
   }, [data, title, color]);
 
-  const options = useMemo(() => ({
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      title: {
-        display: true,
-        text: title,
-        font: { size: 16, weight: "bold" },
-      },
-      legend: { display: false },
-      tooltip: {
-        enabled: true,
-        callbacks: {
-          label: (ctx: any) => {
-            return `Frequency: ${ctx.parsed.y}`;
+  const options = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        title: {
+          display: true,
+          text: title,
+          font: { size: 16, weight: "bold" },
+        },
+        legend: { display: false },
+        tooltip: {
+          enabled: true,
+          callbacks: {
+            label: (ctx: any) => {
+              return `Frequency: ${ctx.parsed.y}`;
+            },
           },
         },
       },
-    },
-    scales: {
-      x: {
-        title: { display: true, text: xLabel },
-        grid: { color: "rgba(0,0,0,0.05)" },
+      scales: {
+        x: {
+          title: { display: true, text: xLabel },
+          grid: { color: "rgba(0,0,0,0.05)" },
+        },
+        y: {
+          title: { display: true, text: yLabel },
+          grid: { color: "rgba(0,0,0,0.05)" },
+          beginAtZero: true,
+        },
       },
-      y: {
-        title: { display: true, text: yLabel },
-        grid: { color: "rgba(0,0,0,0.05)" },
-        beginAtZero: true,
-      },
-    },
-    animation: { duration: 0 },
-  }), [title, xLabel, yLabel]);
+      animation: { duration: 0 },
+    }),
+    [title, xLabel, yLabel],
+  );
 
   const stats = chartData.stats;
 
   return (
-    <div className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}>
+    <div
+      className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}
+    >
       <Bar
         options={options as unknown as Parameters<typeof Bar>[0]["options"]}
         data={chartData as unknown as Parameters<typeof Bar>[0]["data"]}
@@ -142,25 +146,33 @@ export function DescriptiveStatsVisualization({
       />
       <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-4">
         <div className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-700">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 uppercase font-semibold">Mean</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 uppercase font-semibold">
+            Mean
+          </p>
           <p className="text-lg font-mono font-bold text-zinc-900 dark:text-zinc-100">
             {stats?.mean.toFixed(2)}
           </p>
         </div>
         <div className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-700">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 uppercase font-semibold">Median</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 uppercase font-semibold">
+            Median
+          </p>
           <p className="text-lg font-mono font-bold text-zinc-900 dark:text-zinc-100">
             {stats?.median.toFixed(2)}
           </p>
         </div>
         <div className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-700">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 uppercase font-semibold">Std Dev</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 uppercase font-semibold">
+            Std Dev
+          </p>
           <p className="text-lg font-mono font-bold text-zinc-900 dark:text-zinc-100">
             {stats?.stdDev.toFixed(2)}
           </p>
         </div>
         <div className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-lg border border-zinc-200 dark:border-zinc-700">
-          <p className="text-xs text-zinc-500 dark:text-zinc-400 uppercase font-semibold">Range</p>
+          <p className="text-xs text-zinc-500 dark:text-zinc-400 uppercase font-semibold">
+            Range
+          </p>
           <p className="text-lg font-mono font-bold text-zinc-900 dark:text-zinc-100">
             [{stats?.min.toFixed(2)}, {stats?.max.toFixed(2)}]
           </p>

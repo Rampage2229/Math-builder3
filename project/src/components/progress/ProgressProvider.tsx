@@ -1,13 +1,19 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { 
-  UserProgress, 
-  loadProgress, 
-  saveProgress, 
-  getOverallStats as getOverallStatsLib, 
-  formatTime, 
-  TopicProgress 
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
+import {
+  UserProgress,
+  loadProgress,
+  saveProgress,
+  getOverallStats as getOverallStatsLib,
+  formatTime,
+  TopicProgress,
 } from "@/lib/progress";
 
 // Type for the overall stats returned by the library function
@@ -21,7 +27,9 @@ interface ProgressContextType {
   formatTime: (seconds: number) => string;
 }
 
-const ProgressContext = createContext<ProgressContextType | undefined>(undefined);
+const ProgressContext = createContext<ProgressContextType | undefined>(
+  undefined,
+);
 
 export function ProgressProvider({ children }: { children: ReactNode }) {
   const [progress, setProgress] = useState<UserProgress>(() => loadProgress());
@@ -39,7 +47,10 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("storage", handleStorageChange);
   }, []);
 
-  const getTopicStats = (topic: string, totalExercises: number): TopicProgress => {
+  const getTopicStats = (
+    topic: string,
+    totalExercises: number,
+  ): TopicProgress => {
     const topicProgress = progress.topicProgress[topic];
     if (!topicProgress) {
       return {
