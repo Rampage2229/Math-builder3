@@ -2,7 +2,7 @@
 
 import { FormulaDisplay, InlineFormula, BlockFormula } from "./FormulaDisplay";
 
-interface TheorySectionProps {
+export interface TheorySectionProps {
   title: string;
   description: string;
   topics: TheoryTopic[];
