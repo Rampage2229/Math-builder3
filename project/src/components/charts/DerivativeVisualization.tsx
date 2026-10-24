@@ -262,7 +262,7 @@ export function DerivativeVisualization({
             </li>
             <li>
               <span className="font-mono text-red-600 dark:text-red-400">
-                f'(x)
+                f(x)
               </span>{" "}
               - Derivative (rate of change)
             </li>
@@ -274,7 +274,7 @@ export function DerivativeVisualization({
                 at x = {pointOfInterest}
                 <br />
                 <span className="ml-4">
-                  Slope f'({pointOfInterest}) ={" "}
+                  Slope f&#39;({pointOfInterest}) ={" "}
                   {derivative(pointOfInterest).toFixed(4)}
                 </span>
               </li>
