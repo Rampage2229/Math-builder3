@@ -8,18 +8,26 @@ export interface ProgressEntry {
   score?: number;
 }
 
+export interface TopicProgress {
+  topicId: string;
+  completedExercises: number;
+  totalExercises: number;
+}
+
 export interface UserProgress {
-  topics: Record<string, {
-    completedExercises: number;
-    totalExercises: number;
-  }>;
+  topics: TopicProgress[];
   completedExercises: string[];
   totalScore: number;
 }
 
-export function useProgress() {
+export function useProgress(): {
+  progress: UserProgress;
+  loadProgress: () => void;
+  saveProgress: (newProgress: UserProgress) => void;
+  markExerciseComplete: (exerciseId: string, topic: string, score: number) => void;
+} {
   const [progress, setProgress] = useState<UserProgress>({
-    topics: {},
+    topics: [],
     completedExercises: [],
     totalScore: 0,
   });
@@ -52,20 +60,22 @@ export function useProgress() {
       const newCompletedExercises = [...prev.completedExercises, exerciseId];
       const newTotalScore = prev.totalScore + score;
       
-      const topicProgress = prev.topics[topic] || { completedExercises: 0, totalExercises: 0 };
+      const topicIndex = prev.topics.findIndex(t => t.topicId === topic);
+      const topicProgress = prev.topics[topicIndex] || { topicId: topic, completedExercises: 0, totalExercises: 0 };
       const newTopicProgress = {
         ...topicProgress,
         completedExercises: topicProgress.completedExercises + 1,
       };
 
+      const newTopics = topicIndex >= 0
+        ? [...prev.topics.slice(0, topicIndex), newTopicProgress, ...prev.topics.slice(topicIndex + 1)]
+        : [...prev.topics, newTopicProgress];
+
       return {
         ...prev,
         completedExercises: newCompletedExercises,
         totalScore: newTotalScore,
-        topics: {
-          ...prev.topics,
-          [topic]: newTopicProgress,
-        },
+        topics: newTopics,
       };
     });
   };
