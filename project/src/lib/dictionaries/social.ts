@@ -14,14 +14,14 @@ export interface SocialDictionary {
   financial_math_desc: string;
   linear_programming_title: string;
   linear_programming_desc: string;
-  linear_programming_feasible_region_title: string;
-  linear_programming_feasible_region_desc: string;
-  linear_programming_objective_function_title: string;
-  linear_programming_objective_function_desc: string;
-  linear_programming_simplex_method_title: string;
-  linear_programming_simplex_method_desc: string;
-  linear_programming_duality_title: string;
-  linear_programming_duality_desc: string;
+  feasible_region_title: string;
+  feasible_region_desc: string;
+  objective_function_title: string;
+  objective_function_desc: string;
+  simplex_method_title: string;
+  simplex_method_desc: string;
+  duality_title: string;
+  duality_desc: string;
   nav_home: string;
   nav_social: string;
   nav_scientific: string;
@@ -36,9 +36,9 @@ export interface SocialDictionary {
 
 export const socialDictionary: Record<string, SocialDictionary> = {
   en: {
-    page_title: "Mathematics Applied to Social Sciences",
+    page_title: "Social Mathematics",
     page_subtitle:
-      "This track focuses on statistical analysis, probability, and mathematical modeling for social science research, economics, and business applications.",
+      "Statistics, probability, and data analysis for social sciences, economics, and business applications.",
     track_badge: "Social Sciences Track",
     descriptive_statistics_title: "Descriptive Statistics",
     descriptive_statistics_desc:
@@ -58,17 +58,17 @@ export const socialDictionary: Record<string, SocialDictionary> = {
     linear_programming_title: "Linear Programming",
     linear_programming_desc:
       "Optimization techniques for maximizing or minimizing linear objective functions subject to linear constraints.",
-    linear_programming_feasible_region_title: "Feasible Region",
-    linear_programming_feasible_region_desc:
+    feasible_region_title: "Feasible Region",
+    feasible_region_desc:
       "The feasible region is the set of all points that satisfy all constraints simultaneously. It is typically a convex polygon in two dimensions, bounded by the constraint lines.",
-    linear_programming_objective_function_title: "Objective Function",
-    linear_programming_objective_function_desc:
+    objective_function_title: "Objective Function",
+    objective_function_desc:
       "The objective function is the linear function to be maximized or minimized. The optimal solution occurs at a corner point (vertex) of the feasible region.",
-    linear_programming_simplex_method_title: "Simplex Method",
-    linear_programming_simplex_method_desc:
+    simplex_method_title: "Simplex Method",
+    simplex_method_desc:
       "The simplex method is an iterative algorithm that moves from one corner point to an adjacent one, improving the objective function value at each step until the optimal solution is reached.",
-    linear_programming_duality_title: "Duality",
-    linear_programming_duality_desc:
+    duality_title: "Duality",
+    duality_desc:
       "Every linear programming problem has a corresponding dual problem. The optimal values of the primal and dual problems are equal under certain conditions (strong duality theorem).",
     nav_home: "Home",
     nav_social: "Social Mathematics",
@@ -82,9 +82,9 @@ export const socialDictionary: Record<string, SocialDictionary> = {
     exercises_link: "Practice Exercises",
   },
   ca: {
-    page_title: "Matemàtiques Aplicades a les Ciències Socials",
+    page_title: "Matemàtiques Socials",
     page_subtitle:
-      "Aquesta pista se centra en l'anàlisi estadístic, la probabilitat i la modelització matemàtica per a la recerca en ciències socials, economia i aplicacions empresarials.",
+      "Estadística, probabilitat i anàlisi de dades per a ciències socials, economia i aplicacions empresarials.",
     track_badge: "Pista de Ciències Socials",
     descriptive_statistics_title: "Estadística Descriptiva",
     descriptive_statistics_desc:
@@ -104,17 +104,17 @@ export const socialDictionary: Record<string, SocialDictionary> = {
     linear_programming_title: "Programació Lineal",
     linear_programming_desc:
       "Tècniques d'optimització per maximitzar o minimitzar funcions objectiu lineals subjectes a restriccions lineals.",
-    linear_programming_feasible_region_title: "Regió Factible",
-    linear_programming_feasible_region_desc:
+    feasible_region_title: "Regió Factible",
+    feasible_region_desc:
       "La regió factible és el conjunt de tots els punts que satisfacen totes les restriccions simultàniament. Típicament és un polígon convex en dues dimensions, delimitat per les línies de restricció.",
-    linear_programming_objective_function_title: "Funció Objectiu",
-    linear_programming_objective_function_desc:
+    objective_function_title: "Funció Objectiu",
+    objective_function_desc:
       "La funció objectiu és la funció lineal que es vol maximitzar o minimitzar. La solució òptima ocorre en un punt vora (vèrtex) de la regió factible.",
-    linear_programming_simplex_method_title: "Mètode Simplex",
-    linear_programming_simplex_method_desc:
+    simplex_method_title: "Mètode Simplex",
+    simplex_method_desc:
       "El mètode simplex és un algoritme iteratiu que es mou d'un punt vora a un adjacent, millorant el valor de la funció objectiu en cada pas fins a arribar a la solució òptima.",
-    linear_programming_duality_title: "Dualitat",
-    linear_programming_duality_desc:
+    duality_title: "Dualitat",
+    duality_desc:
       "Cada problema de programació lineal té un problema dual corresponent. Els valors òptims del problema primal i dual són iguals sota certes condicions (teorema de dualitat forta).",
     nav_home: "Inici",
     nav_social: "Matemàtiques Socials",
@@ -128,9 +128,9 @@ export const socialDictionary: Record<string, SocialDictionary> = {
     exercises_link: "Exercicis de Pràctica",
   },
   es: {
-    page_title: "Matemáticas Aplicadas a las Ciencias Sociales",
+    page_title: "Matemáticas Sociales",
     page_subtitle:
-      "Esta pista se centra en el análisis estadístico, la probabilidad y la modelización matemática para la investigación en ciencias sociales, economía y aplicaciones empresariales.",
+      "Estadística, probabilidad y análisis de datos para ciencias sociales, economía y aplicaciones empresariales.",
     track_badge: "Pista de Ciencias Sociales",
     descriptive_statistics_title: "Estadística Descriptiva",
     descriptive_statistics_desc:
@@ -150,17 +150,17 @@ export const socialDictionary: Record<string, SocialDictionary> = {
     linear_programming_title: "Programación Lineal",
     linear_programming_desc:
       "Técnicas de optimización para maximizar o minimizar funciones objetivo lineales sujetas a restricciones lineales.",
-    linear_programming_feasible_region_title: "Región Factible",
-    linear_programming_feasible_region_desc:
+    feasible_region_title: "Región Factible",
+    feasible_region_desc:
       "La región factible es el conjunto de todos los puntos que satisfacen todas las restricciones simultáneamente. Típicamente es un polígono convexo en dos dimensiones, delimitado por las líneas de restricción.",
-    linear_programming_objective_function_title: "Función Objetivo",
-    linear_programming_objective_function_desc:
+    objective_function_title: "Función Objetivo",
+    objective_function_desc:
       "La función objetivo es la función lineal que se desea maximizar o minimizar. La solución óptima ocurre en un punto esquina (vértice) de la región factible.",
-    linear_programming_simplex_method_title: "Método Simplex",
-    linear_programming_simplex_method_desc:
+    simplex_method_title: "Método Simplex",
+    simplex_method_desc:
       "El método simplex es un algoritmo iterativo que se mueve de un punto esquina a uno adyacente, mejorando el valor de la función objetivo en cada paso hasta alcanzar la solución óptima.",
-    linear_programming_duality_title: "Dualidad",
-    linear_programming_duality_desc:
+    duality_title: "Dualidad",
+    duality_desc:
       "Todo problema de programación lineal tiene un problema dual correspondiente. Los valores óptimos del problema primal y dual son iguales bajo ciertas condiciones (teorema de dualidad fuerte).",
     nav_home: "Inicio",
     nav_social: "Matemáticas Sociales",
