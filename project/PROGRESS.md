@@ -1357,3 +1357,29 @@ Validated project deliverables and components. All syntax checks passed.
 Validated project deliverables and components. All syntax checks passed.
 
 ---
+
+### Cycle #78 [2026-10-24 08:40:19]
+**Subtasks Assigned:**
+- **subtask_1**: Fix middleware and routing configuration to resolve 404 error on /ca/ca URL: The URL structure shows duplicate locale (/ca/ca instead of /ca). Fix project/src/middleware.ts to properly handle locale detection and redirection without duplicating the locale. Also verify project/vercel.json and project/next.config.ts for correct routing configuration. Target files: project/src/middleware.ts, project/vercel.json, project/next.config.ts
+- **subtask_2**: Fix Jest configuration and test setup: Fix project/tests/setup.ts to remove incorrect imports of Jest globals (beforeAll, afterAll, describe, it, expect, jest) from 'jest' module - they are globals, not exports. Configure project/jest.config.ts with proper globals setup. Fix TypeScript 'any' type error in project/src/app/[locale]/progress/page.tsx line 19. Run prettier formatting. Verify npm run build passes and all tests pass. Target files: project/tests/setup.ts, project/jest.config.ts, project/src/app/[locale]/progress/page.tsx, project/package.json
+- **subtask_3**: Complete integration of LinearProgrammingVisualization into social page and update dictionaries: Finish integrating the LinearProgrammingVisualization component into project/src/app/[locale]/social/page.tsx and add linear programming theory content (feasible region, objective function, simplex method, duality) to all three dictionaries (ca.json, es.json, en.json) under social.linearProgramming section. Target files: project/src/app/[locale]/social/page.tsx, project/src/lib/dictionaries/ca.json, project/src/lib/dictionaries/es.json, project/src/lib/dictionaries/en.json
+- **subtask_4**: Create IntegralVisualization component for scientific curriculum and integrate: Build project/src/components/charts/IntegralVisualization.tsx with interactive Riemann sums (left/right/midpoint/trapezoidal), definite integral area visualization with adjustable bounds, and antiderivative visualization. Then integrate into project/src/app/[locale]/scientific/page.tsx and add integral theory content to all three dictionaries under scientific.integrals section. Target files: project/src/components/charts/IntegralVisualization.tsx, project/src/app/[locale]/scientific/page.tsx, project/src/lib/dictionaries/ca.json, project/src/lib/dictionaries/es.json, project/src/lib/dictionaries/en.json
+**Deliverables & Modified Files:**
+- `project/src/app/[locale]/progress/page.tsx`
+- `project/src/lib/dictionaries/social.ts`
+**QA Validation:**
+bash
+```
+filepath:project/src/lib/dictionaries/social.ts
+<<<<<<< SEARCH
+linear_programming_desc:
+"Optimization techniques for maximizing or minimizing linear objective functions subject to linear constraints.",
+nav_home: "Home",
+nav_social: "Social Mathematics",
+nav_scientific: "Scientific Mathematics",
+=======
+linear_programming_desc:
+"Optimization techniques for maximizing or minimizing linear objective functions subject to linear constraints.",
+linear_programming_feasible_region_title: "Feasi
+
+---

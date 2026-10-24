@@ -76,6 +76,19 @@ export const socialDictionary: Record<string, SocialDictionary> = {
     linear_programming_desc:
       "Optimization techniques for maximizing or minimizing linear objective functions subject to linear constraints.",
 
+    linear_programming_feasible_region_title: "Feasible Region",
+    linear_programming_feasible_region_desc:
+      "The feasible region is the set of all points that satisfy all constraints simultaneously. Typically it is a convex polygon in two dimensions, bounded by the constraint lines.",
+    linear_programming_objective_function_title: "Objective Function",
+    linear_programming_objective_function_desc:
+      "The objective function is the linear function to be maximized or minimized. The optimal solution occurs at a corner point (vertex) of the feasible region.",
+    linear_programming_simplex_method_title: "Simplex Method",
+    linear_programming_simplex_method_desc:
+      "The simplex method is an iterative algorithm that moves from one corner point to an adjacent one, improving the objective function value at each step until the optimal solution is reached.",
+    linear_programming_duality_title: "Duality",
+    linear_programming_duality_desc:
+      "Every linear programming problem has a corresponding dual problem. The optimal values of the primal and dual problems are equal under certain conditions (strong duality theorem).",
+
     nav_home: "Home",
     nav_social: "Social Mathematics",
     nav_scientific: "Scientific Mathematics",
@@ -118,6 +131,19 @@ export const socialDictionary: Record<string, SocialDictionary> = {
     linear_programming_title: "Programació Lineal",
     linear_programming_desc:
       "Tècniques d'optimització per maximitzar o minimitzar funcions objectiu lineals subjectes a restriccions lineals.",
+
+    linear_programming_feasible_region_title: "Regió Factible",
+    linear_programming_feasible_region_desc:
+      "La regió factible és el conjunt de tots els punts que satisfacen totes les restriccions simultàniament. Típicament és un polígon convex en dues dimensions, delimitat per les línies de restricció.",
+    linear_programming_objective_function_title: "Funció Objectiu",
+    linear_programming_objective_function_desc:
+      "La funció objectiu és la funció lineal que es vol maximitzar o minimitzar. La solució òptima ocorre en un punt vora (vèrtex) de la regió factible.",
+    linear_programming_simplex_method_title: "Mètode Simplex",
+    linear_programming_simplex_method_desc:
+      "El mètode simplex és un algoritme iteratiu que es desplaça d'un punt vora a un adjacent, millorant el valor de la funció objectiu en cada pas fins a assolir la solució òptima.",
+    linear_programming_duality_title: "Dualitat",
+    linear_programming_duality_desc:
+      "Cada problema de programació lineal té un problema dual corresponent. Els valors òptims del problema primal i dual són iguals en certes condicions (teorema de dualitat forta).",
 
     nav_home: "Inici",
     nav_social: "Matemàtiques Socials",
