@@ -1,3 +1,4 @@
+import { ProgressProvider } from "@/components/progress/ProgressProvider";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProgressClient from "./ProgressClient";
@@ -45,5 +46,9 @@ export default async function ProgressPage({ params }: ProgressPageProps) {
   const { locale } = await params;
   const dict = await loadDictionary(locale);
 
-  return <ProgressClient locale={locale} dict={dict} />;
+  return (
+    <ProgressProvider>
+      <ProgressClient locale={locale} dict={dict} />
+    </ProgressProvider>
+  );
 }

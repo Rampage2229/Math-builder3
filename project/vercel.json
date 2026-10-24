@@ -1,19 +1,8 @@
 {
+  "framework": "nextjs",
   "buildCommand": "npm run build",
   "devCommand": "npm run dev",
   "installCommand": "npm install",
-  "framework": "nextjs",
-  "regions": ["iad1"],
-  "rewrites": [
-    {
-      "source": "/:lang(ca|es|en)/:path*",
-      "destination": "/:lang/:path*"
-    },
-    {
-      "source": "/:path*",
-      "destination": "/en/:path*"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
