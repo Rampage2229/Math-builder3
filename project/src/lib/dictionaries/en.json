@@ -4,6 +4,7 @@
   "nav_scientific": "Scientific Mathematics",
   "hero_title": "Spanish Baccalaureate Mathematics Curriculum",
   "hero_description": "Explore the complete curriculum for both Social and Scientific Mathematics tracks in the Spanish Baccalaureate system. Available in Catalan, Spanish, and English.",
+  "hero_subtitle": "Master mathematics for your future academic and professional path",
   "track_social_badge": "Social Sciences Track",
   "track_scientific_badge": "Scientific-Technical Track",
   "footer_copyright": "© 2024 Spanish Baccalaureate Mathematics Curriculum. All rights reserved.",
@@ -36,5 +37,19 @@
   "select_language": "Select Language",
   "catalan": "Catalan",
   "spanish": "Spanish",
-  "english": "English"
+  "english": "English",
+  "social_theory": "Social Theory",
+  "social_exercises": "Social Exercises",
+  "scientific_theory": "Scientific Theory",
+  "scientific_exercises": "Scientific Exercises",
+  "explore_social": "Explore Social Mathematics",
+  "explore_scientific": "Explore Scientific Mathematics",
+  "get_started": "Get Started",
+  "choose_your_track": "Choose Your Track",
+  "track_description_social": "Statistics, probability, and data analysis for social sciences, economics, and business.",
+  "track_description_scientific": "Calculus, linear algebra, and advanced mathematics for science, engineering, and technology.",
+  "practice_exercises": "Practice Exercises",
+  "theory_content": "Theory Content",
+  "interactive_learning": "Interactive Learning",
+  "comprehensive_curriculum": "Comprehensive Curriculum"
 }

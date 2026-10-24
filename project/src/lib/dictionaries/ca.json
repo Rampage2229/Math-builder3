@@ -4,6 +4,7 @@
   "nav_scientific": "Matemàtiques Científiques",
   "hero_title": "Currículum de Matemàtiques del Batxillerat Espanyol",
   "hero_description": "Explora el currículum complet per a les pistes de Matemàtiques Socials i Científiques del sistema de Batxillerat espanyol. Disponible en català, castellà i anglès.",
+  "hero_subtitle": "Domina les matemàtiques per al teu futur acadèmic i professional",
   "track_social_badge": "Pista de Ciències Socials",
   "track_scientific_badge": "Pista Científico-Tècnica",
   "footer_copyright": "© 2024 Currículum de Matemàtiques del Batxillerat Espanyol. Tots els drets reservats.",
@@ -36,5 +37,19 @@
   "select_language": "Selecciona l'idioma",
   "catalan": "Català",
   "spanish": "Castellà",
-  "english": "Anglès"
+  "english": "Anglès",
+  "social_theory": "Teoria Social",
+  "social_exercises": "Exercicis Socials",
+  "scientific_theory": "Teoria Científica",
+  "scientific_exercises": "Exercicis Científics",
+  "explore_social": "Explora Matemàtiques Socials",
+  "explore_scientific": "Explora Matemàtiques Científiques",
+  "get_started": "Comença",
+  "choose_your_track": "Tria la Teva Pista",
+  "track_description_social": "Estadística, probabilitat i anàlisi de dades per a ciències socials, economia i negocis.",
+  "track_description_scientific": "Càlcul, àlgebra lineal i matemàtiques avançades per a ciència, enginyeria i tecnologia.",
+  "practice_exercises": "Exercicis de Pràctica",
+  "theory_content": "Contingut Teòric",
+  "interactive_learning": "Aprenentatge Interactiu",
+  "comprehensive_curriculum": "Currículum Complet"
 }
