@@ -1226,3 +1226,35 @@ Jest config is fixed and the Next.js build succeeds. Now the test failures are i
   Validated project deliverables and components. All syntax checks passed.
 
 ---
+
+### Cycle #72 [2026-10-24 08:07:59]
+**Subtasks Assigned:**
+- **subtask_1**: Fix middleware and routing configuration to resolve 404 error on /ca/ca URL: The URL structure shows duplicate locale (/ca/ca instead of /ca). Fix project/src/middleware.ts to properly handle locale detection and redirection without duplicating the locale. Also verify project/vercel.json and project/next.config.ts for correct routing configuration. Target files: project/src/middleware.ts, project/vercel.json, project/next.config.ts
+- **subtask_2**: Complete integration of LinearProgrammingVisualization into social page and update dictionaries: Finish integrating the LinearProgrammingVisualization component into project/src/app/[locale]/social/page.tsx and add linear programming theory content (feasible region, objective function, simplex method, duality) to all three dictionaries (ca.json, es.json, en.json) under social.linearProgramming section. Target files: project/src/app/[locale]/social/page.tsx, project/src/lib/dictionaries/ca.json, project/src/lib/dictionaries/es.json, project/src/lib/dictionaries/en.json
+- **subtask_3**: Create IntegralVisualization component for scientific curriculum and integrate: Build project/src/components/charts/IntegralVisualization.tsx with interactive Riemann sums (left/right/midpoint/trapezoidal), definite integral area visualization with adjustable bounds, and antiderivative visualization. Then integrate into project/src/app/[locale]/scientific/page.tsx and add integral theory content to all three dictionaries under scientific.integrals section. Target files: project/src/components/charts/IntegralVisualization.tsx, project/src/app/[locale]/scientific/page.tsx, project/src/lib/dictionaries/ca.json, project/src/lib/dictionaries/es.json, project/src/lib/dictionaries/en.json
+- **subtask_4**: Fix TypeScript errors, Jest configuration, and verify build passes: Fix TypeScript 'any' type error in project/src/app/[locale]/progress/page.tsx line 19. Configure Jest globals in jest.config.ts and tests/setup.ts to resolve 'describe/jest not defined' errors. Run prettier formatting on all project files. Verify npm run build passes and all tests pass. Target files: project/src/app/[locale]/progress/page.tsx, project/jest.config.ts, project/tests/setup.ts, project/package.json
+**Deliverables & Modified Files:**
+- `project/PROGRESS.md`
+- `project/jest.config.ts`
+- `project/src/app/[locale]/progress/page.tsx`
+- `project/tests/setup.ts`
+**QA Validation:**
+bash
+cd project && npm test 2>&1
+```
+The test failures are caused by `tests/setup.ts` using bare `beforeAll`/`afterAll` calls that conflict with the `declare global` block. The `declare global { namespace jest { ... } }` block shadows the imports. I need to remove that block since the imports already provide the types and runtime values.
+```filepath:project/tests/setup.ts
+<<<<<<< SEARCH
+import {
+beforeAll,
+afterAll,
+beforeEach,
+afterEach,
+describe,
+it,
+expect,
+jest,
+} from "jest";
+declare global
+
+---
