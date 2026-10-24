@@ -1,5 +1,15 @@
 import { JSX } from "react";
 
+interface NextImageProps {
+  src: string;
+  alt?: string;
+  width?: number | string;
+  height?: number | string;
+  priority?: boolean;
+  className?: string;
+  [key: string]: unknown;
+}
+
 export const Image = ({
   src,
   alt,
@@ -8,7 +18,7 @@ export const Image = ({
   priority,
   className,
   ...props
-}: any): JSX.Element => {
+}: NextImageProps): JSX.Element => {
   return (
     <img
       src={src}
