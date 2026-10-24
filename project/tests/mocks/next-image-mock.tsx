@@ -19,7 +19,7 @@ export const Image = ({
   className,
   ...props
 }: NextImageProps): JSX.Element => {
-  // eslint-disable-next-line @next/next/no-img-element
+   
   return (
     <img
       src={src}
