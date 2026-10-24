@@ -76,8 +76,8 @@ export function CombinatoricsVisualization({
   const [showFormula, setShowFormula] = useState(true);
 
   const chartData = useMemo(() => {
-    let labels: string[] = [];
-    let data: number[] = [];
+    const labels: string[] = [];
+    const data: number[] = [];
     let formula = "";
     let result = 0;
 
@@ -137,7 +137,7 @@ export function CombinatoricsVisualization({
       tooltip: {
         enabled: true,
         callbacks: {
-          label: (ctx: any) => {
+          label: (ctx: { parsed: { y: number } }) => {
             return `Value: ${ctx.parsed.y.toLocaleString()}`;
           },
         },

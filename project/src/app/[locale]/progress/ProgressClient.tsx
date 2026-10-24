@@ -9,7 +9,7 @@ interface ProgressClientProps {
 }
 
 export default function ProgressClient({ locale, dict }: ProgressClientProps) {
-  const { progress, getOverallStats, getTopicStats, formatTime, refreshProgress } = useProgress();
+  const { progress, getOverallStats, getTopicStats, formatTime } = useProgress();
   const [activeTab, setActiveTab] = useState<"overview" | "topics" | "history">("overview");
 
   const overallStats = getOverallStats();
@@ -31,8 +31,6 @@ export default function ProgressClient({ locale, dict }: ProgressClientProps) {
     { key: "financial_mathematics", label: dict.financial_mathematics, totalExercises: 8 },
     { key: "linear_programming", label: dict.linear_programming, totalExercises: 6 },
   ];
-
-  const allTopics = [...scientificTopics, ...socialTopics];
 
   const renderOverview = () => (
     <div className="space-y-6">
@@ -247,6 +245,7 @@ function TopicProgressBar({
   percentage,
   averageScore,
   timeSpent,
+  dict,
 }: {
   label: string;
   completed: number;
@@ -254,6 +253,7 @@ function TopicProgressBar({
   percentage: number;
   averageScore: number;
   timeSpent: string;
+  dict: Record<string, string>;
 }) {
   return (
     <div className="space-y-2">
