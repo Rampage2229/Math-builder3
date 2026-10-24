@@ -27,11 +27,11 @@ const dictionaries: Record<string, Record<string, string>> = {
 };
 
 async function loadDictionary(locale: string): Promise<Record<string, string>> {
-  if (!dictionaries[locale]) {
+  const dict = dictionaries[locale];
+  if (!dict) {
     notFound();
   }
-
-  return dictionaries[locale];
+  return dict;
 }
 
 export default async function ProgressPage({ params }: ProgressPageProps) {

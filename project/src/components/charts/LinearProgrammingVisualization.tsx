@@ -289,7 +289,9 @@ export function LinearProgrammingVisualization({
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="space-y-6">
           <Line
-            options={options as unknown as Parameters<typeof Line>[0]["options"]}
+            options={
+              options as unknown as Parameters<typeof Line>[0]["options"]
+            }
             data={chartData as unknown as Parameters<typeof Line>[0]["data"]}
             height={400}
             width={600}
@@ -303,12 +305,11 @@ export function LinearProgrammingVisualization({
                 .filter((p) => p.feasible)
                 .map((p, index) => (
                   <li key={index} className="flex justify-between">
-                    <span>({p.x.toFixed(2)}, {p.y.toFixed(2)})</span>
+                    <span>
+                      ({p.x.toFixed(2)}, {p.y.toFixed(2)})
+                    </span>
                     <span className="font-mono">
-                      z = {(
-                        objective.a * p.x +
-                        objective.b * p.y
-                      ).toFixed(2)}
+                      z = {(objective.a * p.x + objective.b * p.y).toFixed(2)}
                     </span>
                   </li>
                 ))}
