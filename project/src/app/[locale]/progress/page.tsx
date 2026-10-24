@@ -1,6 +1,9 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import ProgressClient from "./ProgressClient";
+import enDict from "@/lib/dictionaries/en.json";
+import esDict from "@/lib/dictionaries/es.json";
+import caDict from "@/lib/dictionaries/ca.json";
 
 interface ProgressPageProps {
   params: Promise<{ locale: string }>;
@@ -17,22 +20,18 @@ export async function generateMetadata({
   };
 }
 
-async function loadDictionary(locale: string): Promise<Record<string, string>> {
-  const dictionaries: Record<
-    string,
-    () => Promise<{ default: Record<string, string> }>
-  > = {
-    en: () => import("@/lib/dictionaries/en.json"),
-    es: () => import("@/lib/dictionaries/es.json"),
-    ca: () => import("@/lib/dictionaries/ca.json"),
-  };
+const dictionaries: Record<string, Record<string, string>> = {
+  en: enDict,
+  es: esDict,
+  ca: caDict,
+};
 
+async function loadDictionary(locale: string): Promise<Record<string, string>> {
   if (!dictionaries[locale]) {
     notFound();
   }
 
-  const dictModule = await dictionaries[locale]();
-  return dictModule.default as Record<string, string>;
+  return dictionaries[locale];
 }
 
 export default async function ProgressPage({ params }: ProgressPageProps) {

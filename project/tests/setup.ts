@@ -8,6 +8,11 @@ declare global {
       method: K,
     ) => jest.SpyInstance<T[K], []>;
     const mock: <T = unknown>(implementation?: (...args: unknown[]) => T) => T;
+    const describe: (name: string, fn: () => void) => void;
+    const it: (name: string, fn: () => void | Promise<void>) => void;
+    const expect: <T>(actual: T) => jest.Matchers<T>;
+    const beforeAll: (fn: () => void | Promise<void>) => void;
+    const afterAll: (fn: () => void | Promise<void>) => void;
   }
 }
 
