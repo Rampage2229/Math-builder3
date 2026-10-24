@@ -1,4 +1,10 @@
 export interface ScientificDictionary {
+=======
+PLACEHOLDER
+
+=======
+PLACEHOLDER
+
   title: string;
   subtitle: string;
   topics: {
