@@ -31,7 +31,7 @@ async function loadDictionary(locale: string): Promise<Record<string, string>> {
   if (!dict) {
     notFound();
   }
-  return dict as Record<string, string>;
+  return dict!;
 }
 
 export default async function ProgressPage({ params }: ProgressPageProps) {
