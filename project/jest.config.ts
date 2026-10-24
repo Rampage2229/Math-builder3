@@ -1,7 +1,13 @@
-<<<<<<< SEARCH
-  setupFiles: ["<rootDir>/tests/setup.ts"],
+import type { Config } from "jest";
+
+const config: Config = {
+  preset: "ts-jest",
+  testEnvironment: "jsdom",
   setupFilesAfterEnv: ["<rootDir>/tests/setup.ts"],
-=======
-  setupFilesAfterEnv: ["<rootDir>/tests/setup.ts"],
-=======
-REPLACE
+  testMatch: ["<rootDir>/tests/**/*.test.{ts,tsx}"],
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/src/$1",
+  },
+};
+
+export default config;
