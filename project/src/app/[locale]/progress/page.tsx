@@ -6,7 +6,9 @@ interface ProgressPageProps {
   params: Promise<{ locale: string }>;
 }
 
-export async function generateMetadata({ params }: ProgressPageProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: ProgressPageProps): Promise<Metadata> {
   const { locale } = await params;
   const dict = await loadDictionary(locale);
   return {
@@ -16,7 +18,10 @@ export async function generateMetadata({ params }: ProgressPageProps): Promise<M
 }
 
 async function loadDictionary(locale: string): Promise<Record<string, string>> {
-  const dictionaries: Record<string, () => Promise<{ default: Record<string, string> }>> = {
+  const dictionaries: Record<
+    string,
+    () => Promise<{ default: Record<string, string> }>
+  > = {
     en: () => import("@/lib/dictionaries/en.json"),
     es: () => import("@/lib/dictionaries/es.json"),
     ca: () => import("@/lib/dictionaries/ca.json"),

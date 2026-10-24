@@ -121,6 +121,7 @@ export default function ProgressClient({ locale, dict }: ProgressClientProps) {
                 percentage={percentage}
                 averageScore={stats.averageScore}
                 timeSpent={formatTime(stats.timeSpent)}
+                dict={dict}
               />
             );
           })}
@@ -145,6 +146,7 @@ export default function ProgressClient({ locale, dict }: ProgressClientProps) {
                 percentage={percentage}
                 averageScore={stats.averageScore}
                 timeSpent={formatTime(stats.timeSpent)}
+                dict={dict}
               />
             );
           })}
