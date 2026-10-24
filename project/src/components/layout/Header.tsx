@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { socialDictionary } from "@/lib/dictionaries/social";
-import { socialDictionary } from "@/lib/dictionaries/social";
 
 interface HeaderProps {
   hasSidebar: boolean;
