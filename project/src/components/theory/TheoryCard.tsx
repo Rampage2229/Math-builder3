@@ -90,7 +90,7 @@ export function TheoryCard({ topic }: TheoryCardProps) {
               ))}
             </ul>
           </div>
-        ))}
+        )}
       </div>
     </article>
   );

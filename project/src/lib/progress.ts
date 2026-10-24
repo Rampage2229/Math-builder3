@@ -203,3 +203,36 @@ export function formatTime(seconds: number): string {
   }
   return `${remainingSeconds}s`;
 }
+
+export function useProgress() {
+  const [progress, setProgress] = useState<UserProgress>(defaultProgress);
+
+  useEffect(() => {
+    const loaded = loadProgress();
+    setProgress(loaded);
+  }, [loadProgress]);
+
+  return { progress, loadProgress };
+}
+
+export function useProgress() {
+  const [progress, setProgress] = useState<UserProgress>(defaultProgress);
+
+  useEffect(() => {
+    const loaded = loadProgress();
+    setProgress(loaded);
+  }, [loadProgress]);
+
+  return { progress, loadProgress };
+}
+
+export function useProgress() {
+  const [progress, setProgress] = useState<UserProgress>(defaultProgress);
+
+  useEffect(() => {
+    const loaded = loadProgress();
+    setProgress(loaded);
+  }, [loadProgress]);
+
+  return { progress, loadProgress };
+}

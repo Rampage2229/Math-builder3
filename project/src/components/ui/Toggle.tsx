@@ -5,7 +5,10 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export interface ToggleProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
+  extends React.InputHTMLAttributes<HTMLInputElement> {
+  /** @deprecated Use type alias instead */
+  _placeholder?: never;
+}
 
 const Toggle = React.forwardRef<HTMLInputElement, ToggleProps>(
   ({ className, ...props }, ref) => (

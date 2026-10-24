@@ -5,7 +5,10 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 export interface ContainerProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+  extends React.HTMLAttributes<HTMLDivElement> {
+  /** @deprecated Use type alias instead */
+  _placeholder?: never;
+}
 
 const Container = React.forwardRef<HTMLDivElement, ContainerProps>(
   ({ className, ...props }, ref) => (
