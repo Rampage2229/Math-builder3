@@ -1,7 +1,7 @@
 # Project Execution State & Swarm Instructions
 **Goal:** Develop this website about spanish bacculerate's both social ans scientific math curriculums. Buid it so it can be deployed in Vercel with node.js. Make it in Catalan, Spanish and English. Make sure that on each iteration the webpage is functional with vercel, and it doesn't break between pushes. It's supposed to be a leaening site with exercices snd theory and interactive elements.Lice here https://batxmatx-mk0oynnk9-holahola2224-2779s-projects.vercel.app/ca/ca.
 **Active Mode:** 💻 Software Engineering (Code)
-**Last Updated:** 2026-10-24 08:40:19 (Cycle #78)
+**Last Updated:** 2026-10-24 08:51:24 (Cycle #80)
 **Latest Operator Steering:** 08:29:08.371 Running build in Washington, D.C., USA (East) – iad1
 08:29:08.372 Build machine configuration: 2 cores, 8 GB
 08:29:08.524 Cloning github.com/Rampage2229/Math-builder3 (Branch: main, Commit: af62fbe)
@@ -51,24 +51,5 @@
 - `skills/`: Reusable procedural knowledge manuals.
 
 ## Latest QA Status
-bash
-```
-filepath:project/src/lib/dictionaries/social.ts
-<<<<<<< SEARCH
-linear_programming_desc:
-"Optimization techniques for maximizing or minimizing linear objective functions subject to linear constraints.",
-nav_home: "Home",
-nav_social: "Social Mathematics",
-nav_scientific: "Scientific Mathematics",
-=======
-linear_programming_desc:
-"Optimization techniques for maximizing or minimizing linear objective functions subject to linear constraints.",
-linear_programming_feasible_region_title: "Feasible Region",
-linear_programming_feasible_region_desc:
-"The feasible region is the set of all points that satisfy all constraints simultaneously. Typically it is a convex polygon in two dimensions, bounded by the constraint lines.",
-linear_programming_objective_function_title: "Objective Function",
-linear_programming_objective_function_desc:
-"The objective function is the linear function to be maximized or minimized. The optimal solution occurs at a corner point (vertex) of the feasible region.",
-linear_programming_simplex_method_title: "Simplex Method",
-linear_programming_simplex_method_desc:
-"The simplex method is an iterative algorithm that moves from one corner point to an adjacent one, i
+The `social.ts` file is corrupted with merge conflict markers (41 bytes of placeholder text). I need to examine the reference files to understand the expected structure, then fix it and run verification.
+Let me examine the test file to understand what's expected from `social.ts`, then fix it.
