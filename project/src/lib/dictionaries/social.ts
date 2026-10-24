@@ -1,4 +1,3 @@
-export interface SocialDictionary {
   // Page header
   page_title: string;
   page_subtitle: string;
