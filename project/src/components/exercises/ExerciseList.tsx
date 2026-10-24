@@ -7,7 +7,7 @@ interface ExerciseListProps {
   description?: string;
 }
 
-export default function ExerciseList({ exercises, title, description }: ExerciseListProps) {
+export function ExerciseList({ exercises, title, description }: ExerciseListProps) {
   return (
     <section className="exercise-list" aria-labelledby="exercise-list-title">
       <header className="exercise-list-header">
