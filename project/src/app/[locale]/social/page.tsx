@@ -146,7 +146,7 @@ const topics: Record<string, TheoryTopic[]> = {
       id: "linear-programming",
       title: "Programación Lineal",
       content: "Técnicas de optimización para maximizar o minimizar funciones objetivo lineales sujetas a restricciones lineales.",
-      keyPoints: ["Funciones objetivo", "Restricciones lineales", "Técnicas de optimización"],
+      keyPoints: ["Funciones objetivo", "Restricciones lineals", "Técnicas de optimización"],
     },
   ],
 };
