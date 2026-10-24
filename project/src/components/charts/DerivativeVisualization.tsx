@@ -32,6 +32,11 @@ export interface DerivativeVisualizationProps {
   xMin: number;
   xMax: number;
   pointOfInterest?: number;
+  limitPoint?: number;
+  limitValue?: number;
+  showEpsilonDelta?: boolean;
+  epsilon?: number;
+  delta?: number;
   title: string;
   xLabel?: string;
   yLabel?: string;
