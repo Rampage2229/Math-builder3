@@ -28,10 +28,15 @@ ChartJS.register(
 
 interface DerivativeVisualizationProps {
   func: (x: number) => number;
-  derivative: (x: number) => number;
+  derivative?: (x: number) => number;
   xMin: number;
   xMax: number;
   pointOfInterest?: number;
+  limitPoint?: number;
+  limitValue?: number;
+  showEpsilonDelta?: boolean;
+  epsilon?: number;
+  delta?: number;
   title: string;
   xLabel?: string;
   yLabel?: string;
