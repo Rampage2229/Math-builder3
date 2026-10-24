@@ -13,11 +13,11 @@ export default async function ScientificPage({ params }: { params: Promise<{ loc
 
   // Type-safe accessor for dictionary topic properties
   const getTopicTitle = (topic: string): string => {
-    return (dict as Record<string, string>)[`${topic}_title`] || topic;
+    return (dict as unknown as Record<string, string>)[`${topic}_title`] || topic;
   };
 
   const getTopicDesc = (topic: string): string => {
-    return (dict as Record<string, string>)[`${topic}_desc`] || "";
+    return (dict as unknown as Record<string, string>)[`${topic}_desc`] || "";
   };
 
   return (
