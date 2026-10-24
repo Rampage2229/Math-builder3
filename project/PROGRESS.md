@@ -478,3 +478,19 @@ Validated project deliverables and components. All syntax checks passed.
 Validated project deliverables and components. All syntax checks passed.
 
 ---
+
+### Cycle #21 [2026-10-24 02:04:10]
+**Subtasks Assigned:**
+- **subtask_1**: Enhance scientific curriculum page with full theory content: Update project/src/app/[locale]/scientific/page.tsx to include comprehensive theory sections using TheorySection, TopicCard, and FormulaDisplay components for all scientific math topics (limits, derivatives, integrals, vectors, matrices, probability). Ensure all content is localized for Catalan, Spanish, and English.
+- **subtask_2**: Enhance social curriculum page with full theory content: Update project/src/app/[locale]/social/page.tsx to include comprehensive theory sections using TheorySection, TopicCard, and FormulaDisplay components for all social math topics (descriptive statistics, probability distributions, statistical inference, regression, optimization). Ensure all content is localized for Catalan, Spanish, and English.
+- **subtask_3**: Improve home page and navigation: Update project/src/app/[locale]/page.tsx with an engaging landing page that introduces both curriculums, adds clear navigation to scientific/social sections, and includes language switcher. Enhance project/src/components/ui/LanguageSwitcher.tsx if needed.
+- **subtask_4**: Final production verification and deployment readiness: Run npm run build to verify production build passes. Run full test suite (npm test). Verify sitemap.xml generation at project/src/app/sitemap.ts. Check SEO metadata in project/src/app/[locale]/layout.tsx. Verify vercel.json configuration. Test all three locales render correctly.
+**Deliverables & Modified Files:**
+- `project/src/components/exercises/ExerciseList.tsx`
+- `project/src/components/ui/LanguageSwitcher.tsx`
+**QA Validation:**
+bash
+cd project && npm test 2>&1
+```
+
+---
