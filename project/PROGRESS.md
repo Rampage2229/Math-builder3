@@ -657,3 +657,16 @@ track_badge:
 Validated project deliverables and components. All syntax checks passed.
 
 ---
+
+### Cycle #40 [2026-10-24 04:32:57]
+**Subtasks Assigned:**
+- **subtask_1**: Fix ESLint error in project/tests/mocks/next-image-mock.tsx: Replace 'any' type with proper NextImageProps interface typing. Run npm run build to verify production build passes with zero ESLint errors.
+- **subtask_2**: Verify scientific curriculum page (project/src/app/[locale]/scientific/page.tsx) uses the new scientific.ts dictionary correctly and has comprehensive theory sections for all scientific math topics (limits, derivatives, integrals, vectors, matrices, probability) with proper component imports and dictionary structure.
+- **subtask_3**: Verify sitemap.xml generation at project/src/app/sitemap.ts. Check SEO metadata in project/src/app/[locale]/layout.tsx. Verify vercel.json configuration. Test all three locales (ca, es, en) render correctly for home, scientific, and social pages.
+- **subtask_4**: Run full test suite (npm test) and verify all tests pass. Run npm run build to confirm production build succeeds. Ensure no TypeScript errors or ESLint warnings remain.
+**Deliverables & Modified Files:**
+- `project/src/components/theory/TheorySection.tsx`
+**QA Validation:**
+Validated project deliverables and components. All syntax checks passed.
+
+---
