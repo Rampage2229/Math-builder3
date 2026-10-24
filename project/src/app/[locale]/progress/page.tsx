@@ -41,6 +41,8 @@ async function loadDictionary(locale: string): Promise<Dictionary> {
   return dict;
 }
 
+const localeDict: Dictionary = dictionaries[locale as Locale] ?? enDict;
+
 export default async function ProgressPage({ params }: ProgressPageProps) {
   const { locale } = await params;
   const dict = await loadDictionary(locale);

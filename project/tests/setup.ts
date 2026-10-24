@@ -1,3 +1,7 @@
+// Jest globals (beforeAll, afterAll, describe, it, expect, jest) are provided
+// globally by @types/jest — they must NOT be imported from the "jest" module.
+// Jest globals (beforeAll, afterAll, describe, it, expect, jest) are provided
+// globally by @types/jest — they must NOT be imported from the "jest" module.
 const originalConsoleError = console.error;
 const originalConsoleWarn = console.warn;
 
