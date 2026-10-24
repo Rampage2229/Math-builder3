@@ -214,25 +214,3 @@ export function useProgress() {
 
   return { progress, loadProgress };
 }
-
-export function useProgress() {
-  const [progress, setProgress] = useState<UserProgress>(defaultProgress);
-
-  useEffect(() => {
-    const loaded = loadProgress();
-    setProgress(loaded);
-  }, [loadProgress]);
-
-  return { progress, loadProgress };
-}
-
-export function useProgress() {
-  const [progress, setProgress] = useState<UserProgress>(defaultProgress);
-
-  useEffect(() => {
-    const loaded = loadProgress();
-    setProgress(loaded);
-  }, [loadProgress]);
-
-  return { progress, loadProgress };
-}
