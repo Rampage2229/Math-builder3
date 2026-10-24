@@ -1691,21 +1691,6 @@ cd /app/workspaces/project && npx --no-install prettier --version 2>&
 **Deliverables & Modified Files:**
 - `project/src/app/[locale]/scientific/page.tsx`
 **QA Validation:**
-```output
-project/src/app/[locale]/scientific/page.tsx
-project/src/app/[locale]/scientific/page.tsx
-project/src/app/[locale]/scientific/page.tsx
-project/src/app/[locale]/scientific/page.tsx
-project/src/app/[locale]/scientific/page.tsx
-project/src/app/[locale]/scientific/page.tsx
-project/src/app/[locale]/scientific/page.tsx
-project/src/locales/en.json
-project/src/locales/en.json
-project/src/locales/en.json
-project/src/locales/en.json
-project/src/locales/en.json
-project/src/locales/en.json
-project
 
 ---
 
