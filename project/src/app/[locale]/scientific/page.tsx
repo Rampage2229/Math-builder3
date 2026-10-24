@@ -19,9 +19,9 @@ async function loadDictionary(locale: string): Promise<Dictionary> {
 export default async function ScientificTrackPage({
   params,
 }: {
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  const locale = params.locale;
+  const locale = (await params).locale;
   const dictionary = await loadDictionary(locale);
 
   // Unit data translated per locale
