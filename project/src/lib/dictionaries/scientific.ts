@@ -1,4 +1,64 @@
+PLACEHOLDER
+
+=======
+PLACEHOLDER
+
+  title: string;
+  subtitle: string;
+  topics: {
+    limits: TheoryTopicDict;
+    continuity: TheoryTopicDict;
+    derivatives: TheoryTopicDict;
+    integrals: TheoryTopicDict;
+    vectors: TheoryTopicDict;
+    matrices: TheoryTopicDict;
+    probability: TheoryTopicDict;
+  };
+}
+=======
+PLACEHOLDER
+
+=======
+PLACEHOLDER
+
+  title: string;
+  subtitle: string;
+  topics: {
+    limits: TheoryTopicDict;
+    continuity: TheoryTopicDict;
+    derivatives: TheoryTopicDict;
+    integrals: TheoryTopicDict;
+    vectors: TheoryTopicDict;
+    matrices: TheoryTopicDict;
+    probability: TheoryTopicDict;
+  };
+}
+=======
 export interface ScientificDictionary {
+  title: string;
+  subtitle: string;
+  topics: {
+    limits: TheoryTopicDict;
+    continuity: TheoryTopicDict;
+    derivatives: TheoryTopicDict;
+    integrals: TheoryTopicDict;
+    vectors: TheoryTopicDict;
+    matrices: TheoryTopicDict;
+    probability: TheoryTopicDict;
+  };
+}
+  title: string;
+  subtitle: string;
+  topics: {
+    limits: TheoryTopicDict;
+    continuity: TheoryTopicDict;
+    derivatives: TheoryTopicDict;
+    integrals: TheoryTopicDict;
+    vectors: TheoryTopicDict;
+    matrices: TheoryTopicDict;
+    probability: TheoryTopicDict;
+  };
+}
 =======
 PLACEHOLDER
 
