@@ -1786,3 +1786,35 @@ continuity: TheoryTopicDict;
 deriv
 
 ---
+
+### Cycle #7 [2026-10-24 15:29:08]
+**Subtasks Assigned:**
+- **subtask_1**: Complete Social Math curriculum implementation: Build out project/src/app/[locale]/social/page.tsx, social/exercises/page.tsx, and social/theory/page.tsx with full descriptive statistics, probability, and combinatorics content. Create CombinatoricsVisualization chart component in project/src/components/charts/CombinatoricsVisualization.tsx. Ensure all content uses dictionaries from project/src/lib/dictionaries/social.ts for i18n (ca/es/en).
+- **subtask_2**: Complete Scientific Math curriculum implementation: Enhance project/src/app/[locale]/scientific/page.tsx, scientific/exercises/page.tsx, and scientific/theory/page.tsx with limits, continuity, derivatives, integrals, vectors, matrices, probability. Integrate DerivativeVisualization, add ContinuityVisualization and IntegralVisualization chart components in project/src/components/charts/. Ensure all content uses dictionaries from project/src/lib/dictionaries/scientific.ts for i18n (ca/es/en).
+- **subtask_3**: Fix test suite and ESLint errors: Rewrite project/tests/page-rendering.test.tsx to test dictionary content and locale structure instead of rendering async Next.js Server Components. Fix 2 remaining ESLint no-explicit-any errors in test files. Run npm run build and npm test to confirm zero failures.
+- **subtask_4**: Verify deployment readiness and create QA report: Validate vercel.json configuration for Node.js deployment, test build output, verify all locale routes work (/en, /es, /ca), ensure interactive elements (charts, exercises, progress tracking) function correctly. Update project/QA_VERIFICATION_REPORT.md with current status.
+**Deliverables & Modified Files:**
+- `project/src/components/charts/IntegralVisualization.tsx`
+**QA Validation:**
+All tests pass (47/47), TypeScript compiles cleanly, and ESLint shows only 1 minor warning. Let me fix that warning — `title` is an unnecessary dependency in the `chartData` useMemo.
+```filepath:project/src/components/charts/IntegralVisualization.tsx
+<<<<<<< SEARCH
+return {
+labels,
+datasets: [
+{
+label: "f(x)",
+data,
+borderColor: color,
+backgroundColor: color.replace("1)", "0.1)"),
+borderWidth: 2,
+pointRadius: 0,
+fill: false,
+tension: 0.1,
+},
+{
+label: "Area under curve",
+data: fillData,
+borderCol
+
+---

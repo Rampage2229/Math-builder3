@@ -129,7 +129,7 @@ export function IntegralVisualization({
       ],
       integralValue,
     };
-  }, [func, xMin, xMax, integralMin, integralMax, title, color, fillColor]);
+  }, [func, xMin, xMax, integralMin, integralMax, color, fillColor]);
 
   const options = useMemo(
     () => ({
