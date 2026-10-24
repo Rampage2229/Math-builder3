@@ -1,22 +1,3 @@
-export interface ScientificDictionary {
-=======
-PLACEHOLDER
-
-=======
-PLACEHOLDER
-
-  title: string;
-  subtitle: string;
-  topics: {
-    limits: TheoryTopicDict;
-    continuity: TheoryTopicDict;
-    derivatives: TheoryTopicDict;
-    integrals: TheoryTopicDict;
-    vectors: TheoryTopicDict;
-    matrices: TheoryTopicDict;
-    probability: TheoryTopicDict;
-  };
-}
 
 export interface TheoryTopicDict {
   id: string;
