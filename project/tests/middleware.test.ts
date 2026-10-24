@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest } from "next/server";
 import { proxy as middleware, config } from "../src/proxy";
 
 // Mock the next/server module

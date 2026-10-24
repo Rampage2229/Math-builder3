@@ -11,8 +11,6 @@ const dictionariesDir = path.join(
 
 const supportedLocales = ["en", "ca", "es"] as const;
 
-type Locale = (typeof supportedLocales)[number];
-
 interface Dictionary {
   [key: string]: string;
 }
