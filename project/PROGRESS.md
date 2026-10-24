@@ -544,3 +544,17 @@ expo
 Validated project deliverables and components. All syntax checks passed.
 
 ---
+
+### Cycle #27 [2026-10-24 02:46:02]
+**Subtasks Assigned:**
+- **subtask_1**: Complete scientific curriculum theory page: Update project/src/app/[locale]/scientific/page.tsx with comprehensive theory sections using TheorySection, TopicCard, and FormulaDisplay components for all scientific math topics (limits, derivatives, integrals, vectors, matrices, probability). Ensure all content is localized via dictionaries for Catalan, Spanish, and English. Create/update project/src/lib/dictionaries/scientific.ts with all scientific math translations.
+- **subtask_2**: Enhance home page and navigation: Update project/src/app/[locale]/page.tsx with engaging landing page introducing both curriculums, clear navigation cards/links to scientific/social theory and exercises sections, and proper language switcher integration. Verify project/src/components/ui/LanguageSwitcher.tsx works correctly with all three locales.
+- **subtask_3**: Final production verification and deployment readiness: Run npm run build to verify production build passes. Run full test suite (npm test). Verify sitemap.xml generation at project/src/app/sitemap.ts. Check SEO metadata in project/src/app/[locale]/layout.tsx. Verify vercel.json configuration. Test all three locales render correctly.
+- **subtask_4**: Fix remaining ESLint error: Update project/tests/mocks/next-image-mock.tsx to replace 'any' type with proper TypeScript typing (NextImageProps interface). Ensure all tests still pass after the fix.
+**Deliverables & Modified Files:**
+- `project/src/lib/dictionaries/ca.json`
+- `project/src/lib/dictionaries/en.json`
+**QA Validation:**
+Validated project deliverables and components. All syntax checks passed.
+
+---
