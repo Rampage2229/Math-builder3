@@ -1,70 +1,4 @@
-PLACEHOLDER
-
-=======
-PLACEHOLDER
-
-  title: string;
-  subtitle: string;
-  topics: {
-    limits: TheoryTopicDict;
-    continuity: TheoryTopicDict;
-    derivatives: TheoryTopicDict;
-    integrals: TheoryTopicDict;
-    vectors: TheoryTopicDict;
-    matrices: TheoryTopicDict;
-    probability: TheoryTopicDict;
-  };
-}
-=======
-PLACEHOLDER
-
-=======
-PLACEHOLDER
-
-  title: string;
-  subtitle: string;
-  topics: {
-    limits: TheoryTopicDict;
-    continuity: TheoryTopicDict;
-    derivatives: TheoryTopicDict;
-    integrals: TheoryTopicDict;
-    vectors: TheoryTopicDict;
-    matrices: TheoryTopicDict;
-    probability: TheoryTopicDict;
-  };
-}
-=======
 export interface ScientificDictionary {
-  title: string;
-  subtitle: string;
-  topics: {
-    limits: TheoryTopicDict;
-    continuity: TheoryTopicDict;
-    derivatives: TheoryTopicDict;
-    integrals: TheoryTopicDict;
-    vectors: TheoryTopicDict;
-    matrices: TheoryTopicDict;
-    probability: TheoryTopicDict;
-  };
-}
-  title: string;
-  subtitle: string;
-  topics: {
-    limits: TheoryTopicDict;
-    continuity: TheoryTopicDict;
-    derivatives: TheoryTopicDict;
-    integrals: TheoryTopicDict;
-    vectors: TheoryTopicDict;
-    matrices: TheoryTopicDict;
-    probability: TheoryTopicDict;
-  };
-}
-=======
-PLACEHOLDER
-
-=======
-PLACEHOLDER
-
   title: string;
   subtitle: string;
   topics: {
@@ -136,24 +70,23 @@ export interface ScientificPageDictionary {
   track_badge: string;
   limits_title: string;
   limits_desc: string;
-    derivatives_title: string;
-    derivatives_desc: string;
-    continuity_title: string;
-    continuity_desc: string;
-    integrals_title: string;
-    integrals_desc: string;
-    vectors_title: string;
-    vectors_desc: string;
-    matrices_title: string;
-    matrices_desc: string;
-    combinatorics_title: string;
-    combinatorics_desc: string;
-    probability_title: string;
-    probability_desc: string;
-    descriptive_statistics_title: string;
-    descriptive_statistics_desc: string;
-    nav_home: string;
-
+  derivatives_title: string;
+  derivatives_desc: string;
+  continuity_title: string;
+  continuity_desc: string;
+  integrals_title: string;
+  integrals_desc: string;
+  vectors_title: string;
+  vectors_desc: string;
+  matrices_title: string;
+  matrices_desc: string;
+  combinatorics_title: string;
+  combinatorics_desc: string;
+  probability_title: string;
+  probability_desc: string;
+  descriptive_statistics_title: string;
+  descriptive_statistics_desc: string;
+  nav_home: string;
   nav_social: string;
   nav_scientific: string;
   key_formulas: string;
