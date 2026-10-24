@@ -18,6 +18,16 @@ export interface SocialDictionary {
   linear_programming_title: string;
   linear_programming_desc: string;
 
+  // Linear Programming Theory (detailed)
+  linear_programming_feasible_region_title: string;
+  linear_programming_feasible_region_desc: string;
+  linear_programming_objective_function_title: string;
+  linear_programming_objective_function_desc: string;
+  linear_programming_simplex_method_title: string;
+  linear_programming_simplex_method_desc: string;
+  linear_programming_duality_title: string;
+  linear_programming_duality_desc: string;
+
   // Navigation
   nav_home: string;
   nav_social: string;
