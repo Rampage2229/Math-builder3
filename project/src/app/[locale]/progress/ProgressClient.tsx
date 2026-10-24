@@ -15,6 +15,8 @@ export default function ProgressClient({ locale, dict }: ProgressClientProps) {
     "overview",
   );
 
+  // locale is already available from props
+
   const overallStats = getOverallStats();
 
   // Define topics for both tracks
