@@ -81,10 +81,24 @@ export function LimitVisualization({
       }
     }
 
-    const datasets = [
+    type ChartDataPoint = number | { x: number; y: number };
+
+    const datasets: Array<{
+      label: string;
+      data: ChartDataPoint[];
+      borderColor: string;
+      backgroundColor: string;
+      borderWidth?: number;
+      pointRadius?: number;
+      pointStyle?: string;
+      fill?: boolean;
+      tension?: number;
+      showLine?: boolean;
+      borderDash?: number[];
+    }> = [
       {
         label: title,
-        data,
+        data: data as ChartDataPoint[],
         borderColor: color,
         backgroundColor: color.replace("1)", "0.1)"),
         borderWidth: 2,
@@ -116,6 +130,7 @@ export function LimitVisualization({
           { x: xMax, y: limitValue + epsilon },
         ],
         borderColor: "rgba(34, 197, 94, 0.5)",
+        backgroundColor: "rgba(34, 197, 94, 0.5)",
         borderWidth: 1,
         borderDash: [5, 5],
         pointRadius: 0,
@@ -129,6 +144,7 @@ export function LimitVisualization({
           { x: xMax, y: limitValue - epsilon },
         ],
         borderColor: "rgba(34, 197, 94, 0.5)",
+        backgroundColor: "rgba(34, 197, 94, 0.5)",
         borderWidth: 1,
         borderDash: [5, 5],
         pointRadius: 0,
@@ -142,6 +158,7 @@ export function LimitVisualization({
           { x: limitPoint - delta, y: limitValue + epsilon },
         ],
         borderColor: "rgba(249, 115, 22, 0.5)",
+        backgroundColor: "rgba(249, 115, 22, 0.5)",
         borderWidth: 1,
         borderDash: [5, 5],
         pointRadius: 0,
@@ -155,6 +172,7 @@ export function LimitVisualization({
           { x: limitPoint + delta, y: limitValue + epsilon },
         ],
         borderColor: "rgba(249, 115, 22, 0.5)",
+        backgroundColor: "rgba(249, 115, 22, 0.5)",
         borderWidth: 1,
         borderDash: [5, 5],
         pointRadius: 0,
