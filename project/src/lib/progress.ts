@@ -15,13 +15,14 @@ export interface ExerciseProgress {
 
 export interface TopicProgress {
   topic: string;
-  completed: number;
-  total: number;
+  completedExercises: number;
+  totalExercises: number;
   averageScore: number;
   timeSpent: number; // in seconds
 }
 
 export interface UserProgress {
+  topics: Record<string, TopicProgress>;
   topicProgress: Record<string, TopicProgress>;
   exerciseProgress: ExerciseProgress;
   totalTimeSpent: number; // in seconds
@@ -31,6 +32,7 @@ export interface UserProgress {
 const STORAGE_KEY = "math_progress";
 
 const defaultProgress: UserProgress = {
+  topics: {},
   topicProgress: {},
   exerciseProgress: {
     completedExercises: {},
@@ -66,6 +68,7 @@ export function loadProgress(): UserProgress {
         ),
       },
       topicProgress: parsed.topicProgress || {},
+      topics: parsed.topics || parsed.topicProgress || {},
     };
   } catch {
     return defaultProgress;
@@ -114,30 +117,31 @@ export function updateExerciseProgress(
   const topicProgress = { ...progress.topicProgress };
   const currentTopic = topicProgress[topic] || {
     topic,
-    completed: 0,
-    total: 0,
+    completedExercises: 0,
+    totalExercises: 0,
     averageScore: 0,
     timeSpent: 0,
   };
-  currentTopic.total += 1;
+  currentTopic.totalExercises += 1;
   if (isCorrect) {
-    currentTopic.completed += 1;
+    currentTopic.completedExercises += 1;
   }
   currentTopic.averageScore =
-    (currentTopic.averageScore * (currentTopic.total - 1) +
+    (currentTopic.averageScore * (currentTopic.totalExercises - 1) +
       (isCorrect ? 100 : 0)) /
-    currentTopic.total;
+    currentTopic.totalExercises;
   currentTopic.timeSpent += timeSpent;
   topicProgress[topic] = currentTopic;
 
   return {
     ...progress,
+    topics: { ...progress.topics, [topic]: currentTopic },
+    topicProgress,
     exerciseProgress: {
       completedExercises,
       attempts,
       totalPoints,
     },
-    topicProgress,
     totalTimeSpent: progress.totalTimeSpent + timeSpent,
     lastActive: now,
   };
@@ -152,15 +156,15 @@ export function getTopicStats(
   if (!topicProgress) {
     return {
       topic,
-      completed: 0,
-      total: totalExercises,
+      completedExercises: 0,
+      totalExercises,
       averageScore: 0,
       timeSpent: 0,
     };
   }
   return {
     ...topicProgress,
-    total: totalExercises,
+    totalExercises,
   };
 }
 
