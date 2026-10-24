@@ -145,7 +145,7 @@ export const scientificDictionary: Record<string, ScientificPageDictionary> = {
   ca: {
     page_title: "Teoria de Matemàtiques Científiques",
     page_subtitle:
-      "Cobertura completa de límits, derivades, integrals, vectors, matrius i probabilitat per a la pista de Ciències del Batxillerat espanyol.",
+      "Cobertura completa de límits, derivades, integrals, vectors, matrius, combinatòria, probabilitat i estadística descriptiva per a la pista de Ciències del Batxillerat espanyol.",
     track_badge: "Pista de Ciències Científiques",
     limits_title: "Límits i Continuitat",
     limits_desc:
@@ -187,7 +187,7 @@ export const scientificDictionary: Record<string, ScientificPageDictionary> = {
   es: {
     page_title: "Teoría de Matemáticas Científicas",
     page_subtitle:
-      "Cobertura completa de límites, derivadas, integrales, vectores, matrices y probabilidad para la pista de Ciencias del Bachillerato español.",
+      "Cobertura completa de límites, derivadas, integrales, vectores, matrices, combinatoria, probabilidad y estadística descriptiva para la pista de Ciencias del Bachillerato español.",
     track_badge: "Pista de Ciencias Científicas",
     limits_title: "Límites y Continuidad",
     limits_desc:
