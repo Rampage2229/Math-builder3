@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
+import { ThemeToggle } from "@/components/ui/ThemeToggle";
 import { socialDictionary } from "@/lib/dictionaries/social";
 
 interface HeaderProps {
@@ -98,6 +99,9 @@ export function Header({ hasSidebar, onToggleSidebar }: HeaderProps) {
                 english: dict.english,
               }}
             />
+
+            {/* Theme toggle */}
+            <ThemeToggle />
           </div>
         </div>
       </div>
