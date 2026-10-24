@@ -8,6 +8,11 @@ const config: Config = {
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/src/$1",
   },
+  globals: {
+    "ts-jest": {
+      isolatedModules: true,
+    },
+  },
 };
 
 export default config;

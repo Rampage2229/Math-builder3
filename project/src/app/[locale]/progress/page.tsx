@@ -20,18 +20,20 @@ export async function generateMetadata({
   };
 }
 
-const dictionaries: Record<string, Record<string, string>> = {
-  en: enDict as Record<string, string>,
-  es: esDict as Record<string, string>,
-  ca: caDict as Record<string, string>,
+type Dictionary = Record<string, string>;
+
+const dictionaries: Record<string, Dictionary> = {
+  en: enDict as Dictionary,
+  es: esDict as Dictionary,
+  ca: caDict as Dictionary,
 };
 
-async function loadDictionary(locale: string): Promise<Record<string, string>> {
+async function loadDictionary(locale: string): Promise<Dictionary> {
   const dict = dictionaries[locale];
   if (!dict) {
     notFound();
   }
-  return dict!;
+  return dict;
 }
 
 export default async function ProgressPage({ params }: ProgressPageProps) {
