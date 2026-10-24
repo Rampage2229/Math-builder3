@@ -1,3 +1,6 @@
+=======
+import Link from "next/link";
+
 export function Footer() {
   return (
     <footer className="bg-zinc-900 dark:bg-zinc-800 text-zinc-400 dark:text-zinc-50 py-8">
@@ -12,9 +15,9 @@ export function Footer() {
             </div>
           </div>
           <div className="flex gap-6 text-sm">
-            <a href="/en" className="hover:text-zinc-200 transition-colors">English</a>
-            <a href="/es" className="hover:text-zinc-200 transition-colors">Español</a>
-            <a href="/ca" className="hover:text-zinc-200 transition-colors">Català</a>
+            <Link href="/en" className="hover:text-zinc-200 transition-colors">English</Link>
+            <Link href="/es" className="hover:text-zinc-200 transition-colors">Español</Link>
+            <Link href="/ca" className="hover:text-zinc-200 transition-colors">Català</Link>
           </div>
         </div>
       </div>

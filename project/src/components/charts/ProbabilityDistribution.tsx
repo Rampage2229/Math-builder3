@@ -1,5 +1,5 @@
-<<<<<<< SEARCH
-const ProbabilityDistribution = ({ data }: ProbabilityDistributionProps) => {
+=======
+export function ProbabilityDistribution({ data }: ProbabilityDistributionProps) {
   const config = useMemo(() => {
     const colors = ['#4F46E5', '#EF4444', '#10B981', '#F59E0B', '#8B5CF6'];
     const color = colors[data?.index % colors.length] || '#3B82F6';
@@ -38,5 +38,4 @@ const ProbabilityDistribution = ({ data }: ProbabilityDistributionProps) => {
   }, [data]);
   
   return <canvas id="probability-chart" width={800} height={400} />;
-};
->>>>>>> REPLACE
+}
