@@ -12,10 +12,6 @@ const config: Config = {
     "ts-jest": {
       isolatedModules: true,
     },
-    describe: expect.global.describe,
-    it: expect.global.it,
-    expect: expect.global.expect,
-    jest: expect.global.jest,
   },
 };
 

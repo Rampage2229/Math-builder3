@@ -22,18 +22,21 @@ export async function generateMetadata({
 
 type Dictionary = Record<string, string>;
 
-const dictionaries: Record<string, Dictionary> = {
+const supportedLocales = ["en", "es", "ca"] as const;
+type Locale = (typeof supportedLocales)[number];
+
+const dictionaries: Record<Locale, Dictionary> = {
   en: enDict as Dictionary,
   es: esDict as Dictionary,
   ca: caDict as Dictionary,
 };
 
 async function loadDictionary(locale: string): Promise<Dictionary> {
-  const dict = dictionaries[locale];
+  const dict = dictionaries[locale as Locale];
   if (!dict) {
     notFound();
   }
-  return dict!;
+  return dict;
 }
 
 export default async function ProgressPage({ params }: ProgressPageProps) {
