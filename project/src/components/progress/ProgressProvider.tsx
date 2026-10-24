@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { UserProgress, loadProgress, saveProgress, getOverallStats as getOverallStatsLib, formatTime, TopicProgress } from "@/lib/progress";
+import { UserProgress, loadProgress, saveProgress, getOverallStats, formatTime, TopicProgress } from "@/lib/progress";
 
 interface ProgressContextType {
   progress: UserProgress;
@@ -46,7 +46,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
     };
   };
 
-  const getOverallStats = () => getOverallStatsLib(progress);
+  const getOverallStatsWrapper = () => getOverallStats(progress);
 
   return (
     <ProgressContext.Provider
@@ -54,7 +54,7 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
         progress,
         refreshProgress,
         getTopicStats,
-        getOverallStats,
+        getOverallStats: getOverallStatsWrapper,
         formatTime,
       }}
     >
