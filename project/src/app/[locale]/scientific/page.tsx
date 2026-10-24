@@ -67,7 +67,7 @@ function ScientificPageInner({ locale }: ScientificPageProps) {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           <aside className="lg:col-span-3 hidden lg:block">
             <nav className="space-y-1">
-              {scientificTopicsOrder.map((topic) => (
+              {scientificTopicsOrder.map((topic: string) => (
                 <button
                   key={topic}
                   onClick={() => setActiveTopic(topic)}
