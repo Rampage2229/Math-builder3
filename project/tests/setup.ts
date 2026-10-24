@@ -1,5 +1,3 @@
-import "@testing-library/jest-dom";
-
 declare global {
   namespace jest {
     const fn: <T = unknown>(implementation?: (...args: unknown[]) => T) => T;

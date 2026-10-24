@@ -15,15 +15,15 @@ export async function generateMetadata({
   const { locale } = await params;
   const dict = await loadDictionary(locale);
   return {
-    title: dict.progress_title,
-    description: dict.progress_subtitle,
+    title: dict["progress_title"],
+    description: dict["progress_subtitle"],
   };
 }
 
 const dictionaries: Record<string, Record<string, string>> = {
-  en: enDict,
-  es: esDict,
-  ca: caDict,
+  en: enDict as Record<string, string>,
+  es: esDict as Record<string, string>,
+  ca: caDict as Record<string, string>,
 };
 
 async function loadDictionary(locale: string): Promise<Record<string, string>> {
@@ -31,7 +31,7 @@ async function loadDictionary(locale: string): Promise<Record<string, string>> {
   if (!dict) {
     notFound();
   }
-  return dict;
+  return dict as Record<string, string>;
 }
 
 export default async function ProgressPage({ params }: ProgressPageProps) {
