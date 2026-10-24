@@ -126,5 +126,14 @@
   "progress_tracking": "Progress Tracking",
   "completion_rate": "Completion Rate",
   "exercises_completed": "Exercises Completed",
-  "total_points_earned": "Total Points Earned"
+  "total_points_earned": "Total Points Earned",
+  "examples_link": "Examples",
+  "formulas": "Formulas",
+  "key_formulas": "Key Formulas",
+  "examples": "Examples",
+  "key_points": "Key Points",
+  "problem": "Problem",
+  "solution": "Solution",
+  "theory_link": "View Theory",
+  "exercises_link": "Practice Exercises"
 }
