@@ -287,6 +287,30 @@ export function DerivativeVisualization({
                 </span>
               </li>
             )}
+            {pointOfInterest !== undefined && !derivative && (
+              <li>
+                <span className="font-mono text-gray-600 dark:text-gray-400">
+                  Tangent line
+                </span>{" "}
+                at x = {pointOfInterest}
+                <br />
+                <span className="ml-4 text-gray-500 dark:text-gray-400">
+                  Derivative function not provided
+                </span>
+              </li>
+            )}
+            {pointOfInterest !== undefined && !derivative && (
+              <li>
+                <span className="font-mono text-gray-600 dark:text-gray-400">
+                  Tangent line
+                </span>{" "}
+                at x = {pointOfInterest}
+                <br />
+                <span className="ml-4 text-gray-500 dark:text-gray-400">
+                  Derivative function not provided
+                </span>
+              </li>
+            )}
           </ul>
         </div>
       </div>
