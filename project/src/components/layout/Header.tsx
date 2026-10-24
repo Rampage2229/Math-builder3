@@ -3,6 +3,8 @@
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
+import { socialDictionary } from "@/lib/dictionaries/social";
+import { socialDictionary } from "@/lib/dictionaries/social";
 
 interface HeaderProps {
   hasSidebar: boolean;
@@ -15,6 +17,10 @@ export function Header({ hasSidebar, onToggleSidebar }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const currentLocale = pathname.split("/")[2] || "en";
+
+  const dict =
+    socialDictionary[currentLocale as keyof typeof socialDictionary] ||
+    socialDictionary.en;
 
   const handleLanguageChange = (newLocale: string) => {
     const newPathname = pathname.replace(`/${currentLocale}`, `/${newLocale}`);
@@ -85,6 +91,13 @@ export function Header({ hasSidebar, onToggleSidebar }: HeaderProps) {
             <LanguageSwitcher
               locale={currentLocale}
               onChange={(newLocale: string) => handleLanguageChange(newLocale)}
+              dictionary={{
+                language: dict.language,
+                select_language: dict.select_language,
+                catalan: dict.catalan,
+                spanish: dict.spanish,
+                english: dict.english,
+              }}
             />
           </div>
         </div>
