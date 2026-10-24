@@ -4,11 +4,21 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { scientificDictionary, scientificTopicsOrder } from "@/lib/dictionaries/scientific";
 
-export default function ScientificPage({ params }: { params: { locale: string } }) {
+export default async function ScientificPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const dict =
-    scientificDictionary[params.locale as keyof typeof scientificDictionary] ||
+    scientificDictionary[locale as keyof typeof scientificDictionary] ||
     scientificDictionary.en;
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
+
+  // Type-safe accessor for dictionary topic properties
+  const getTopicTitle = (topic: string): string => {
+    return (dict as Record<string, string>)[`${topic}_title`] || topic;
+  };
+
+  const getTopicDesc = (topic: string): string => {
+    return (dict as Record<string, string>)[`${topic}_desc`] || "";
+  };
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
@@ -22,13 +32,13 @@ export default function ScientificPage({ params }: { params: { locale: string } 
               <h1 className="text-xl font-bold">{dict.page_title}</h1>
             </div>
             <div className="flex items-center gap-4">
-              <Link href="/" className="text-slate-600 hover:text-blue-600 transition">
+              <Link href={`/${locale}`} className="text-slate-600 hover:text-blue-600 transition">
                 {dict.nav_home}
               </Link>
-              <Link href="/social" className="text-slate-600 hover:text-blue-600 transition">
+              <Link href={`/${locale}/social`} className="text-slate-600 hover:text-blue-600 transition">
                 {dict.nav_social}
               </Link>
-              <Link href="/scientific" className="text-blue-600 font-medium">
+              <Link href={`/${locale}/scientific`} className="text-blue-600 font-medium">
                 {dict.nav_scientific}
               </Link>
             </div>
@@ -55,7 +65,7 @@ export default function ScientificPage({ params }: { params: { locale: string } 
                       : "text-slate-600 hover:bg-slate-100"
                   }`}
                 >
-                  {dict[`${topic}_title` as keyof typeof dict]}
+                  {getTopicTitle(topic)}
                 </button>
               ))}
             </nav>
@@ -70,10 +80,10 @@ export default function ScientificPage({ params }: { params: { locale: string } 
                   className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm"
                 >
                   <h3 className="text-2xl font-bold mb-2">
-                    {dict[`${topic}_title` as keyof typeof dict]}
+                    {getTopicTitle(topic)}
                   </h3>
                   <p className="text-slate-600 mb-4">
-                    {dict[`${topic}_desc` as keyof typeof dict]}
+                    {getTopicDesc(topic)}
                   </p>
                   <div className="flex gap-4">
                     <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition text-sm font-medium">
