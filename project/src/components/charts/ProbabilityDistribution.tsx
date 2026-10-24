@@ -124,7 +124,7 @@ export function ProbabilityDistribution({
         tooltip: {
           enabled: true,
           callbacks: {
-            label: (ctx: any) => {
+            label: (ctx: { parsed: { x: number; y: number | undefined } }) => {
               const x = ctx.parsed.x;
               const y = ctx.parsed.y;
               return `${xLabel} = ${x}, P = ${y?.toFixed(4)}`;

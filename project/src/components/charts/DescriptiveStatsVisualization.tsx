@@ -110,7 +110,7 @@ export function DescriptiveStatsVisualization({
         tooltip: {
           enabled: true,
           callbacks: {
-            label: (ctx: any) => {
+            label: (ctx: { parsed: { y: number | undefined } }) => {
               return `Frequency: ${ctx.parsed.y}`;
             },
           },

@@ -67,7 +67,7 @@ export function VectorVisualization({
         borderColor: "rgba(16, 185, 129, 1)",
         backgroundColor: "rgba(16, 185, 129, 1)",
         borderWidth: 3,
-        // @ts-ignore - borderDash is supported by Chart.js but not in the type definition
+        // @ts-expect-error - borderDash is supported by Chart.js but not in the type definition
         borderDash: [6, 4],
         pointRadius: [6, 6],
         pointBackgroundColor: [
@@ -104,7 +104,7 @@ export function VectorVisualization({
         tooltip: {
           enabled: true,
           callbacks: {
-            label: (ctx: any) => {
+            label: (ctx: { parsed: { x: number; y: number } }) => {
               const p = ctx.parsed;
               return `(${p.x}, ${p.y})`;
             },

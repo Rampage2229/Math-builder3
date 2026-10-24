@@ -199,7 +199,7 @@ export function ContinuityVisualization({
           mode: "nearest",
           intersect: false,
           callbacks: {
-            label: (ctx: any) => {
+            label: (ctx: { parsed: { x: number; y: number | undefined } }) => {
               const x = ctx.parsed.x;
               const y = ctx.parsed.y;
               return `f(${x}) = ${y?.toFixed(4)}`;
