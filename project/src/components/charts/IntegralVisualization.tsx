@@ -7,8 +7,8 @@ Chart.register(...registerables);
 
 export interface IntegralVisualizationProps {
   func: (x: number) => number;
-  a: number;
-  b: number;
+  xMin: number;
+  xMax: number;
   partitions?: number;
   title?: string;
   xLabel?: string;
@@ -18,8 +18,8 @@ export interface IntegralVisualizationProps {
 
 export function IntegralVisualization({
   func,
-  a,
-  b,
+  xMin,
+  xMax,
   partitions = 10,
   title,
   xLabel = "x",
@@ -35,7 +35,7 @@ export function IntegralVisualization({
     
     // Generate function points
     for (let i = 0; i <= 100; i++) {
-      const x = a + (b - a) * (i / 100);
+      const x = xMin + (xMax - xMin) * (i / 100);
       xValues.push(x);
       try {
         yValues.push(func(x));
@@ -45,9 +45,9 @@ export function IntegralVisualization({
     }
     
     // Generate rectangles for Riemann sum
-    const width = (b - a) / partitions;
+    const width = (xMax - xMin) / partitions;
     for (let i = 0; i < partitions; i++) {
-      const x = a + i * width;
+      const x = xMin + i * width;
       rectX.push(x, x + width, x + width, x, x);
       try {
         const y = func(x);
@@ -97,12 +97,12 @@ export function IntegralVisualization({
         plugins: {
           title: {
             display: true,
-            text: title || `∫[${a},${b}] f(x) dx`,
+            text: title || `∫[${xMin},${xMax}] f(x) dx`,
           },
         },
       },
     };
-  }, [func, a, b, partitions, title, xLabel, yLabel]);
+  }, [func, xMin, xMax, partitions, title, xLabel, yLabel]);
   
   return (
     <div className={`w-full max-w-lg mx-auto bg-white dark:bg-zinc-900 rounded-xl shadow-sm border border-zinc-200 dark:border-zinc-800 p-6 mb-8 ${className}`}>
