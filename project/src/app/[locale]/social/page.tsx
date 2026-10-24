@@ -1,6 +1,3 @@
-<<<<<<< SEARCH
-
-=======
 "use client";
 
 import { TheorySection, TheoryTopic } from "@/components/theory/TheorySection";
@@ -220,5 +217,3 @@ export default async function SocialTrackPage({
     </div>
   );
 }
-=======
-REPLACE
