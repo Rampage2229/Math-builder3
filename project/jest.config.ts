@@ -11,6 +11,24 @@ const config: Config = {
     "^next/image$": "<rootDir>/tests/mocks/next-image-mock.tsx",
   },
   setupFilesAfterEnv: ["<rootDir>/tests/setup.ts"],
+  globals: {
+    "ts-jest": {
+      tsconfig: {
+        jsx: "react-jsx",
+        module: "esnext",
+        moduleResolution: "bundler",
+        isolatedModules: true,
+        strict: true,
+        esModuleInterop: true,
+        skipLibCheck: true,
+        resolveJsonModule: true,
+        target: "ES2017",
+        lib: ["dom", "dom.iterable", "esnext"],
+        allowJs: true,
+        noEmit: true,
+      },
+    },
+  },
   transform: {
     "^.+\\.(ts|tsx)$": [
       "ts-jest",

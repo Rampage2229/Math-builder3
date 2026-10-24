@@ -2,12 +2,12 @@ import "@testing-library/jest-dom";
 
 declare global {
   namespace jest {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const fn: any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const spyOn: any;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const mock: any;
+    const fn: <T = unknown>(implementation?: (...args: unknown[]) => T) => T;
+    const spyOn: <T extends object, K extends keyof T>(
+      object: T,
+      method: K,
+    ) => jest.SpyInstance<T[K], []>;
+    const mock: <T = unknown>(implementation?: (...args: unknown[]) => T) => T;
   }
 }
 

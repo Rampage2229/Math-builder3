@@ -32,7 +32,7 @@ async function loadDictionary(locale: string): Promise<Record<string, string>> {
   }
 
   const dictModule = await dictionaries[locale]();
-  return dictModule.default;
+  return dictModule.default as Record<string, string>;
 }
 
 export default async function ProgressPage({ params }: ProgressPageProps) {
