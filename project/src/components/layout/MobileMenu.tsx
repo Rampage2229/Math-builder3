@@ -58,11 +58,12 @@ export function MobileMenu({ locale, onSelect }: MobileMenuProps) {
                 locale === lang.code ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300" : "hover:bg-zinc-100 dark:hover:bg-zinc-800"
               }`}
             >
-              {lang.nativeName}
+              {lang.name}
             </button>
           </li>
         ))}
       </ul>
-    </div>
+</div>
   );
 }
+

@@ -1,6 +1,5 @@
 "use client";
 
-import { ThemeProvider as NextThemesProvider } from "next-themes";
 import { useEffect, useState } from "react";
 
 export function ThemeProvider({
@@ -23,13 +22,8 @@ export function ThemeProvider({
   }
 
   return (
-    <NextThemesProvider
-      attribute="class"
-      defaultTheme={defaultTheme}
-      enableSystem={enableSystem}
-      disableTransitionOnChange
-    >
+    <div className={`theme-${defaultTheme}`}>
       {children}
-    </NextThemesProvider>
+    </div>
   );
 }

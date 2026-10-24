@@ -2,24 +2,26 @@
 
 import { useMemo } from "react";
 
+interface ProbabilityDataItem {
+  value: number;
+  probability: number;
+}
+
 export interface ProbabilityDistributionProps {
-  data?: {
-    index?: number;
-    map?: (item: { value: number; probability: number }) => { x: number; y: number };
-  }[];
+  data?: ProbabilityDataItem[];
 }
 
 export function ProbabilityDistribution({ data }: ProbabilityDistributionProps) {
   const config = useMemo(() => {
     const colors = ['#4F46E5', '#EF4444', '#10B981', '#F59E0B', '#8B5CF6'];
-    const color = colors[data?.index % colors.length] || '#3B82F6';
+    const color = colors[0] || '#3B82F6';
     
     const config = {
       type: 'bar' as const,
       data: {
         datasets: [{
           label: 'Probability',
-          data: data?.map((item: { value: number; probability: number }) => ({
+          data: data?.map((item: ProbabilityDataItem) => ({
             x: item.value,
             y: item.probability
           })) || [],

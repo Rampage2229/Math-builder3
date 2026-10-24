@@ -26,6 +26,14 @@ export interface UserProgress {
   lastActive: Date;
 }
 
+import { useState, useEffect } from "react";
+
+import { useState, useEffect } from "react";
+
+import { useState, useEffect } from "react";
+
+import { useState, useEffect } from "react";
+
 const STORAGE_KEY = "math_progress";
 
 const defaultProgress: UserProgress = {

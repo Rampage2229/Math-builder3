@@ -20,7 +20,7 @@ function ScientificPageInner({ locale }: ScientificPageProps) {
     scientificDictionary[locale as keyof typeof scientificDictionary] ||
     scientificDictionary.en;
   const [activeTopic, setActiveTopic] = useState<string | null>(null);
-  const { progress, loadProgress, saveProgress } = useProgress();
+  const { progress, loadProgress } = useProgress();
 
   // Type-safe accessor for dictionary topic properties
   const getTopicTitle = (topic: string): string => {
