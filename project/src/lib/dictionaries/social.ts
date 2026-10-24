@@ -143,5 +143,3 @@ export const SocialDictionary = {
 };
 
 export const socialDictionary = SocialDictionary;
-
-export const socialDictionary = SocialDictionary;
