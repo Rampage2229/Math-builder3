@@ -5,6 +5,7 @@ import { useRouter, usePathname } from "next/navigation";
 
 interface LanguageSwitcherProps {
   locale: string;
+  onChange?: (newLocale: string) => void;
   dictionary: {
     language: string;
     select_language: string;
@@ -22,6 +23,7 @@ const languages = [
 
 export function LanguageSwitcher({
   locale,
+  onChange,
   dictionary,
 }: LanguageSwitcherProps) {
   const router = useRouter();
@@ -37,6 +39,7 @@ export function LanguageSwitcher({
     router.push(newPathname);
     router.refresh();
     setIsOpen(false);
+    onChange?.(newLocale);
   };
 
   return (
