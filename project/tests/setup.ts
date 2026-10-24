@@ -1,10 +1,3 @@
-declare global {
-  namespace jest {
-    // eslint-disable-next-line @typescript-eslint/no-empty-object-type
-    interface Matchers<R> extends jest.Matchers<R, unknown> {}
-  }
-}
-
 const originalConsoleError = console.error;
 const originalConsoleWarn = console.warn;
 

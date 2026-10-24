@@ -20,7 +20,9 @@ export async function generateMetadata({
   };
 }
 
-type Dictionary = Record<string, string>;
+interface Dictionary {
+  [key: string]: string;
+}
 
 const supportedLocales = ["en", "es", "ca"] as const;
 type Locale = (typeof supportedLocales)[number];
