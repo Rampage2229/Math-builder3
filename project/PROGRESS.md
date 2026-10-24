@@ -2092,3 +2092,24 @@ I found a duplicate import in `Header.tsx` (lines 10-11). Let me fix that first,
 import { socialDictionary } from "@/lib/di
 
 ---
+
+### Cycle #26 [2026-10-24 18:24:46]
+**Subtasks Assigned:**
+- **subtask_1**: Fix UserProgress type and progress.ts: Add 'topics' array property to UserProgress interface; fix useProgress hook return type; ensure proper typing for progress tracking. Target: project/src/lib/progress.ts
+- **subtask_2**: Fix chart component props and scientific page: Update DerivativeVisualizationProps/IntegralVisualizationProps/ProbabilityDistributionProps to match usage in scientific/page.tsx; add missing dictionary keys (examples_link, formulas) to locale dictionaries. Target: project/src/components/charts/*.tsx, project/src/app/[locale]/scientific/page.tsx, project/src/dictionaries/*.json
+- **subtask_3**: Fix Exercise exports and components: Export Exercise type from types.ts; fix imports in scientific-exercises.ts, social-exercises.ts, ExerciseComponent.tsx, ExerciseList.tsx; add proper option types. Target: project/src/lib/exercises/types.ts, project/src/lib/exercises/*.ts, project/src/components/exercises/*.tsx
+- **subtask_4**: Fix UI conflicts and Header: Resolve cva redeclarations in Badge.tsx/Button.tsx; fix Header.tsx LanguageSwitcherProps (add onChange); fix social/page.tsx string/string[] mismatch; verify build passes. Target: project/src/components/ui/Badge.tsx, Button.tsx, project/src/components/layout/Header.tsx, project/src/app/[locale]/social/page.tsx
+**Deliverables & Modified Files:**
+- `project/src/components/charts/DerivativeVisualization.tsx`
+- `project/src/components/charts/IntegralVisualization.tsx`
+- `project/src/lib/progress.ts`
+**QA Validation:**
+Now I have a clear picture. Let me fix the TypeScript errors in the deliverable files.
+**Issues found:**
+1. `DerivativeVisualization.tsx`: `derivative` is optional but used without null checks (lines 74, 131, 286)
+2. `progress.ts`: Missing standalone exports (`loadProgress`, `saveProgress`, `getOverallStats`, `formatTime`) needed by `ProgressProvider.tsx`
+3. Jest tests: All 47 pass ✓
+Let me fix `DerivativeVisualization.tsx` first:
+```filepath:project/src/components/charts/DerivativeVisualization
+
+---

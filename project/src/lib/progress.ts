@@ -20,6 +20,55 @@ export interface UserProgress {
   totalScore: number;
 }
 
+export function loadProgress(): UserProgress | null {
+  if (typeof window !== 'undefined') {
+    const saved = localStorage.getItem('userProgress');
+    if (saved) {
+      try {
+        return JSON.parse(saved);
+      } catch {
+        // Ignore parse errors
+      }
+    }
+  }
+  return null;
+}
+
+export function saveProgress(newProgress: UserProgress): void {
+  if (typeof window !== 'undefined') {
+    localStorage.setItem('userProgress', JSON.stringify(newProgress));
+  }
+}
+
+export function getOverallStats(progress: UserProgress): {
+  totalExercises: number;
+  completedExercises: number;
+  averageScore: number;
+  completionRate: number;
+} {
+  const totalTopics = progress.topics.length;
+  const totalExercises = progress.topics.reduce((sum, t) => sum + t.totalExercises, 0);
+  const completedExercises = progress.completedExercises.length;
+  const averageScore = totalExercises > 0 ? progress.totalScore / totalExercises : 0;
+  const completionRate = totalExercises > 0 ? completedExercises / totalExercises : 0;
+
+  return {
+    totalExercises,
+    completedExercises,
+    averageScore,
+    completionRate,
+  };
+}
+
+export function formatTime(seconds: number): string {
+  const h = Math.floor(seconds / 3600);
+  const m = Math.floor((seconds % 3600) / 60);
+  const s = seconds % 60;
+  return [h, m, s]
+    .map(v => v.toString().padStart(2, '0'))
+    .join(':');
+}
+
 export function useProgress(): {
   progress: UserProgress;
   loadProgress: () => void;
@@ -32,24 +81,16 @@ export function useProgress(): {
     totalScore: 0,
   });
 
-  const loadProgress = () => {
-    if (typeof window !== 'undefined') {
-      const saved = localStorage.getItem('userProgress');
-      if (saved) {
-        try {
-          setProgress(JSON.parse(saved));
-        } catch {
-          // Ignore parse errors
-        }
-      }
+  const handleLoadProgress = () => {
+    const saved = loadProgress();
+    if (saved) {
+      setProgress(saved);
     }
   };
 
-  const saveProgress = (newProgress: UserProgress) => {
+  const handleSaveProgress = (newProgress: UserProgress) => {
     setProgress(newProgress);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('userProgress', JSON.stringify(newProgress));
-    }
+    saveProgress(newProgress);
   };
 
   const markExerciseComplete = (exerciseId: string, topic: string, score: number) => {
@@ -80,5 +121,5 @@ export function useProgress(): {
     });
   };
 
-  return { progress, loadProgress, saveProgress, markExerciseComplete };
+  return { progress, loadProgress: handleLoadProgress, saveProgress: handleSaveProgress, markExerciseComplete };
 }

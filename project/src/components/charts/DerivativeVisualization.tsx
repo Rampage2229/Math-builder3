@@ -71,13 +71,13 @@ export function DerivativeVisualization({
       const x = xMin + i * step;
       try {
         const y = func(x);
-        const dy = derivative(x);
+        const dy = derivative?.(x);
         if (isFinite(y) && Math.abs(y) < 1e6) {
           funcData.push({ x, y });
         } else {
           funcData.push({ x, y: null });
         }
-        if (isFinite(dy) && Math.abs(dy) < 1e6) {
+        if (dy !== undefined && isFinite(dy) && Math.abs(dy) < 1e6) {
           derivData.push({ x, y: dy });
         } else {
           derivData.push({ x, y: null });
@@ -125,7 +125,7 @@ export function DerivativeVisualization({
     ];
 
     // Add tangent line at point of interest
-    if (pointOfInterest !== undefined) {
+    if (pointOfInterest !== undefined && derivative) {
       const x0 = pointOfInterest;
       const y0 = func(x0);
       const slope = derivative(x0);
@@ -274,7 +274,7 @@ export function DerivativeVisualization({
               </span>{" "}
               - Derivative (rate of change)
             </li>
-            {pointOfInterest !== undefined && (
+            {pointOfInterest !== undefined && derivative && (
               <li>
                 <span className="font-mono text-green-600 dark:text-green-400">
                   Tangent line
