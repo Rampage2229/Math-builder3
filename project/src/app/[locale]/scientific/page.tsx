@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { scientificDictionary, scientificTopicsOrder } from "@/lib/dictionaries/scientific";
 import { LimitVisualization } from "@/components/charts/LimitVisualization";
@@ -13,8 +13,11 @@ import { DescriptiveStatsVisualization } from "@/components/charts/DescriptiveSt
 import { CombinatoricsVisualization } from "@/components/charts/CombinatoricsVisualization";
 import { FunctionGraph } from "@/components/charts/FunctionGraph";
 
-export default async function ScientificPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale } = await params;
+interface ScientificPageProps {
+  locale: string;
+}
+
+function ScientificPageInner({ locale }: ScientificPageProps) {
   const dict =
     scientificDictionary[locale as keyof typeof scientificDictionary] ||
     scientificDictionary.en;
@@ -202,4 +205,9 @@ export default async function ScientificPage({ params }: { params: Promise<{ loc
       </main>
     </div>
   );
+}
+
+export default async function ScientificPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
+  return <ScientificPageInner locale={locale} />;
 }
