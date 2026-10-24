@@ -13,6 +13,8 @@ declare global {
     const expect: <T>(actual: T) => jest.Matchers<T>;
     const beforeAll: (fn: () => void | Promise<void>) => void;
     const afterAll: (fn: () => void | Promise<void>) => void;
+    const beforeEach: (fn: () => void | Promise<void>) => void;
+    const afterEach: (fn: () => void | Promise<void>) => void;
   }
 }
 
