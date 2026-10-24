@@ -6,22 +6,39 @@ import { cn } from "@/lib/utils";
 
 export interface SelectProps
   extends React.SelectHTMLAttributes<HTMLSelectElement> {
-  /** @deprecated Use type alias instead */
-  _placeholder?: never;
+  label?: string;
+  error?: string;
+  helperText?: string;
 }
 
 const Select = React.forwardRef<HTMLSelectElement, SelectProps>(
-  ({ className, children, ...props }, ref) => (
-    <select
-      ref={ref}
-      className={cn(
-        "flex h-10 w-full items-center rounded-md border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:ring-offset-zinc-900",
-        className
+  ({ className, children, label, error, helperText, ...props }, ref) => (
+    <div className="space-y-1">
+      {label && (
+        <label className="text-sm font-medium text-zinc-700 dark:text-zinc-300">
+          {label}
+        </label>
       )}
-      {...props}
-    >
-      {children}
-    </select>
+      <select
+        ref={ref}
+        className={cn(
+          "flex h-10 w-full items-center rounded-md border bg-white dark:bg-zinc-900 px-3 py-2 text-sm ring-offset-white file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-950 focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 dark:ring-offset-zinc-900",
+          error && "border-red-500 dark:border-red-500 focus-visible:ring-red-500",
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </select>
+      {error && (
+        <p className="text-xs text-red-500 dark:text-red-400">{error}</p>
+      )}
+      {helperText && !error && (
+        <p className="text-xs text-zinc-500 dark:text-zinc-400">
+          {helperText}
+        </p>
+      )}
+    </div>
   )
 );
 Select.displayName = "Select";
