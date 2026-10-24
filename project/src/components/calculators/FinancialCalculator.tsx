@@ -1,10 +1,9 @@
 'use client';
 
 import { useState, useMemo } from 'react';
-import { Dictionary } from '@/lib/dictionaries';
 
 interface FinancialCalculatorProps {
-  dictionary: Dictionary;
+  dictionary: Record<string, string>;
   locale: 'ca' | 'es' | 'en';
 }
 
@@ -17,13 +16,39 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
   const [payment, setPayment] = useState(100);
   const [paymentType, setPaymentType] = useState<'ordinary' | 'due'>('ordinary');
 
-  const t = dictionary.calculators?.financial || {
-    title: 'Financial Calculator',
-    modes: { compound: 'Compound Interest', annuity: 'Annuity', loan: 'Loan', presentValue: 'Present Value' },
-    labels: { principal: 'Principal', rate: 'Annual Rate (%)', time: 'Time (years)', frequency: 'Compounding Frequency', payment: 'Payment', paymentType: 'Payment Type', ordinary: 'Ordinary', due: 'Due', result: 'Result', futureValue: 'Future Value', presentValue: 'Present Value', totalPaid: 'Total Paid', totalInterest: 'Total Interest' }
+  const t = {
+    title: dictionary['calculators.financial.title'] || 'Financial Calculator',
+    modes: {
+      compound: dictionary['calculators.financial.modes.compound'] || 'Compound Interest',
+      annuity: dictionary['calculators.financial.modes.annuity'] || 'Annuity',
+      loan: dictionary['calculators.financial.modes.loan'] || 'Loan',
+      presentValue: dictionary['calculators.financial.modes.presentValue'] || 'Present Value',
+    },
+    labels: {
+      principal: dictionary['calculators.financial.labels.principal'] || 'Principal',
+      rate: dictionary['calculators.financial.labels.rate'] || 'Annual Rate (%)',
+      time: dictionary['calculators.financial.labels.time'] || 'Time (years)',
+      frequency: dictionary['calculators.financial.labels.frequency'] || 'Compounding Frequency',
+      payment: dictionary['calculators.financial.labels.payment'] || 'Payment',
+      paymentType: dictionary['calculators.financial.labels.paymentType'] || 'Payment Type',
+      ordinary: dictionary['calculators.financial.labels.ordinary'] || 'Ordinary',
+      due: dictionary['calculators.financial.labels.due'] || 'Due',
+      result: dictionary['calculators.financial.labels.result'] || 'Result',
+      futureValue: dictionary['calculators.financial.labels.futureValue'] || 'Future Value',
+      presentValue: dictionary['calculators.financial.labels.presentValue'] || 'Present Value',
+      totalPaid: dictionary['calculators.financial.labels.totalPaid'] || 'Total Paid',
+      totalInterest: dictionary['calculators.financial.labels.totalInterest'] || 'Total Interest',
+    },
   };
 
-  const results = useMemo(() => {
+  const results = useMemo<{
+    futureValue?: number;
+    totalInterest?: number;
+    principal?: number;
+    monthlyPayment?: number;
+    totalPaid?: number;
+    presentValue?: number;
+  }>(() => {
     const r = rate / 100;
     const n = frequency;
     const t_years = time;
@@ -32,7 +57,7 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
       case 'compound': {
         const futureValue = principal * Math.pow(1 + r / n, n * t_years);
         const totalInterest = futureValue - principal;
-        return { futureValue, totalInterest, principal, monthlyPayment: undefined, presentValue: undefined, totalPaid: undefined };
+        return { futureValue, totalInterest, principal };
       }
       case 'annuity': {
         const i = r / n;
@@ -41,7 +66,7 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
         const futureValue = payment * factor * ((Math.pow(1 + i, periods) - 1) / i);
         const totalPaid = payment * periods;
         const totalInterest = futureValue - totalPaid;
-        return { futureValue, totalPaid, totalInterest, principal: undefined, monthlyPayment: undefined, presentValue: undefined };
+        return { futureValue, totalPaid, totalInterest };
       }
       case 'loan': {
         const i = r / n;
@@ -49,7 +74,7 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
         const monthlyPayment = principal * (i * Math.pow(1 + i, periods)) / (Math.pow(1 + i, periods) - 1);
         const totalPaid = monthlyPayment * periods;
         const totalInterest = totalPaid - principal;
-        return { monthlyPayment, totalPaid, totalInterest, principal: undefined, futureValue: undefined, presentValue: undefined };
+        return { monthlyPayment, totalPaid, totalInterest };
       }
       case 'presentValue': {
         const i = r / n;
@@ -58,24 +83,25 @@ export function FinancialCalculator({ dictionary, locale }: FinancialCalculatorP
         const presentValue = payment * factor * (1 - Math.pow(1 + i, -periods)) / i;
         const totalPaid = payment * periods;
         const totalInterest = totalPaid - presentValue;
-        return { presentValue, totalPaid, totalInterest, principal: undefined, futureValue: undefined, monthlyPayment: undefined };
+        return { presentValue, totalPaid, totalInterest };
       }
     }
   }, [mode, principal, rate, time, frequency, payment, paymentType]);
 
-  const formatCurrency = (value: number) => {
+  const formatCurrency = (value: number | undefined) => {
+    if (value === undefined) return '-';
     return new Intl.NumberFormat(locale === 'ca' ? 'ca-ES' : locale === 'es' ? 'es-ES' : 'en-US', {
       style: 'currency',
       currency: 'EUR',
       minimumFractionDigits: 2,
-      maximumFractionDigits: 2
+      maximumFractionDigits: 2,
     }).format(value);
   };
 
   return (
     <div className="calculator-container financial-calculator">
       <h2>{t.title}</h2>
-      
+
       <div className="calculator-tabs">
         {[
           { id: 'compound', label: t.modes.compound },
