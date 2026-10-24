@@ -9,6 +9,8 @@ export interface ScientificDictionary {
     vectors: TheoryTopicDict;
     matrices: TheoryTopicDict;
     probability: TheoryTopicDict;
+    combinatorics: TheoryTopicDict;
+    "descriptive-statistics": TheoryTopicDict;
   };
 }
 
@@ -62,6 +64,8 @@ export const scientificTopicsOrder: (keyof ScientificDictionary["topics"])[] = [
   "vectors",
   "matrices",
   "probability",
+  "combinatorics",
+  "descriptive-statistics",
 ];
 
 export interface ScientificPageDictionary {
