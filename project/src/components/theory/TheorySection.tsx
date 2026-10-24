@@ -2,14 +2,14 @@
 
 import { FormulaDisplay, InlineFormula, BlockFormula } from "./FormulaDisplay";
 
-interface TheorySectionProps {
+export interface TheorySectionProps {
   title: string;
   description: string;
   topics: TheoryTopic[];
   className?: string;
 }
 
-interface TheoryTopic {
+export interface TheoryTopic {
   id: string;
   title: string;
   content: string;
@@ -18,7 +18,7 @@ interface TheoryTopic {
   keyPoints?: string[];
 }
 
-interface TheoryExample {
+export interface TheoryExample {
   title: string;
   problem: string;
   solution: string;
