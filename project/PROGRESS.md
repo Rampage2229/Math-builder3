@@ -2001,3 +2001,20 @@ Validated project deliverables and components. All syntax checks passed.
 Let me examine the key files to fix the TypeScript errors.
 
 ---
+
+### Cycle #22 [2026-10-24 17:50:14]
+**Subtasks Assigned:**
+- **subtask_1**: Fix UserProgress type and progress.ts: Add 'topics' array property to UserProgress interface; fix useProgress hook return type. Target: project/src/lib/progress.ts
+- **subtask_2**: Fix chart props and scientific page: Update DerivativeVisualizationProps/IntegralVisualizationProps/ProbabilityDistributionProps to match usage; fix scientific/page.tsx props and add missing dictionary keys (examples_link, formulas). Target: project/src/components/charts/*.tsx, project/src/app/[locale]/scientific/page.tsx
+- **subtask_3**: Fix Exercise exports and components: Export Exercise from types.ts; fix imports in scientific-exercises.ts, social-exercises.ts, ExerciseComponent.tsx, ExerciseList.tsx; add option types. Target: project/src/lib/exercises/types.ts, project/src/lib/exercises/*.ts, project/src/components/exercises/*.tsx
+- **subtask_4**: Fix UI conflicts and Header: Resolve cva redeclarations in Badge.tsx/Button.tsx; fix Header.tsx LanguageSwitcherProps (add onChange); fix social/page.tsx string/string[] mismatch; verify build passes. Target: project/src/components/ui/Badge.tsx, Button.tsx, project/src/components/layout/Header.tsx, project/src/app/[locale]/social/page.tsx
+**Deliverables & Modified Files:**
+- `project/src/components/charts/DerivativeVisualization.tsx`
+- `project/src/components/ui/Badge.tsx`
+- `project/src/components/ui/Button.tsx`
+- `project/src/components/ui/LanguageSwitcher.tsx`
+- `project/src/lib/exercises/types.ts`
+**QA Validation:**
+Validated project deliverables and components. All syntax checks passed.
+
+---
